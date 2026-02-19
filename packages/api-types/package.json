@@ -1,0 +1,34 @@
+{
+  "name": "@upvio/api-types",
+  "description": "TypeScript types for Upvio API",
+  "version": "0.1.0",
+  "license": "MIT",
+  "homepage": "https://github.com/upvio/upvio-js/tree/main/packages/api-types",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/upvio/upvio-js.git"
+  },
+  "categories": [
+    "typescript"
+  ],
+  "author": {
+    "name": "Upvio",
+    "email": "support@upvio.com"
+  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "src/v1.d.ts"
+  ],
+  "exports": {
+    "./v1": {
+      "types": "./src/v1.d.ts"
+    }
+  },
+  "scripts": {
+    "codegen": "openapi-typescript https://api.upvio.com/v1/openapi.json -o ./src/v1.d.ts"
+  },
+  "devDependencies": {
+    "openapi-typescript": "^7.13.0"
+  }
+}
