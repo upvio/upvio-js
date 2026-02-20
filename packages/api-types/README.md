@@ -8,7 +8,7 @@ Intended for internal SDK usage rather than to be used directly.
 ```typescript
 import type { components } as apiTypes from '@upvio/api-types/v1'
 
-type Patient = components.schemas.Patient
+type Patient = components['schemas']['Patient']
 
 const patient: Patient = {
   id: 'patient_123',

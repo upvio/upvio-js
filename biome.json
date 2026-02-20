@@ -1,0 +1,56 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.4.3/schema.json",
+  "files": {
+    "includes": [
+      "biome.json",
+      "biome.jsonc",
+      "**/*.ts",
+      "**/*.tsx",
+      "package.json",
+      "**/package.json",
+      "**/tsconfig*.json",
+      "!packages/api-types/src/*.d.ts",
+      "!**/node_modules",
+      "!**/dist"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "useEditorconfig": true
+  },
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "source": {
+        "organizeImports": {
+          "level": "on",
+          "options": {
+            "groups": [
+              { "type": false, "source": [":URL:", ":NODE:", ":PACKAGE:"] },
+              ":BLANK_LINE:",
+              { "type": false, "source": [":PATH:", ":ALIAS:"] },
+              ":BLANK_LINE:",
+              ":TYPE:"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {}
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "jsxQuoteStyle": "single",
+      "semicolons": "asNeeded"
+    }
+  },
+  "json": {
+    "formatter": {
+      "trailingCommas": "none"
+    }
+  }
+}
