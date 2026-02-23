@@ -3,8 +3,7 @@ import { type ApiV1Response, type GetData, request } from '../../request'
 import type * as apiTypes from '@upvio/api-types/v1'
 import type { UpvioApiClient } from '../../../client'
 
-type TemplatesPath =
-  apiTypes.paths['/businesses/{businessId}/vitals/templates']
+type TemplatesPath = apiTypes.paths['/businesses/{businessId}/vitals/templates']
 type TemplatePath =
   apiTypes.paths['/businesses/{businessId}/vitals/templates/{id}']
 
