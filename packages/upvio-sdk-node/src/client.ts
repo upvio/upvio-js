@@ -35,9 +35,7 @@ export class UpvioApiClient {
             patientId: string,
             body: Parameters<V1['createPatientMagicLink']>[2],
           ) =>
-            v1().then((e) =>
-              e.createPatientMagicLink(this, patientId, body),
-            ),
+            v1().then((e) => e.createPatientMagicLink(this, patientId, body)),
         },
       },
       vitals: {
