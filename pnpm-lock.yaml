@@ -32,8 +32,8 @@ importers:
   packages/upvio-sdk-node:
     devDependencies:
       '@upvio/api-types':
-        specifier: 0.1.0
-        version: 0.1.0
+        specifier: 0.1.1
+        version: 0.1.1
       tsup:
         specifier: ^8.5.1
         version: 8.5.1(postcss@8.5.6)(tsx@4.21.0)(typescript@5.9.3)
@@ -417,8 +417,8 @@ packages:
   '@types/estree@1.0.8':
     resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
 
-  '@upvio/api-types@0.1.0':
-    resolution: {integrity: sha512-wMW5OZ35G9pFrQ3GiEfv+cxotSlVTtG51IgXMJ0Kg25DKmPtUjwbA88BZa7WMfpFOmNKQGxUDkv8JvJo8AsfQQ==}
+  '@upvio/api-types@0.1.1':
+    resolution: {integrity: sha512-PomZjfUwkIWk+G8VjZDscjFvjwej8x/PWA3IDhsDsoUyeVk1DEPnfHGCl+CrKEGiRPm0d5/6m90h1JIT6kCSWw==}
 
   '@vitest/expect@4.0.18':
     resolution: {integrity: sha512-8sCWUyckXXYvx4opfzVY03EOiYVxyNrHS5QxX3DAIi5dpJAAkyJezHCP77VMX4HKA2LDT/Jpfo8i2r5BE3GnQQ==}
@@ -1161,7 +1161,7 @@ snapshots:
 
   '@types/estree@1.0.8': {}
 
-  '@upvio/api-types@0.1.0': {}
+  '@upvio/api-types@0.1.1': {}
 
   '@vitest/expect@4.0.18':
     dependencies:

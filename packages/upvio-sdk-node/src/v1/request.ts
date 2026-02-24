@@ -2,45 +2,37 @@ import { UpvioApiRequestError } from '../errors'
 
 import type { UpvioApiClient } from '../client'
 
-export type GetData<
+export type ResponseData<
   T extends {
-    get: {
-      responses: {
-        '200': { content: { 'application/json': { data?: unknown } } }
-      }
+    responses: {
+      '200': { content: { 'application/json': { data?: unknown } } }
     }
   },
-> = T['get']['responses']['200']['content']['application/json']['data']
+> = T['responses']['200']['content']['application/json']['data']
 
-export type GetQueryParams<
+export type QueryParams<
   T extends {
-    get: {
-      parameters: {
-        query?: Record<string, unknown>
-      }
+    parameters: {
+      query?: Record<string, unknown>
     }
   },
-> = NonNullable<T['get']['parameters']['query']>
+> = NonNullable<T['parameters']['query']>
 
-export type PostData<
+export type CreatedResponseData<
   T extends {
-    post: {
-      responses: {
-        '201': { content: { 'application/json': { data?: unknown } } }
-      }
+    responses: {
+      '201': { content: { 'application/json': { data?: unknown } } }
     }
   },
-> = T['post']['responses']['201']['content']['application/json']['data']
+> = T['responses']['201']['content']['application/json']['data']
 
-export type PostBody<
+export type RequestBody<
   T extends {
-    post: {
-      requestBody: {
-        content: { 'application/json': unknown }
-      }
+    requestBody: {
+      content: { 'application/json': unknown }
     }
   },
-> = T['post']['requestBody']['content']['application/json']
+> = T['requestBody']['content']['application/json']
 
 export type ApiV1Response<T> = {
   data?: T

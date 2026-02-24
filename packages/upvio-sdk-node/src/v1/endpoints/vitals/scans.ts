@@ -1,28 +1,29 @@
 import {
   type ApiV1Response,
-  type GetData,
-  type GetQueryParams,
-  type PostBody,
-  type PostData,
+  type CreatedResponseData,
+  type QueryParams,
+  type RequestBody,
+  type ResponseData,
   request,
 } from '../../request'
 
 import type * as apiTypes from '@upvio/api-types/v1'
 import type { UpvioApiClient } from '../../../client'
 
-type ScansPath = apiTypes.paths['/businesses/{businessId}/vitals/scans']
-type ScanPath = apiTypes.paths['/businesses/{businessId}/vitals/scans/{id}']
-
-export const listVitalsScans = <T extends GetData<ScansPath>>(
+export const listVitalsScans = <
+  T extends ResponseData<apiTypes.operations['listVitalsScans']>,
+>(
   client: UpvioApiClient,
-  params?: GetQueryParams<ScansPath>,
+  params?: QueryParams<apiTypes.operations['listVitalsScans']>,
 ): Promise<ApiV1Response<T>> => {
   return request<T>('/vitals/scans', { method: 'GET' }, client, params)
 }
 
-export const createVitalsScan = <T extends PostData<ScansPath>>(
+export const createVitalsScan = <
+  T extends CreatedResponseData<apiTypes.operations['createVitalsScan']>,
+>(
   client: UpvioApiClient,
-  body: PostBody<ScansPath>,
+  body: RequestBody<apiTypes.operations['createVitalsScan']>,
 ): Promise<ApiV1Response<T>> => {
   return request<T>(
     '/vitals/scans',
@@ -31,7 +32,9 @@ export const createVitalsScan = <T extends PostData<ScansPath>>(
   )
 }
 
-export const retrieveVitalsScan = <T extends GetData<ScanPath>>(
+export const retrieveVitalsScan = <
+  T extends ResponseData<apiTypes.operations['retrieveVitalsScan']>,
+>(
   client: UpvioApiClient,
   scanId: string,
 ): Promise<ApiV1Response<T>> => {
