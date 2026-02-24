@@ -1,7 +1,7 @@
 {
   "name": "@upvio/api-types",
   "description": "TypeScript types for Upvio API",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "homepage": "https://github.com/upvio/upvio-js/tree/main/packages/api-types",
   "repository": {
