@@ -1,32 +1,33 @@
-import { type ApiV1Response, type GetData, request } from '../../request'
+import { type ApiV1Response, type ResponseData, request } from '../../request'
 
 import type * as apiTypes from '@upvio/api-types/v1'
 import type { UpvioApiClient } from '../../../client'
 
-type PatientsPath = apiTypes.paths['/businesses/{businessId}/patients']
-type PatientPath = apiTypes.paths['/businesses/{businessId}/patients/{id}']
-
 type CreatePatientBody = NonNullable<
-  PatientsPath['post']['requestBody']
+  apiTypes.operations['createPatient']['requestBody']
 >['content']['application/json']
 
 type CreatePatientData =
-  PatientsPath['post']['responses']['201']['content']['application/json']['data']
+  apiTypes.operations['createPatient']['responses']['201']['content']['application/json']['data']
 
 type UpdatePatientBody = NonNullable<
-  PatientPath['put']['requestBody']
+  apiTypes.operations['updatePatient']['requestBody']
 >['content']['application/json']
 
 type UpdatePatientData =
-  PatientPath['put']['responses']['200']['content']['application/json']
+  apiTypes.operations['updatePatient']['responses']['200']['content']['application/json']
 
-export const listPatients = <T extends GetData<PatientsPath>>(
+export const listPatients = <
+  T extends ResponseData<apiTypes.operations['listPatients']>,
+>(
   client: UpvioApiClient,
 ): Promise<ApiV1Response<T>> => {
   return request<T>('/patients', { method: 'GET' }, client)
 }
 
-export const retrievePatient = <T extends GetData<PatientPath>>(
+export const retrievePatient = <
+  T extends ResponseData<apiTypes.operations['retrievePatient']>,
+>(
   client: UpvioApiClient,
   patientId: string,
 ): Promise<ApiV1Response<T>> => {

@@ -1,16 +1,20 @@
-import { type ApiV1Response, request } from '../../request'
+import {
+  type ApiV1Response,
+  type RequestBody,
+  type ResponseData,
+  request,
+} from '../../request'
 
 import type * as apiTypes from '@upvio/api-types/v1'
 import type { UpvioApiClient } from '../../../client'
 
-type MagicLinksPath =
-  apiTypes.paths['/businesses/{businessId}/patients/{patientId}/magic-links']
+type CreateMagicLinkBody = RequestBody<
+  apiTypes.operations['createPatientMagicLink']
+>
 
-type CreateMagicLinkBody =
-  MagicLinksPath['post']['requestBody']['content']['application/json']
-
-type CreateMagicLinkData =
-  MagicLinksPath['post']['responses']['200']['content']['application/json']['data']
+type CreateMagicLinkData = ResponseData<
+  apiTypes.operations['createPatientMagicLink']
+>
 
 export const createPatientMagicLink = <T extends CreateMagicLinkData>(
   client: UpvioApiClient,

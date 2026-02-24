@@ -1,24 +1,25 @@
 import {
   type ApiV1Response,
-  type GetData,
-  type GetQueryParams,
+  type QueryParams,
+  type ResponseData,
   request,
 } from '../../request'
 
 import type * as apiTypes from '@upvio/api-types/v1'
 import type { UpvioApiClient } from '../../../client'
 
-type LinksPath = apiTypes.paths['/businesses/{businessId}/vitals/links']
-type LinkPath = apiTypes.paths['/businesses/{businessId}/vitals/links/{id}']
-
-export const listVitalsLinks = <T extends GetData<LinksPath>>(
+export const listVitalsLinks = <
+  T extends ResponseData<apiTypes.operations['listVitalsLinks']>,
+>(
   client: UpvioApiClient,
-  params?: GetQueryParams<LinksPath>,
+  params?: QueryParams<apiTypes.operations['listVitalsLinks']>,
 ): Promise<ApiV1Response<T>> => {
   return request<T>('/vitals/links', { method: 'GET' }, client, params)
 }
 
-export const retrieveVitalsLink = <T extends GetData<LinkPath>>(
+export const retrieveVitalsLink = <
+  T extends ResponseData<apiTypes.operations['retrieveVitalsLink']>,
+>(
   client: UpvioApiClient,
   linkId: string,
 ): Promise<ApiV1Response<T>> => {
