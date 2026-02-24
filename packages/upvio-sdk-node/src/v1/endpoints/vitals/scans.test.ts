@@ -1,7 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { UpvioApiClient } from '../../../client'
-import { UpvioApiRequestError } from '../../../errors'
 
 const mockFetch = vi.fn()
 
@@ -21,11 +20,11 @@ function mockOk(data: unknown = {}) {
   })
 }
 
-function mockError(status: number, statusText: string) {
+function mockError(status: number, body: unknown = {}) {
   mockFetch.mockResolvedValueOnce({
     ok: false,
     status,
-    statusText,
+    json: () => Promise.resolve(body),
   })
 }
 
@@ -68,13 +67,16 @@ describe('request layer', () => {
     expect(options.headers.Authorization).toBe('Bearer test-api-key')
   })
 
-  it('throws UpvioApiRequestError on non-ok response', async () => {
-    mockError(401, 'Unauthorized')
+  it('returns parsed JSON for non-ok responses', async () => {
+    const body = {
+      error: { title: 'Unauthorized', code: 'unauthorized' },
+    }
+    mockError(401, body)
     const client = createClient()
 
-    await expect(client.v1.vitals.scans.list()).rejects.toThrowError(
-      UpvioApiRequestError,
-    )
+    const result = await client.v1.vitals.scans.list()
+
+    expect(result).toStrictEqual(body)
   })
 
   it('returns the raw JSON response from the server', async () => {
@@ -91,18 +93,17 @@ describe('request layer', () => {
     expect(result).toStrictEqual(serverResponse)
   })
 
-  it('includes status and statusText on the error', async () => {
-    mockError(404, 'Not Found')
+  it('returns error body for 404 responses', async () => {
+    const body = {
+      error: { title: 'Not found', code: 'not_found' },
+    }
+    mockError(404, body)
     const client = createClient()
 
-    try {
-      await client.v1.vitals.scans.retrieve('nonexistent')
-      expect.unreachable()
-    } catch (error) {
-      expect(error).toBeInstanceOf(UpvioApiRequestError)
-      expect((error as UpvioApiRequestError).status).toBe(404)
-      expect((error as UpvioApiRequestError).statusText).toBe('Not Found')
-    }
+    const result = await client.v1.vitals.scans.retrieve('nonexistent')
+
+    expect(result).toStrictEqual(body)
+    expect(result.data).toBeUndefined()
   })
 })
 

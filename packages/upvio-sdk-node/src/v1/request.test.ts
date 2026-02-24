@@ -1,6 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { UpvioApiRequestError } from '../errors'
 import { request } from './request'
 
 import type { UpvioApiClient } from '../client'
@@ -40,7 +39,7 @@ describe('request', () => {
 
     it('returns an error payload from the server without throwing', async () => {
       const body = {
-        error: { message: 'Patient not found', code: 'not_found' },
+        error: { title: 'Patient not found', code: 'not_found' },
       }
       mockFetch.mockResolvedValueOnce({
         ok: true,
@@ -51,7 +50,7 @@ describe('request', () => {
 
       expect(result).toStrictEqual(body)
       expect(result.error).toEqual({
-        message: 'Patient not found',
+        title: 'Patient not found',
         code: 'not_found',
       })
       expect(result.data).toBeUndefined()
@@ -84,47 +83,34 @@ describe('request', () => {
   })
 
   describe('error handling', () => {
-    it('throws UpvioApiRequestError for 4xx responses', async () => {
+    it('returns parsed JSON for 4xx responses', async () => {
+      const body = {
+        error: { title: 'Bad request', code: 'bad_request' },
+      }
       mockFetch.mockResolvedValueOnce({
         ok: false,
         status: 400,
-        statusText: 'Bad Request',
+        json: () => Promise.resolve(body),
       })
 
-      await expect(
-        request('/test', { method: 'POST' }, client),
-      ).rejects.toThrow(UpvioApiRequestError)
+      const result = await request('/test', { method: 'POST' }, client)
+
+      expect(result).toStrictEqual(body)
     })
 
-    it('throws UpvioApiRequestError for 5xx responses', async () => {
+    it('returns parsed JSON for 5xx responses', async () => {
+      const body = {
+        error: { title: 'Internal server error', code: 'internal' },
+      }
       mockFetch.mockResolvedValueOnce({
         ok: false,
         status: 500,
-        statusText: 'Internal Server Error',
+        json: () => Promise.resolve(body),
       })
 
-      await expect(request('/test', { method: 'GET' }, client)).rejects.toThrow(
-        UpvioApiRequestError,
-      )
-    })
+      const result = await request('/test', { method: 'GET' }, client)
 
-    it('includes status, statusText, and message on the error', async () => {
-      mockFetch.mockResolvedValueOnce({
-        ok: false,
-        status: 422,
-        statusText: 'Unprocessable Entity',
-      })
-
-      try {
-        await request('/test', { method: 'POST' }, client)
-        expect.unreachable()
-      } catch (error) {
-        expect(error).toBeInstanceOf(UpvioApiRequestError)
-        const e = error as UpvioApiRequestError
-        expect(e.status).toBe(422)
-        expect(e.statusText).toBe('Unprocessable Entity')
-        expect(e.message).toBe('Failed to fetch: 422 Unprocessable Entity')
-      }
+      expect(result).toStrictEqual(body)
     })
 
     it('propagates network errors from fetch', async () => {
