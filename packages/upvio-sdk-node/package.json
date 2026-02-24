@@ -19,7 +19,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@upvio/api-types": "0.1.0",
+    "@upvio/api-types": "0.1.1",
     "tsup": "^8.5.1"
   }
 }
