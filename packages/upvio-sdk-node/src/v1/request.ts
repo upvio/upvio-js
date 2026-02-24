@@ -1,5 +1,3 @@
-import { UpvioApiRequestError } from '../errors'
-
 import type { UpvioApiClient } from '../client'
 
 export type ResponseData<
@@ -40,7 +38,7 @@ export type ApiV1Response<T> = {
     totalCount?: number
   }
   error?: {
-    message: string
+    title: string
     code: string
   }
 }
@@ -76,9 +74,6 @@ export const request = async <T>(
       ...options?.headers,
     },
   })
-  if (!response.ok) {
-    throw new UpvioApiRequestError(response.status, response.statusText)
-  }
 
   return response.json()
 }
