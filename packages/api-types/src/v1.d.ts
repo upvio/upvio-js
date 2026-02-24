@@ -18,83 +18,20 @@ export interface paths {
          * List Appointments
          * @description List Appointments within a Business
          */
-        get: {
-            parameters: {
-                query: {
-                    /** @description Start of date range */
-                    startDate: string;
-                    /** @description End of date range */
-                    endDate: string;
-                    /** @description ID of the patient to filter appointments by */
-                    patientId?: string;
-                };
-                header?: never;
-                path: {
-                    /** @description Business ID */
-                    businessId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description A list of Appointments */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["Appointment"][];
-                        };
-                    };
-                };
-            };
-        };
+        get: operations["listAppointments"];
         put?: never;
         /**
          * Create an Appointment
          * @description Create an Appointment within a Business
          */
-        post: {
-            parameters: {
-                query?: {
-                    /** @description If true, the appointment will be created even if the staff is busy */
-                    ignoreBusyTimes?: boolean;
-                };
-                header?: never;
-                path: {
-                    /** @description Business ID */
-                    businessId: string;
-                };
-                cookie?: never;
-            };
-            /** @description Appointment data */
-            requestBody: {
-                content: {
-                    "application/json": components["schemas"]["AppointmentCreateInput"];
-                };
-            };
-            responses: {
-                /** @description Created appointment */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["Appointment"];
-                        };
-                    };
-                };
-            };
-        };
+        post: operations["createAppointment"];
         delete?: never;
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/businesses/{businessId}/appointments/{id}": {
+    "/businesses/{businessId}/appointments/{appointmentId}": {
         parameters: {
             query?: never;
             header?: never;
@@ -102,7 +39,7 @@ export interface paths {
                 /** @description Business ID */
                 businessId: string;
                 /** @description Appointment ID */
-                id: string;
+                appointmentId: string;
             };
             cookie?: never;
         };
@@ -110,101 +47,24 @@ export interface paths {
          * Retrieve an Appointment
          * @description Retrieve an Appointments within a Business
          */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    /** @description Business ID */
-                    businessId: string;
-                    /** @description Appointment ID */
-                    id: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description An Appointment */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["Appointment"];
-                        };
-                    };
-                };
-            };
-        };
+        get: operations["retrieveAppointment"];
         put?: never;
         post?: never;
         /**
          * Delete an Appointment
          * @description Delete an Appointments within a Business
          */
-        delete: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    /** @description Business ID */
-                    businessId: string;
-                    /** @description Appointment ID */
-                    id: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Confirmation that the appointment has been deleted */
-                204: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
+        delete: operations["deleteAppointment"];
         options?: never;
         head?: never;
         /**
          * Update an Appointment
          * @description Update an Appointments within a Business
          */
-        patch: {
-            parameters: {
-                query?: {
-                    /** @description If true, the appointment will be updated even if the staff is busy at the new time */
-                    ignoreBusyTimes?: boolean;
-                };
-                header?: never;
-                path: {
-                    /** @description Business ID */
-                    businessId: string;
-                    /** @description Appointment ID */
-                    id: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Updated Appointment */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["Appointment"];
-                        };
-                    };
-                };
-            };
-        };
+        patch: operations["updateAppointment"];
         trace?: never;
     };
-    "/businesses/{businessId}/appointments/{id}/tags": {
+    "/businesses/{businessId}/appointments/{appointmentId}/tags": {
         parameters: {
             query?: never;
             header?: never;
@@ -212,7 +72,7 @@ export interface paths {
                 /** @description Business ID */
                 businessId: string;
                 /** @description Appointment ID */
-                id: string;
+                appointmentId: string;
             };
             cookie?: never;
         };
@@ -229,7 +89,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/businesses/{businessId}/services/{id}/availableTimes": {
+    "/businesses/{businessId}/services/{serviceId}/availableTimes": {
         parameters: {
             query?: never;
             header?: never;
@@ -240,39 +100,7 @@ export interface paths {
          * Service Available Times
          * @description Retrieve available times for a service
          */
-        get: {
-            parameters: {
-                query: {
-                    /** @description The start date of the range to retrieve available times for (ISO 8601 format). */
-                    startDate: string;
-                    /** @description The end date of the range to retrieve available times for (ISO 8601 format). */
-                    endDate: string;
-                    /** @description The duration of the service in minutes. */
-                    duration: number;
-                    /** @description The staff members to filter the available times by. */
-                    staffIds?: string[];
-                    /** @description If true, unavailable slots will be included in the response. */
-                    includeUnavailableSlots?: boolean;
-                };
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description The available times for this service */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["AvailableTimes"];
-                        };
-                    };
-                };
-            };
-        };
+        get: operations["listServiceAvailableTimes"];
         put?: never;
         post?: never;
         delete?: never;
@@ -292,7 +120,7 @@ export interface paths {
          * List Businesses
          * @description List all Businesses that can be accessed within the current context.
          */
-        get: operations["list-businesses"];
+        get: operations["listBusinesses"];
         put?: never;
         post?: never;
         delete?: never;
@@ -315,66 +143,12 @@ export interface paths {
          * Retrieve a Business
          * @description Retrieve a Business
          */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    /** @description Business ID */
-                    businessId: string;
-                    id: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Business */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["Business"];
-                        };
-                    };
-                };
-            };
-        };
+        get: operations["retrieveBusiness"];
         /**
          * Update a Business
          * @description Update a Business
          */
-        put: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    /** @description Business ID */
-                    businessId: string;
-                };
-                cookie?: never;
-            };
-            /** @description Attributes used to update a Business. */
-            requestBody: {
-                content: {
-                    "application/json": components["schemas"]["BusinessUpdateInput"];
-                };
-            };
-            responses: {
-                /** @description Updated Business */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["Business"];
-                        };
-                    };
-                };
-            };
-        };
+        put: operations["updateBusiness"];
         post?: never;
         delete?: never;
         options?: never;
@@ -393,39 +167,7 @@ export interface paths {
          * List Form Submissions
          * @description List all forms
          */
-        get: {
-            parameters: {
-                query?: {
-                    limit?: number;
-                    offset?: number;
-                    filters?: {
-                        /** @description Filter by Form ID. */
-                        formId?: string;
-                        /** @description Filter by Patient ID. */
-                        patientId?: string;
-                    };
-                };
-                header?: never;
-                path: {
-                    businessId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description List of Form Submissions */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["FormSubmission"][];
-                        };
-                    };
-                };
-            };
-        };
+        get: operations["listFormSubmissions"];
         put?: never;
         post?: never;
         delete?: never;
@@ -445,40 +187,7 @@ export interface paths {
          * Retrieve a Form Submission
          * @description Retrieve a Form Submission by ID.
          */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    businessId: string;
-                    formSubmissionId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description A Form Submission. */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["FormSubmission"];
-                        };
-                    };
-                };
-                /** @description Form Submission not found. */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Error"];
-                    };
-                };
-            };
-        };
+        get: operations["retrieveFormSubmission"];
         put?: never;
         post?: never;
         delete?: never;
@@ -498,32 +207,7 @@ export interface paths {
          * List Forms
          * @description List all forms
          */
-        get: {
-            parameters: {
-                query?: {
-                    visibility?: ("LISTED" | "UNLISTED")[];
-                };
-                header?: never;
-                path: {
-                    businessId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description List of Forms */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["Form"][];
-                        };
-                    };
-                };
-            };
-        };
+        get: operations["listForms"];
         put?: never;
         post?: never;
         delete?: never;
@@ -543,40 +227,7 @@ export interface paths {
          * Retrieve a Form
          * @description Retrieve a Form by ID.
          */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    businessId: string;
-                    formId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description A Form. */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["Form"];
-                        };
-                    };
-                };
-                /** @description Form not found. */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Error"];
-                    };
-                };
-            };
-        };
+        get: operations["retrieveForm"];
         put?: never;
         post?: never;
         delete?: never;
@@ -599,101 +250,13 @@ export interface paths {
          * List Locations
          * @description List all locations for a business.
          */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    /** @description Business ID */
-                    businessId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description A list of locations. */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["Location"][];
-                        };
-                    };
-                };
-                /** @description Location requires authentication */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Error"];
-                    };
-                };
-                /** @description Location not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Error"];
-                    };
-                };
-            };
-        };
+        get: operations["listLocations"];
         put?: never;
         /**
          * Create a Location
          * @description Create a new location for the business.
          */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    /** @description Business ID */
-                    businessId: string;
-                };
-                cookie?: never;
-            };
-            requestBody: {
-                content: {
-                    "application/json": components["schemas"]["LocationCreateInput"];
-                };
-            };
-            responses: {
-                /** @description The created location. */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["Location"];
-                        };
-                    };
-                };
-                /** @description Location requires authentication */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Error"];
-                    };
-                };
-                /** @description Location not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Error"];
-                    };
-                };
-            };
-        };
+        post: operations["createLocation"];
         delete?: never;
         options?: never;
         head?: never;
@@ -716,150 +279,18 @@ export interface paths {
          * Retrieve a Location
          * @description Retrieve a specific location by its ID.
          */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    /** @description Business ID */
-                    businessId: string;
-                    /** @description Location ID */
-                    locationId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description The requested location. */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["Location"];
-                        };
-                    };
-                };
-                /** @description Location requires authentication */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Error"];
-                    };
-                };
-                /** @description Location not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Error"];
-                    };
-                };
-            };
-        };
+        get: operations["retrieveLocation"];
         /**
          * Update a Location
          * @description Update an existing location.
          */
-        put: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    /** @description Business ID */
-                    businessId: string;
-                    /** @description Location ID */
-                    locationId: string;
-                };
-                cookie?: never;
-            };
-            requestBody: {
-                content: {
-                    "application/json": components["schemas"]["LocationUpdateInput"];
-                };
-            };
-            responses: {
-                /** @description The updated location. */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["Location"];
-                        };
-                    };
-                };
-                /** @description Location requires authentication */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Error"];
-                    };
-                };
-                /** @description Location not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Error"];
-                    };
-                };
-            };
-        };
+        put: operations["updateLocation"];
         post?: never;
         /**
          * Delete a Location
          * @description Delete an existing location.
          */
-        delete: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    /** @description Business ID */
-                    businessId: string;
-                    /** @description Location ID */
-                    locationId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Confirmation of deletion. */
-                204: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description Location requires authentication */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Error"];
-                    };
-                };
-                /** @description Location not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Error"];
-                    };
-                };
-            };
-        };
+        delete: operations["deleteLocation"];
         options?: never;
         head?: never;
         patch?: never;
@@ -883,74 +314,7 @@ export interface paths {
          * Create a magic link for a patient
          * @description Create a magic link for a patient. The returned URL authenticates the patient and redirects them to the specified URL.
          */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    /** @description Business ID */
-                    businessId: string;
-                    /** @description Patient ID */
-                    patientId: string;
-                };
-                cookie?: never;
-            };
-            requestBody: {
-                content: {
-                    "application/json": {
-                        /**
-                         * Format: uri
-                         * @description URL to redirect the patient to after authentication. Must be a valid Upvio domain.
-                         */
-                        redirectUrl: string;
-                    };
-                };
-            };
-            responses: {
-                /** @description Magic link created */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: {
-                                id?: string;
-                                /** Format: uri */
-                                url?: string;
-                                /** Format: uri */
-                                redirectUrl?: string;
-                                /** Format: date-time */
-                                createdAt?: string;
-                                /** Format: date-time */
-                                expiresAt?: string;
-                            };
-                        };
-                    };
-                };
-                /** @description Bad Request */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description Unauthorized */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description Patient not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
+        post: operations["createPatientMagicLink"];
         delete?: never;
         options?: never;
         head?: never;
@@ -968,72 +332,13 @@ export interface paths {
          * List Booking Event Templates
          * @description List all booking event notification templates for a business.
          */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    businessId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description List of Booking Event Templates */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["BookingEventTemplate"][];
-                        };
-                    };
-                };
-            };
-        };
+        get: operations["listBookingEventTemplates"];
         put?: never;
         /**
          * Create a Booking Event Template
          * @description Create a new booking event notification template.
          */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    businessId: string;
-                };
-                cookie?: never;
-            };
-            requestBody: {
-                content: {
-                    "application/json": components["schemas"]["BookingEventTemplateCreateInput"];
-                };
-            };
-            responses: {
-                /** @description The created Booking Event Template. */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["BookingEventTemplate"];
-                        };
-                    };
-                };
-                /** @description Invalid input. */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Error"];
-                    };
-                };
-            };
-        };
+        post: operations["createBookingEventTemplate"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1051,129 +356,21 @@ export interface paths {
          * Retrieve a Booking Event Template
          * @description Retrieve a booking event notification template by ID.
          */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    businessId: string;
-                    bookingEventTemplateId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description A Booking Event Template. */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["BookingEventTemplate"];
-                        };
-                    };
-                };
-                /** @description Booking Event Template not found. */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Error"];
-                    };
-                };
-            };
-        };
+        get: operations["retrieveBookingEventTemplate"];
         put?: never;
         post?: never;
         /**
          * Delete a Booking Event Template
          * @description Soft-delete a booking event notification template.
          */
-        delete: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    businessId: string;
-                    bookingEventTemplateId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Confirmation of deletion. */
-                204: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description Booking Event Template not found. */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Error"];
-                    };
-                };
-            };
-        };
+        delete: operations["deleteBookingEventTemplate"];
         options?: never;
         head?: never;
         /**
          * Update a Booking Event Template
          * @description Update an existing booking event notification template.
          */
-        patch: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    businessId: string;
-                    bookingEventTemplateId: string;
-                };
-                cookie?: never;
-            };
-            requestBody: {
-                content: {
-                    "application/json": components["schemas"]["BookingEventTemplateUpdateInput"];
-                };
-            };
-            responses: {
-                /** @description The updated Booking Event Template. */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["BookingEventTemplate"];
-                        };
-                    };
-                };
-                /** @description Invalid input. */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Error"];
-                    };
-                };
-                /** @description Booking Event Template not found. */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Error"];
-                    };
-                };
-            };
-        };
+        patch: operations["updateBookingEventTemplate"];
         trace?: never;
     };
     "/businesses/{businessId}/notifications/post-appointment-message-templates": {
@@ -1187,72 +384,13 @@ export interface paths {
          * List Post-Appointment Message Templates
          * @description List all post-appointment message templates for a business.
          */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    businessId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description List of Post-Appointment Message Templates */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["PostAppointmentMessageTemplate"][];
-                        };
-                    };
-                };
-            };
-        };
+        get: operations["listPostAppointmentMessageTemplates"];
         put?: never;
         /**
          * Create a Post-Appointment Message Template
          * @description Create a new post-appointment message template.
          */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    businessId: string;
-                };
-                cookie?: never;
-            };
-            requestBody: {
-                content: {
-                    "application/json": components["schemas"]["PostAppointmentMessageTemplateCreateInput"];
-                };
-            };
-            responses: {
-                /** @description The created Post-Appointment Message Template. */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["PostAppointmentMessageTemplate"];
-                        };
-                    };
-                };
-                /** @description Invalid input. */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Error"];
-                    };
-                };
-            };
-        };
+        post: operations["createPostAppointmentMessageTemplate"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1270,129 +408,21 @@ export interface paths {
          * Retrieve a Post-Appointment Message Template
          * @description Retrieve a post-appointment message template by ID.
          */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    businessId: string;
-                    postAppointmentMessageTemplateId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description A Post-Appointment Message Template. */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["PostAppointmentMessageTemplate"];
-                        };
-                    };
-                };
-                /** @description Post-Appointment Message Template not found. */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Error"];
-                    };
-                };
-            };
-        };
+        get: operations["retrievePostAppointmentMessageTemplate"];
         put?: never;
         post?: never;
         /**
          * Delete a Post-Appointment Message Template
          * @description Soft-delete a post-appointment message template.
          */
-        delete: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    businessId: string;
-                    postAppointmentMessageTemplateId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Confirmation of deletion. */
-                204: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description Post-Appointment Message Template not found. */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Error"];
-                    };
-                };
-            };
-        };
+        delete: operations["deletePostAppointmentMessageTemplate"];
         options?: never;
         head?: never;
         /**
          * Update a Post-Appointment Message Template
          * @description Update an existing post-appointment message template.
          */
-        patch: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    businessId: string;
-                    postAppointmentMessageTemplateId: string;
-                };
-                cookie?: never;
-            };
-            requestBody: {
-                content: {
-                    "application/json": components["schemas"]["PostAppointmentMessageTemplateUpdateInput"];
-                };
-            };
-            responses: {
-                /** @description The updated Post-Appointment Message Template. */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["PostAppointmentMessageTemplate"];
-                        };
-                    };
-                };
-                /** @description Invalid input. */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Error"];
-                    };
-                };
-                /** @description Post-Appointment Message Template not found. */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Error"];
-                    };
-                };
-            };
-        };
+        patch: operations["updatePostAppointmentMessageTemplate"];
         trace?: never;
     };
     "/businesses/{businessId}/notifications/reminder-templates": {
@@ -1406,72 +436,13 @@ export interface paths {
          * List Reminder Templates
          * @description List all reminder templates for a business.
          */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    businessId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description List of Reminder Templates */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["ReminderTemplate"][];
-                        };
-                    };
-                };
-            };
-        };
+        get: operations["listReminderTemplates"];
         put?: never;
         /**
          * Create a Reminder Template
          * @description Create a new reminder template.
          */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    businessId: string;
-                };
-                cookie?: never;
-            };
-            requestBody: {
-                content: {
-                    "application/json": components["schemas"]["ReminderTemplateCreateInput"];
-                };
-            };
-            responses: {
-                /** @description The created Reminder Template. */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["ReminderTemplate"];
-                        };
-                    };
-                };
-                /** @description Invalid input. */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Error"];
-                    };
-                };
-            };
-        };
+        post: operations["createReminderTemplate"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1489,129 +460,21 @@ export interface paths {
          * Retrieve a Reminder Template
          * @description Retrieve a reminder template by ID.
          */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    businessId: string;
-                    reminderTemplateId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description A Reminder Template. */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["ReminderTemplate"];
-                        };
-                    };
-                };
-                /** @description Reminder Template not found. */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Error"];
-                    };
-                };
-            };
-        };
+        get: operations["retrieveReminderTemplate"];
         put?: never;
         post?: never;
         /**
          * Delete a Reminder Template
          * @description Soft-delete a reminder template.
          */
-        delete: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    businessId: string;
-                    reminderTemplateId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Confirmation of deletion. */
-                204: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description Reminder Template not found. */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Error"];
-                    };
-                };
-            };
-        };
+        delete: operations["deleteReminderTemplate"];
         options?: never;
         head?: never;
         /**
          * Update a Reminder Template
          * @description Update an existing reminder template.
          */
-        patch: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    businessId: string;
-                    reminderTemplateId: string;
-                };
-                cookie?: never;
-            };
-            requestBody: {
-                content: {
-                    "application/json": components["schemas"]["ReminderTemplateUpdateInput"];
-                };
-            };
-            responses: {
-                /** @description The updated Reminder Template. */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["ReminderTemplate"];
-                        };
-                    };
-                };
-                /** @description Invalid input. */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Error"];
-                    };
-                };
-                /** @description Reminder Template not found. */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Error"];
-                    };
-                };
-            };
-        };
+        patch: operations["updateReminderTemplate"];
         trace?: never;
     };
     "/businesses/{businessId}/outgoing-webhooks": {
@@ -1628,31 +491,7 @@ export interface paths {
          * List Outgoing Webhooks
          * @description List all outgoing webhooks within a business.
          */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    /** @description Business ID */
-                    businessId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description List of Outgoing Webhooks */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["OutgoingWebhook"][];
-                        };
-                    };
-                };
-            };
-        };
+        get: operations["listOutgoingWebhooks"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1672,85 +511,20 @@ export interface paths {
          * List Patients
          * @description List Patients within a Business
          */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description List of patients */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["Patient"][];
-                        };
-                    };
-                };
-            };
-        };
+        get: operations["listPatients"];
         put?: never;
         /**
          * Create a Patient
          * @description Create a patient. By default, if a patient with the same email already exists, they will be updated (upsert behavior). Set mode to "create" to return an error instead.
          */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: {
-                content: {
-                    "application/json": {
-                        name: string;
-                        email: string;
-                        phoneMobile?: string;
-                        /** Format: uuid */
-                        primaryStaffId?: string;
-                        /**
-                         * @description When set to "create", returns an error if a patient with the same email exists. When set to "upsert" (default), updates the existing patient.
-                         * @default upsert
-                         * @enum {string}
-                         */
-                        mode?: "create" | "upsert";
-                    };
-                };
-            };
-            responses: {
-                /** @description The created Patient */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["Patient"];
-                        };
-                    };
-                };
-                /** @description Conflict - A patient with this email already exists (when mode is "create") */
-                409: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
+        post: operations["createPatient"];
         delete?: never;
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/businesses/{businessId}/patients/{id}": {
+    "/businesses/{businessId}/patients/{patientId}": {
         parameters: {
             query?: never;
             header?: never;
@@ -1761,83 +535,18 @@ export interface paths {
          * Retrieve a Patient
          * @description Retrieve a Patient
          */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description A Patient */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["Patient"];
-                        };
-                    };
-                };
-            };
-        };
+        get: operations["retrievePatient"];
         /**
          * Update a patient
          * @description Update a patient
          */
-        put: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: {
-                content: {
-                    "application/json": {
-                        name?: string;
-                        email?: string;
-                        phoneMobile?: string;
-                    };
-                };
-            };
-            responses: {
-                /** @description The updated Patient */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Patient"];
-                    };
-                };
-            };
-        };
+        put: operations["updatePatient"];
         post?: never;
         /**
          * Archive a Patient
          * @description Archive a patient
          */
-        delete: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Confirmation that the patient has been archived */
-                204: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
+        delete: operations["archivePatient"];
         options?: never;
         head?: never;
         patch?: never;
@@ -1857,67 +566,13 @@ export interface paths {
          * List Service Categories
          * @description List Service Categories within a Business
          */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    /** @description Business ID */
-                    businessId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description List of Service Categories */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["ServiceCategory"][];
-                        };
-                    };
-                };
-            };
-        };
+        get: operations["listServiceCategories"];
         put?: never;
         /**
          * Create a Service Category
          * @description Create a Service Category
          */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    /** @description Business ID */
-                    businessId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: {
-                content: {
-                    "application/json": {
-                        name: string;
-                    };
-                };
-            };
-            responses: {
-                /** @description The created Service Category */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["ServiceCategory"];
-                        };
-                    };
-                };
-            };
-        };
+        post: operations["createServiceCategory"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1937,101 +592,21 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * List Service Categories
-         * @description List Service Categories within a Business
+         * Retrieve a Service Category
+         * @description Retrieve a Service Category within a Business
          */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    /** @description Business ID */
-                    businessId: string;
-                    /** @description Service Category ID */
-                    serviceCategoryId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description List of Services */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["ServiceCategory"];
-                        };
-                    };
-                };
-            };
-        };
+        get: operations["retrieveServiceCategory"];
         /**
          * Update a Service Category
          * @description Update a Service Category
          */
-        put: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    /** @description Business ID */
-                    businessId: string;
-                    /** @description Service Category ID */
-                    serviceCategoryId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: {
-                content: {
-                    "application/json": {
-                        name: string;
-                    };
-                };
-            };
-            responses: {
-                /** @description The updated Service Category */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["ServiceCategory"];
-                        };
-                    };
-                };
-            };
-        };
+        put: operations["updateServiceCategory"];
         post?: never;
         /**
          * Delete a Service Category
          * @description Delete a Service Category
          */
-        delete: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    /** @description Business ID */
-                    businessId: string;
-                    /** @description Service Category ID */
-                    serviceCategoryId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Confirmation that the Service Category has been deleted */
-                204: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
+        delete: operations["deleteServiceCategory"];
         options?: never;
         head?: never;
         patch?: never;
@@ -2051,72 +626,20 @@ export interface paths {
          * List Services
          * @description List Services within a Business
          */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    /** @description Business ID */
-                    businessId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description List of Services */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["Service"][];
-                        };
-                    };
-                };
-            };
-        };
+        get: operations["listServices"];
         put?: never;
         /**
          * Create a Service
          * @description Create a Service
          */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    /** @description Business ID */
-                    businessId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["Service"];
-                };
-            };
-            responses: {
-                /** @description The created Service */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["Service"];
-                        };
-                    };
-                };
-            };
-        };
+        post: operations["createService"];
         delete?: never;
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/businesses/{businessId}/services/{id}": {
+    "/businesses/{businessId}/services/{serviceId}": {
         parameters: {
             query?: never;
             header?: never;
@@ -2124,7 +647,7 @@ export interface paths {
                 /** @description Business ID */
                 businessId: string;
                 /** @description Service ID */
-                id: string;
+                serviceId: string;
             };
             cookie?: never;
         };
@@ -2132,96 +655,18 @@ export interface paths {
          * Retrieve a Service
          * @description Retrieve a Service
          */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    /** @description Business ID */
-                    businessId: string;
-                    /** @description Service ID */
-                    id: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Retrieve a Service */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["Service"];
-                        };
-                    };
-                };
-            };
-        };
+        get: operations["retrieveService"];
         /**
          * Update a Service
          * @description Update a Service
          */
-        put: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    /** @description Business ID */
-                    businessId: string;
-                    /** @description Service ID */
-                    id: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["Service"];
-                };
-            };
-            responses: {
-                /** @description The updated Service */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["Service"];
-                        };
-                    };
-                };
-            };
-        };
+        put: operations["updateService"];
         post?: never;
         /**
          * Delete a Service
          * @description Delete a Service
          */
-        delete: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    /** @description Business ID */
-                    businessId: string;
-                    /** @description Service ID */
-                    id: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Confirmation that the patient has been deleted */
-                204: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
+        delete: operations["deleteService"];
         options?: never;
         head?: never;
         patch?: never;
@@ -2241,76 +686,21 @@ export interface paths {
          * List Staff
          * @description List Staff Members within a Business
          */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    /** @description Business ID */
-                    businessId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description List of Staff Members */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["Staff"][];
-                        };
-                    };
-                };
-            };
-        };
+        get: operations["listStaff"];
         put?: never;
         /**
          * Create a Staff Member
          * @deprecated
          * @description Create a Staff Member
          */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    /** @description Business ID */
-                    businessId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: {
-                content: {
-                    "application/json": {
-                        name: string;
-                        email: string;
-                    };
-                };
-            };
-            responses: {
-                /** @description The created Staff Member */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["Staff"];
-                        };
-                    };
-                };
-            };
-        };
+        post: operations["createStaff"];
         delete?: never;
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/businesses/{businessId}/staff/{id}": {
+    "/businesses/{businessId}/staff/{staffId}": {
         parameters: {
             query?: never;
             header?: never;
@@ -2318,7 +708,7 @@ export interface paths {
                 /** @description Business ID */
                 businessId: string;
                 /** @description Staff ID */
-                id: string;
+                staffId: string;
             };
             cookie?: never;
         };
@@ -2326,108 +716,24 @@ export interface paths {
          * Retrieve a Staff Member
          * @description Retrieve a Staff Member
          */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    /** @description Business ID */
-                    businessId: string;
-                    /** @description Staff ID */
-                    id: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description A Staff member within your business */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["Staff"];
-                        };
-                    };
-                };
-            };
-        };
+        get: operations["retrieveStaff"];
         /**
          * Update a Staff Member
          * @description Update a Staff Member
          */
-        put: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    /** @description Business ID */
-                    businessId: string;
-                    /** @description Staff ID */
-                    id: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: {
-                content: {
-                    "application/json": {
-                        name?: string;
-                        email?: string;
-                        /**
-                         * @description Timezone string.
-                         * @example UTC
-                         */
-                        timezone?: string | null;
-                    };
-                };
-            };
-            responses: {
-                /** @description The updated Staff member */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Staff"];
-                    };
-                };
-            };
-        };
+        put: operations["updateStaff"];
         post?: never;
         /**
          * Delete a Staff Member
          * @description Delete a Staff Member
          */
-        delete: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    /** @description Business ID */
-                    businessId: string;
-                    /** @description Staff ID */
-                    id: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Confirmation that the staff member has been deleted */
-                204: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
+        delete: operations["deleteStaff"];
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/businesses/{businessId}/staff/{id}/capacity": {
+    "/businesses/{businessId}/staff/{staffId}/capacity": {
         parameters: {
             query?: {
                 /** @description Start of date range */
@@ -2440,7 +746,7 @@ export interface paths {
                 /** @description Business ID */
                 businessId: string;
                 /** @description Staff ID */
-                id: string;
+                staffId: string;
             };
             cookie?: never;
         };
@@ -2448,50 +754,7 @@ export interface paths {
          * Staff Capacity
          * @description Retrieve Capacity for a Staff Member
          */
-        get: {
-            parameters: {
-                query?: {
-                    /** @description Start of date range */
-                    startDate?: string;
-                    /** @description End of date range */
-                    endDate?: string;
-                };
-                header?: never;
-                path: {
-                    /** @description Business ID */
-                    businessId: string;
-                    /** @description Staff ID */
-                    id: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description A Staff member within your business */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: {
-                                /** @description Total minutes blocked by external events or time blockers. */
-                                blockedTime?: {
-                                    externalEvents?: number;
-                                    timeBlockers?: number;
-                                };
-                                /** @description Total minutes the staff could potentially be booked (from his working hours). */
-                                bookableMinutes?: number;
-                                /** @description Total minutes the staff was available for booking (bookable minutes minus blocked minutes) */
-                                availableBookableMinutes?: number;
-                                /** @description Total minutes the staff was booked. */
-                                bookedMinutes?: number;
-                            };
-                        };
-                    };
-                };
-            };
-        };
+        get: operations["getStaffCapacity"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2511,35 +774,7 @@ export interface paths {
          * List Time Blockers
          * @description List Time Blockers within a Business
          */
-        get: {
-            parameters: {
-                query?: {
-                    /** @description Start of date range filter */
-                    startDate?: string;
-                    /** @description End of date range filter (requires startDate) */
-                    endDate?: string;
-                    /** @description ID of the staff to filter time blockers by */
-                    staffId?: string;
-                };
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description List of time blockers */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["TimeBlocker"][];
-                        };
-                    };
-                };
-            };
-        };
+        get: operations["listTimeBlockers"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2548,7 +783,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/businesses/{businessId}/time-blockers/{id}": {
+    "/businesses/{businessId}/time-blockers/{timeBlockerId}": {
         parameters: {
             query?: never;
             header?: never;
@@ -2559,28 +794,7 @@ export interface paths {
          * Retrieve a Time Blocker
          * @description Retrieve a Time Blocker
          */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description A Time Blocker */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["TimeBlocker"];
-                        };
-                    };
-                };
-            };
-        };
+        get: operations["retrieveTimeBlocker"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2600,39 +814,7 @@ export interface paths {
          * List Vitals Links
          * @description List all vitals links for a business with pagination
          */
-        get: {
-            parameters: {
-                query?: {
-                    limit?: number;
-                    offset?: number;
-                    vitalsTemplateId?: string;
-                    status?: "ACTIVE" | "ARCHIVED" | "DISABLED";
-                };
-                header?: never;
-                path: {
-                    businessId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description List of Vitals Links */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["VitalsLink"][];
-                            meta?: {
-                                /** @description Total number of links matching the filter criteria. */
-                                totalCount?: number;
-                            };
-                        };
-                    };
-                };
-            };
-        };
+        get: operations["listVitalsLinks"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2641,7 +823,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/businesses/{businessId}/vitals/links/{id}": {
+    "/businesses/{businessId}/vitals/links/{linkId}": {
         parameters: {
             query?: never;
             header?: never;
@@ -2652,40 +834,7 @@ export interface paths {
          * Retrieve a Vitals Link
          * @description Retrieve a vitals link by ID.
          */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    businessId: string;
-                    id: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description A Vitals Link. */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["VitalsLink"];
-                        };
-                    };
-                };
-                /** @description Vitals Link not found. */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Error"];
-                    };
-                };
-            };
-        };
+        get: operations["retrieveVitalsLink"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2705,106 +854,20 @@ export interface paths {
          * List Vitals Scans
          * @description List all vitals scans for a business with pagination
          */
-        get: {
-            parameters: {
-                query?: {
-                    limit?: number;
-                    offset?: number;
-                    patientId?: string;
-                    vitalsLinkId?: string;
-                };
-                header?: never;
-                path: {
-                    businessId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description List of Vitals Scans */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["VitalsScan"][];
-                            meta?: {
-                                /** @description Total number of scans matching the filter criteria. */
-                                totalCount?: number;
-                            };
-                        };
-                    };
-                };
-            };
-        };
+        get: operations["listVitalsScans"];
         put?: never;
         /**
          * Create a Vitals Scan
          * @description Create a new vitals scan for a patient with optional pre-filled input data.
          */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    businessId: string;
-                };
-                cookie?: never;
-            };
-            requestBody: {
-                content: {
-                    "application/json": {
-                        /** @description The ID of the Vitals Link to create the scan under. */
-                        vitalsLinkId: string;
-                        /** @description The ID of the Patient this scan is for. */
-                        patientId: string;
-                        inputData?: components["schemas"]["VitalsScanInputData"];
-                    };
-                };
-            };
-            responses: {
-                /** @description Vitals Scan created */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["VitalsScan"];
-                        };
-                    };
-                };
-                /** @description Bad request (link expired, disabled, max scans reached, or insufficient credits) */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description Unauthorized */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description Vitals link or patient not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
+        post: operations["createVitalsScan"];
         delete?: never;
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/businesses/{businessId}/vitals/scans/{id}": {
+    "/businesses/{businessId}/vitals/scans/{scanId}": {
         parameters: {
             query?: never;
             header?: never;
@@ -2815,40 +878,7 @@ export interface paths {
          * Retrieve a Vitals Scan
          * @description Retrieve a vitals scan by ID.
          */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    businessId: string;
-                    id: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description A Vitals Scan. */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["VitalsScan"];
-                        };
-                    };
-                };
-                /** @description Vitals Scan not found. */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Error"];
-                    };
-                };
-            };
-        };
+        get: operations["retrieveVitalsScan"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2868,34 +898,7 @@ export interface paths {
          * List Vitals Templates
          * @description List all available vitals templates for a business
          */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    businessId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description List of Vitals Templates */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["VitalsTemplate"][];
-                            meta?: {
-                                /** @description Total number of templates available. */
-                                totalCount?: number;
-                            };
-                        };
-                    };
-                };
-            };
-        };
+        get: operations["listVitalsTemplates"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2904,7 +907,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/businesses/{businessId}/vitals/templates/{id}": {
+    "/businesses/{businessId}/vitals/templates/{templateId}": {
         parameters: {
             query?: never;
             header?: never;
@@ -2915,40 +918,7 @@ export interface paths {
          * Retrieve a Vitals Template
          * @description Retrieve a vitals template by ID.
          */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    businessId: string;
-                    id: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description A Vitals Template. */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["VitalsTemplate"];
-                        };
-                    };
-                };
-                /** @description Vitals Template not found. */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Error"];
-                    };
-                };
-            };
-        };
+        get: operations["retrieveVitalsTemplate"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2969,171 +939,13 @@ export interface paths {
          * @description Experimental Feature. Subject to change.
          *     Retrieve a list of Working Hours Schedules for a Staff.
          */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    businessId: string;
-                    staffId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description A list of Working Hours Schedules */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["WorkingHoursSchedule"][];
-                        };
-                    };
-                };
-            };
-        };
+        get: operations["listStaffWorkingHoursSchedules"];
         put?: never;
         /**
          * Create Staff Working Hours Schedule
          * @description Experimental Feature. Subject to change. Create a Working Hours Schedule for a Staff. Must not conflict with an existing Working Hours Schedule.
          */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    businessId: string;
-                    staffId: string;
-                };
-                cookie?: never;
-            };
-            requestBody: {
-                content: {
-                    "application/json": {
-                        /** Format: date */
-                        dateStart?: string;
-                        /** Format: date */
-                        dateEnd?: string;
-                        /** @description A configuration to define active hours. */
-                        workingHours?: {
-                            /**
-                             * @description A group of active hours for a single day.
-                             * @example [
-                             *       [
-                             *         900,
-                             *         1200
-                             *       ],
-                             *       [
-                             *         1300,
-                             *         1700
-                             *       ]
-                             *     ]
-                             */
-                            monday?: number[][];
-                            /**
-                             * @description A group of active hours for a single day.
-                             * @example [
-                             *       [
-                             *         900,
-                             *         1200
-                             *       ],
-                             *       [
-                             *         1300,
-                             *         1700
-                             *       ]
-                             *     ]
-                             */
-                            tuesday?: number[][];
-                            /**
-                             * @description A group of active hours for a single day.
-                             * @example [
-                             *       [
-                             *         900,
-                             *         1200
-                             *       ],
-                             *       [
-                             *         1300,
-                             *         1700
-                             *       ]
-                             *     ]
-                             */
-                            wednesday?: number[][];
-                            /**
-                             * @description A group of active hours for a single day.
-                             * @example [
-                             *       [
-                             *         900,
-                             *         1200
-                             *       ],
-                             *       [
-                             *         1300,
-                             *         1700
-                             *       ]
-                             *     ]
-                             */
-                            thursday?: number[][];
-                            /**
-                             * @description A group of active hours for a single day.
-                             * @example [
-                             *       [
-                             *         900,
-                             *         1200
-                             *       ],
-                             *       [
-                             *         1300,
-                             *         1700
-                             *       ]
-                             *     ]
-                             */
-                            friday?: number[][];
-                            /**
-                             * @description A group of active hours for a single day.
-                             * @example [
-                             *       [
-                             *         900,
-                             *         1200
-                             *       ],
-                             *       [
-                             *         1300,
-                             *         1700
-                             *       ]
-                             *     ]
-                             */
-                            saturday?: number[][];
-                            /**
-                             * @description A group of active hours for a single day.
-                             * @example [
-                             *       [
-                             *         900,
-                             *         1200
-                             *       ],
-                             *       [
-                             *         1300,
-                             *         1700
-                             *       ]
-                             *     ]
-                             */
-                            sunday?: number[][];
-                        };
-                    };
-                };
-            };
-            responses: {
-                /** @description The created Working Hours Schedule. */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            data?: components["schemas"]["WorkingHoursSchedule"];
-                        };
-                    };
-                };
-            };
-        };
+        post: operations["createStaffWorkingHoursSchedule"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3152,72 +964,14 @@ export interface paths {
          * @description Experimental Feature. Subject to change.
          *     Retrieve a Working Hours Schedule for a Staff.
          */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    businessId: string;
-                    staffId: string;
-                    workingHoursScheduleId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description A Working Hours Schedules */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["WorkingHoursSchedule"];
-                    };
-                };
-            };
-        };
+        get: operations["retrieveStaffWorkingHoursSchedule"];
         put?: never;
         post?: never;
         /**
          * Delete Staff Working Hours Schedule
          * @description Experimental Feature. Subject to change.
          */
-        delete: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    businessId: string;
-                    staffId: string;
-                    workingHoursScheduleId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Working Hours Schedule deleted. */
-                204: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description Working Hours Schedule does not exist. */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description Failed to delete Working Hours Schedule. */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
+        delete: operations["deleteStaffWorkingHoursSchedule"];
         options?: never;
         head?: never;
         patch?: never;
@@ -4040,6 +1794,30 @@ export interface components {
              */
             updatedAt?: string;
         };
+        MagicLink: {
+            /** @description The magic link ID. */
+            id: string;
+            /**
+             * Format: uri
+             * @description The magic link URL that authenticates the patient.
+             */
+            url: string;
+            /**
+             * Format: uri
+             * @description The URL the patient is redirected to after authentication.
+             */
+            redirectUrl: string;
+            /**
+             * Format: date-time
+             * @description Time when the resource was created (ISO 8601 format).
+             */
+            readonly createdAt: string;
+            /**
+             * Format: date-time
+             * @description When the magic link expires.
+             */
+            expiresAt: string;
+        };
         /**
          * Outgoing Webhook
          * @description Endpoint that receives events from Upvio.
@@ -4712,6 +2490,11 @@ export interface components {
              * @description When the link expires, if applicable.
              */
             expiresAt?: string | null;
+            /**
+             * Format: uri
+             * @description The full URL for this vitals link.
+             */
+            url: string;
         };
         VitalsScan: {
             /**
@@ -5059,6 +2842,151 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
+    listAppointments: {
+        parameters: {
+            query: {
+                /** @description Start of date range */
+                startDate: string;
+                /** @description End of date range */
+                endDate: string;
+                /** @description ID of the patient to filter appointments by */
+                patientId?: string;
+            };
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A list of Appointments */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Appointment"][];
+                    };
+                };
+            };
+        };
+    };
+    createAppointment: {
+        parameters: {
+            query?: {
+                /** @description If true, the appointment will be created even if the staff is busy */
+                ignoreBusyTimes?: boolean;
+            };
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        /** @description Appointment data */
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AppointmentCreateInput"];
+            };
+        };
+        responses: {
+            /** @description Created appointment */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Appointment"];
+                    };
+                };
+            };
+        };
+    };
+    retrieveAppointment: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Appointment ID */
+                appointmentId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description An Appointment */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Appointment"];
+                    };
+                };
+            };
+        };
+    };
+    deleteAppointment: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Appointment ID */
+                appointmentId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Confirmation that the appointment has been deleted */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    updateAppointment: {
+        parameters: {
+            query?: {
+                /** @description If true, the appointment will be updated even if the staff is busy at the new time */
+                ignoreBusyTimes?: boolean;
+            };
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Appointment ID */
+                appointmentId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Updated Appointment */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Appointment"];
+                    };
+                };
+            };
+        };
+    };
     updateAppointmentTags: {
         parameters: {
             query?: never;
@@ -5067,7 +2995,7 @@ export interface operations {
                 /** @description Business ID */
                 businessId: string;
                 /** @description Appointment ID */
-                id: string;
+                appointmentId: string;
             };
             cookie?: never;
         };
@@ -5121,7 +3049,40 @@ export interface operations {
             };
         };
     };
-    "list-businesses": {
+    listServiceAvailableTimes: {
+        parameters: {
+            query: {
+                /** @description The start date of the range to retrieve available times for (ISO 8601 format). */
+                startDate: string;
+                /** @description The end date of the range to retrieve available times for (ISO 8601 format). */
+                endDate: string;
+                /** @description The duration of the service in minutes. */
+                duration: number;
+                /** @description The staff members to filter the available times by. */
+                staffIds?: string[];
+                /** @description If true, unavailable slots will be included in the response. */
+                includeUnavailableSlots?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The available times for this service */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["AvailableTimes"];
+                    };
+                };
+            };
+        };
+    };
+    listBusinesses: {
         parameters: {
             query?: never;
             header?: never;
@@ -5140,6 +3101,2138 @@ export interface operations {
                         data?: components["schemas"]["Business"][];
                     };
                 };
+            };
+        };
+    };
+    retrieveBusiness: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Business */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Business"];
+                    };
+                };
+            };
+        };
+    };
+    updateBusiness: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        /** @description Attributes used to update a Business. */
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["BusinessUpdateInput"];
+            };
+        };
+        responses: {
+            /** @description Updated Business */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Business"];
+                    };
+                };
+            };
+        };
+    };
+    listFormSubmissions: {
+        parameters: {
+            query?: {
+                limit?: number;
+                offset?: number;
+                filters?: {
+                    /** @description Filter by Form ID. */
+                    formId?: string;
+                    /** @description Filter by Patient ID. */
+                    patientId?: string;
+                };
+            };
+            header?: never;
+            path: {
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of Form Submissions */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["FormSubmission"][];
+                    };
+                };
+            };
+        };
+    };
+    retrieveFormSubmission: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+                formSubmissionId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A Form Submission. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["FormSubmission"];
+                    };
+                };
+            };
+            /** @description Form Submission not found. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    listForms: {
+        parameters: {
+            query?: {
+                visibility?: ("LISTED" | "UNLISTED")[];
+            };
+            header?: never;
+            path: {
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of Forms */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Form"][];
+                    };
+                };
+            };
+        };
+    };
+    retrieveForm: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+                formId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A Form. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Form"];
+                    };
+                };
+            };
+            /** @description Form not found. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    listLocations: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A list of locations. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Location"][];
+                    };
+                };
+            };
+            /** @description Location requires authentication */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Location not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    createLocation: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["LocationCreateInput"];
+            };
+        };
+        responses: {
+            /** @description The created location. */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Location"];
+                    };
+                };
+            };
+            /** @description Location requires authentication */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Location not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    retrieveLocation: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Location ID */
+                locationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The requested location. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Location"];
+                    };
+                };
+            };
+            /** @description Location requires authentication */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Location not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    updateLocation: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Location ID */
+                locationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["LocationUpdateInput"];
+            };
+        };
+        responses: {
+            /** @description The updated location. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Location"];
+                    };
+                };
+            };
+            /** @description Location requires authentication */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Location not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    deleteLocation: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Location ID */
+                locationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Confirmation of deletion. */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Location requires authentication */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Location not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    createPatientMagicLink: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Patient ID */
+                patientId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /**
+                     * Format: uri
+                     * @description URL to redirect the patient to after authentication. Must be a valid Upvio domain.
+                     */
+                    redirectUrl: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Magic link created */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["MagicLink"];
+                    };
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Patient not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    listBookingEventTemplates: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of Booking Event Templates */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["BookingEventTemplate"][];
+                    };
+                };
+            };
+        };
+    };
+    createBookingEventTemplate: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["BookingEventTemplateCreateInput"];
+            };
+        };
+        responses: {
+            /** @description The created Booking Event Template. */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["BookingEventTemplate"];
+                    };
+                };
+            };
+            /** @description Invalid input. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    retrieveBookingEventTemplate: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+                bookingEventTemplateId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A Booking Event Template. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["BookingEventTemplate"];
+                    };
+                };
+            };
+            /** @description Booking Event Template not found. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    deleteBookingEventTemplate: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+                bookingEventTemplateId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Confirmation of deletion. */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Booking Event Template not found. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    updateBookingEventTemplate: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+                bookingEventTemplateId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["BookingEventTemplateUpdateInput"];
+            };
+        };
+        responses: {
+            /** @description The updated Booking Event Template. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["BookingEventTemplate"];
+                    };
+                };
+            };
+            /** @description Invalid input. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Booking Event Template not found. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    listPostAppointmentMessageTemplates: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of Post-Appointment Message Templates */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["PostAppointmentMessageTemplate"][];
+                    };
+                };
+            };
+        };
+    };
+    createPostAppointmentMessageTemplate: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PostAppointmentMessageTemplateCreateInput"];
+            };
+        };
+        responses: {
+            /** @description The created Post-Appointment Message Template. */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["PostAppointmentMessageTemplate"];
+                    };
+                };
+            };
+            /** @description Invalid input. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    retrievePostAppointmentMessageTemplate: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+                postAppointmentMessageTemplateId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A Post-Appointment Message Template. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["PostAppointmentMessageTemplate"];
+                    };
+                };
+            };
+            /** @description Post-Appointment Message Template not found. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    deletePostAppointmentMessageTemplate: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+                postAppointmentMessageTemplateId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Confirmation of deletion. */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Post-Appointment Message Template not found. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    updatePostAppointmentMessageTemplate: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+                postAppointmentMessageTemplateId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PostAppointmentMessageTemplateUpdateInput"];
+            };
+        };
+        responses: {
+            /** @description The updated Post-Appointment Message Template. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["PostAppointmentMessageTemplate"];
+                    };
+                };
+            };
+            /** @description Invalid input. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Post-Appointment Message Template not found. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    listReminderTemplates: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of Reminder Templates */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["ReminderTemplate"][];
+                    };
+                };
+            };
+        };
+    };
+    createReminderTemplate: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ReminderTemplateCreateInput"];
+            };
+        };
+        responses: {
+            /** @description The created Reminder Template. */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["ReminderTemplate"];
+                    };
+                };
+            };
+            /** @description Invalid input. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    retrieveReminderTemplate: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+                reminderTemplateId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A Reminder Template. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["ReminderTemplate"];
+                    };
+                };
+            };
+            /** @description Reminder Template not found. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    deleteReminderTemplate: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+                reminderTemplateId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Confirmation of deletion. */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Reminder Template not found. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    updateReminderTemplate: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+                reminderTemplateId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ReminderTemplateUpdateInput"];
+            };
+        };
+        responses: {
+            /** @description The updated Reminder Template. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["ReminderTemplate"];
+                    };
+                };
+            };
+            /** @description Invalid input. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Reminder Template not found. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    listOutgoingWebhooks: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of Outgoing Webhooks */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["OutgoingWebhook"][];
+                    };
+                };
+            };
+        };
+    };
+    listPatients: {
+        parameters: {
+            query?: {
+                limit?: number;
+                offset?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of patients */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Patient"][];
+                        meta?: {
+                            /** @description Total number of non-archived patients in the business. */
+                            totalCount?: number;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    createPatient: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": {
+                    name: string;
+                    email: string;
+                    phoneMobile?: string;
+                    /** Format: uuid */
+                    primaryStaffId?: string;
+                    /**
+                     * @description When set to "create", returns an error if a patient with the same email exists. When set to "upsert" (default), updates the existing patient.
+                     * @default upsert
+                     * @enum {string}
+                     */
+                    mode?: "create" | "upsert";
+                };
+            };
+        };
+        responses: {
+            /** @description The created Patient */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Patient"];
+                    };
+                };
+            };
+            /** @description Conflict - A patient with this email already exists (when mode is "create") */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    retrievePatient: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A Patient */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Patient"];
+                    };
+                };
+            };
+        };
+    };
+    updatePatient: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": {
+                    name?: string;
+                    email?: string;
+                    phoneMobile?: string;
+                };
+            };
+        };
+        responses: {
+            /** @description The updated Patient */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Patient"];
+                };
+            };
+        };
+    };
+    archivePatient: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Confirmation that the patient has been archived */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    listServiceCategories: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of Service Categories */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["ServiceCategory"][];
+                    };
+                };
+            };
+        };
+    };
+    createServiceCategory: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": {
+                    name: string;
+                };
+            };
+        };
+        responses: {
+            /** @description The created Service Category */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["ServiceCategory"];
+                    };
+                };
+            };
+        };
+    };
+    retrieveServiceCategory: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Service Category ID */
+                serviceCategoryId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A Service Category */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["ServiceCategory"];
+                    };
+                };
+            };
+        };
+    };
+    updateServiceCategory: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Service Category ID */
+                serviceCategoryId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": {
+                    name: string;
+                };
+            };
+        };
+        responses: {
+            /** @description The updated Service Category */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["ServiceCategory"];
+                    };
+                };
+            };
+        };
+    };
+    deleteServiceCategory: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Service Category ID */
+                serviceCategoryId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Confirmation that the Service Category has been deleted */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    listServices: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of Services */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Service"][];
+                    };
+                };
+            };
+        };
+    };
+    createService: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["Service"];
+            };
+        };
+        responses: {
+            /** @description The created Service */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Service"];
+                    };
+                };
+            };
+        };
+    };
+    retrieveService: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Service ID */
+                serviceId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Retrieve a Service */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Service"];
+                    };
+                };
+            };
+        };
+    };
+    updateService: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Service ID */
+                serviceId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["Service"];
+            };
+        };
+        responses: {
+            /** @description The updated Service */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Service"];
+                    };
+                };
+            };
+        };
+    };
+    deleteService: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Service ID */
+                serviceId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Confirmation that the patient has been deleted */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    listStaff: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of Staff Members */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Staff"][];
+                    };
+                };
+            };
+        };
+    };
+    createStaff: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": {
+                    name: string;
+                    email: string;
+                };
+            };
+        };
+        responses: {
+            /** @description The created Staff Member */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Staff"];
+                    };
+                };
+            };
+        };
+    };
+    retrieveStaff: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Staff ID */
+                staffId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A Staff member within your business */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Staff"];
+                    };
+                };
+            };
+        };
+    };
+    updateStaff: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Staff ID */
+                staffId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": {
+                    name?: string;
+                    email?: string;
+                    /**
+                     * @description Timezone string.
+                     * @example UTC
+                     */
+                    timezone?: string | null;
+                };
+            };
+        };
+        responses: {
+            /** @description The updated Staff member */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Staff"];
+                };
+            };
+        };
+    };
+    deleteStaff: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Staff ID */
+                staffId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Confirmation that the staff member has been deleted */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    getStaffCapacity: {
+        parameters: {
+            query?: {
+                /** @description Start of date range */
+                startDate?: string;
+                /** @description End of date range */
+                endDate?: string;
+            };
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Staff ID */
+                staffId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A Staff member within your business */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: {
+                            /** @description Total minutes blocked by external events or time blockers. */
+                            blockedTime?: {
+                                externalEvents?: number;
+                                timeBlockers?: number;
+                            };
+                            /** @description Total minutes the staff could potentially be booked (from his working hours). */
+                            bookableMinutes?: number;
+                            /** @description Total minutes the staff was available for booking (bookable minutes minus blocked minutes) */
+                            availableBookableMinutes?: number;
+                            /** @description Total minutes the staff was booked. */
+                            bookedMinutes?: number;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    listTimeBlockers: {
+        parameters: {
+            query?: {
+                /** @description Start of date range filter */
+                startDate?: string;
+                /** @description End of date range filter (requires startDate) */
+                endDate?: string;
+                /** @description ID of the staff to filter time blockers by */
+                staffId?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of time blockers */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["TimeBlocker"][];
+                    };
+                };
+            };
+        };
+    };
+    retrieveTimeBlocker: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A Time Blocker */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["TimeBlocker"];
+                    };
+                };
+            };
+        };
+    };
+    listVitalsLinks: {
+        parameters: {
+            query?: {
+                limit?: number;
+                offset?: number;
+                vitalsTemplateId?: string;
+                status?: "ACTIVE" | "ARCHIVED" | "DISABLED";
+            };
+            header?: never;
+            path: {
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of Vitals Links */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["VitalsLink"][];
+                        meta?: {
+                            /** @description Total number of links matching the filter criteria. */
+                            totalCount?: number;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    retrieveVitalsLink: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+                linkId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A Vitals Link. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["VitalsLink"];
+                    };
+                };
+            };
+            /** @description Vitals Link not found. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    listVitalsScans: {
+        parameters: {
+            query?: {
+                limit?: number;
+                offset?: number;
+                patientId?: string;
+                vitalsLinkId?: string;
+            };
+            header?: never;
+            path: {
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of Vitals Scans */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["VitalsScan"][];
+                        meta?: {
+                            /** @description Total number of scans matching the filter criteria. */
+                            totalCount?: number;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    createVitalsScan: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @description The ID of the Vitals Link to create the scan under. */
+                    vitalsLinkId: string;
+                    /** @description The ID of the Patient this scan is for. */
+                    patientId: string;
+                    inputData?: components["schemas"]["VitalsScanInputData"];
+                };
+            };
+        };
+        responses: {
+            /** @description Vitals Scan created */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["VitalsScan"];
+                    };
+                };
+            };
+            /** @description Bad request (link expired, disabled, max scans reached, or insufficient credits) */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Vitals link or patient not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    retrieveVitalsScan: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+                scanId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A Vitals Scan. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["VitalsScan"];
+                    };
+                };
+            };
+            /** @description Vitals Scan not found. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    listVitalsTemplates: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of Vitals Templates */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["VitalsTemplate"][];
+                        meta?: {
+                            /** @description Total number of templates available. */
+                            totalCount?: number;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    retrieveVitalsTemplate: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+                templateId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A Vitals Template. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["VitalsTemplate"];
+                    };
+                };
+            };
+            /** @description Vitals Template not found. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    listStaffWorkingHoursSchedules: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+                staffId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A list of Working Hours Schedules */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["WorkingHoursSchedule"][];
+                    };
+                };
+            };
+        };
+    };
+    createStaffWorkingHoursSchedule: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+                staffId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** Format: date */
+                    dateStart?: string;
+                    /** Format: date */
+                    dateEnd?: string;
+                    /** @description A configuration to define active hours. */
+                    workingHours?: {
+                        /**
+                         * @description A group of active hours for a single day.
+                         * @example [
+                         *       [
+                         *         900,
+                         *         1200
+                         *       ],
+                         *       [
+                         *         1300,
+                         *         1700
+                         *       ]
+                         *     ]
+                         */
+                        monday?: number[][];
+                        /**
+                         * @description A group of active hours for a single day.
+                         * @example [
+                         *       [
+                         *         900,
+                         *         1200
+                         *       ],
+                         *       [
+                         *         1300,
+                         *         1700
+                         *       ]
+                         *     ]
+                         */
+                        tuesday?: number[][];
+                        /**
+                         * @description A group of active hours for a single day.
+                         * @example [
+                         *       [
+                         *         900,
+                         *         1200
+                         *       ],
+                         *       [
+                         *         1300,
+                         *         1700
+                         *       ]
+                         *     ]
+                         */
+                        wednesday?: number[][];
+                        /**
+                         * @description A group of active hours for a single day.
+                         * @example [
+                         *       [
+                         *         900,
+                         *         1200
+                         *       ],
+                         *       [
+                         *         1300,
+                         *         1700
+                         *       ]
+                         *     ]
+                         */
+                        thursday?: number[][];
+                        /**
+                         * @description A group of active hours for a single day.
+                         * @example [
+                         *       [
+                         *         900,
+                         *         1200
+                         *       ],
+                         *       [
+                         *         1300,
+                         *         1700
+                         *       ]
+                         *     ]
+                         */
+                        friday?: number[][];
+                        /**
+                         * @description A group of active hours for a single day.
+                         * @example [
+                         *       [
+                         *         900,
+                         *         1200
+                         *       ],
+                         *       [
+                         *         1300,
+                         *         1700
+                         *       ]
+                         *     ]
+                         */
+                        saturday?: number[][];
+                        /**
+                         * @description A group of active hours for a single day.
+                         * @example [
+                         *       [
+                         *         900,
+                         *         1200
+                         *       ],
+                         *       [
+                         *         1300,
+                         *         1700
+                         *       ]
+                         *     ]
+                         */
+                        sunday?: number[][];
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description The created Working Hours Schedule. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["WorkingHoursSchedule"];
+                    };
+                };
+            };
+        };
+    };
+    retrieveStaffWorkingHoursSchedule: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+                staffId: string;
+                workingHoursScheduleId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A Working Hours Schedules */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkingHoursSchedule"];
+                };
+            };
+        };
+    };
+    deleteStaffWorkingHoursSchedule: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+                staffId: string;
+                workingHoursScheduleId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Working Hours Schedule deleted. */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Working Hours Schedule does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Failed to delete Working Hours Schedule. */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
         };
     };

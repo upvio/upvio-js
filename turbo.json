@@ -8,6 +8,7 @@
       "outputs": ["dist"]
     },
     "codegen": {
+      "cache": false,
       "dependsOn": []
     },
     "lint": {
