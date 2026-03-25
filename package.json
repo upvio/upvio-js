@@ -11,10 +11,10 @@
     "test": "turbo run test"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.7",
-    "turbo": "^2.8.11",
+    "@biomejs/biome": "2.4.9",
+    "turbo": "^2.8.20",
     "typescript": "5.9.3",
-    "vitest": "^4.0.18"
+    "vitest": "^4.1.1"
   },
   "packageManager": "pnpm@9.0.0",
   "engines": {
