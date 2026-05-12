@@ -17,9 +17,6 @@
     "vitest": "^4.1.1"
   },
   "packageManager": "pnpm@11.0.9",
-  "pnpm": {
-    "ignoredBuiltDependencies": ["esbuild"]
-  },
   "engines": {
     "node": ">=22"
   }
