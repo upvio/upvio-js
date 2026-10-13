@@ -9,6 +9,7 @@ export {
 export { listVitalsLinks, retrieveVitalsLink } from './endpoints/vitals/links'
 export {
   createVitalsScan,
+  createVitalsScanEmbedSession,
   listVitalsScans,
   retrieveVitalsScan,
 } from './endpoints/vitals/scans'

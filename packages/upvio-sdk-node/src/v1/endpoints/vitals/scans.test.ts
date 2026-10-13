@@ -138,6 +138,40 @@ describe('client.v1.vitals.scans', () => {
       expect(JSON.parse(options.body)).toEqual(body)
       expect(result).toEqual({ data: { id: 'scan_123' } })
     })
+
+    it('forwards return URL fields in the request body', async () => {
+      mockOk({ data: { id: 'scan_123' } })
+      const client = createClient()
+
+      const body = {
+        vitalsLinkId: 'link_456',
+        patientId: 'patient_789',
+        successReturnUrl: 'https://example.com/success',
+        failureReturnUrl: 'https://example.com/failure',
+        abortReturnUrl: 'https://example.com/abort',
+      }
+
+      await client.v1.vitals.scans.create(body)
+
+      const [, options] = mockFetch.mock.calls[0]
+      expect(JSON.parse(options.body)).toEqual(body)
+    })
+
+    it('omits return URL fields from the body when not provided', async () => {
+      mockOk({ data: { id: 'scan_123' } })
+      const client = createClient()
+
+      await client.v1.vitals.scans.create({
+        vitalsLinkId: 'link_456',
+        patientId: 'patient_789',
+      })
+
+      const [, options] = mockFetch.mock.calls[0]
+      const sent = JSON.parse(options.body)
+      expect(sent).not.toHaveProperty('successReturnUrl')
+      expect(sent).not.toHaveProperty('failureReturnUrl')
+      expect(sent).not.toHaveProperty('abortReturnUrl')
+    })
   })
 
   describe('list', () => {
@@ -153,6 +187,26 @@ describe('client.v1.vitals.scans', () => {
         'https://api.example.com/v1/businesses/biz_123/vitals/scans',
       )
       expect(options.method).toBe('GET')
+      expect(result).toEqual(responseData)
+    })
+
+    it('surfaces return URL fields on each item', async () => {
+      const responseData = {
+        data: [
+          {
+            id: 'scan_1',
+            successReturnUrl: 'https://example.com/success',
+            failureReturnUrl: 'https://example.com/failure',
+            abortReturnUrl: null,
+          },
+        ],
+        meta: { totalCount: 1 },
+      }
+      mockOk(responseData)
+      const client = createClient()
+
+      const result = await client.v1.vitals.scans.list()
+
       expect(result).toEqual(responseData)
     })
 
@@ -192,6 +246,62 @@ describe('client.v1.vitals.scans', () => {
       )
       expect(options.method).toBe('GET')
       expect(result).toEqual({ data: { id: 'scan_abc' } })
+    })
+
+    it('surfaces return URL fields from the response', async () => {
+      const responseData = {
+        data: {
+          id: 'scan_abc',
+          successReturnUrl: 'https://example.com/success',
+          failureReturnUrl: 'https://example.com/failure',
+          abortReturnUrl: 'https://example.com/abort',
+        },
+      }
+      mockOk(responseData)
+      const client = createClient()
+
+      const result = await client.v1.vitals.scans.retrieve('scan_abc')
+
+      expect(result).toEqual(responseData)
+    })
+  })
+
+  describe('createEmbedSession', () => {
+    it('sends a POST to the scan embed-sessions path', async () => {
+      const responseData = {
+        data: {
+          url: 'https://scan.upvio.com/acme/scans/scan_abc/embed#token=tok_abc',
+          expiresAt: '2026-10-09T12:00:00.000Z',
+        },
+      }
+      mockOk(responseData)
+      const client = createClient()
+
+      const result = await client.v1.vitals.scans.createEmbedSession('scan_abc')
+
+      const [url, options] = mockFetch.mock.calls[0]
+      expect(url).toBe(
+        'https://api.example.com/v1/businesses/biz_123/vitals/scans/scan_abc/embed-sessions',
+      )
+      expect(options.method).toBe('POST')
+      expect(options.body).toBeUndefined()
+      expect(result).toEqual(responseData)
+    })
+
+    it('returns the error body when the scan has already finished', async () => {
+      const body = {
+        error: {
+          code: 409,
+          type: 'ConflictError',
+          title: 'Vitals Scan has already finished',
+        },
+      }
+      mockError(409, body)
+      const client = createClient()
+
+      const result = await client.v1.vitals.scans.createEmbedSession('scan_abc')
+
+      expect(result).toStrictEqual(body)
     })
   })
 })

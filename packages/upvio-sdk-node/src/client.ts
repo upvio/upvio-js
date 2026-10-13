@@ -52,6 +52,8 @@ export class UpvioApiClient {
             v1().then((e) => e.createVitalsScan(this, body)),
           retrieve: (scanId: string) =>
             v1().then((e) => e.retrieveVitalsScan(this, scanId)),
+          createEmbedSession: (scanId: string) =>
+            v1().then((e) => e.createVitalsScanEmbedSession(this, scanId)),
         },
         templates: {
           list: () => v1().then((e) => e.listVitalsTemplates(this)),

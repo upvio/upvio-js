@@ -23,3 +23,17 @@ for (const patient of patients) {
   console.log(patient.email)
 }
 ```
+
+### Embedding the scan interface
+
+Create an embed session for a pending or started scan on your backend and
+pass its `url` to the browser, where [`@upvio/vitals-embed`](../vitals-embed)
+renders it. The URL is valid for one hour.
+
+```typescript
+const { data, error } = await client.v1.vitals.scans.createEmbedSession(scanId)
+// data: { url, expiresAt }
+```
+
+Requires the `vitals.embed` feature and at least one allowed origin under
+**Settings → Developers → Allowed Origins** in the Account Portal.

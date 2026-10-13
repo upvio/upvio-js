@@ -40,3 +40,18 @@ export const retrieveVitalsScan = <
 ): Promise<ApiV1Response<T>> => {
   return request<T>(`/vitals/scans/${scanId}`, { method: 'GET' }, client)
 }
+
+export const createVitalsScanEmbedSession = <
+  T extends CreatedResponseData<
+    apiTypes.operations['createVitalsScanEmbedSession']
+  >,
+>(
+  client: UpvioApiClient,
+  scanId: string,
+): Promise<ApiV1Response<T>> => {
+  return request<T>(
+    `/vitals/scans/${scanId}/embed-sessions`,
+    { method: 'POST' },
+    client,
+  )
+}
