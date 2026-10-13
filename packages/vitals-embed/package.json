@@ -1,0 +1,38 @@
+{
+  "name": "@upvio/vitals-embed",
+  "description": "Embed the Upvio vitals scan interface in a web page",
+  "version": "0.1.0",
+  "license": "MIT",
+  "homepage": "https://github.com/upvio/upvio-js/tree/main/packages/vitals-embed",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/upvio/upvio-js.git"
+  },
+  "author": {
+    "name": "Upvio",
+    "email": "support@upvio.com"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts",
+    "check-types": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "happy-dom": "20.14.5",
+    "tsup": "8.5.1"
+  }
+}
