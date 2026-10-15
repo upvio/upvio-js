@@ -16,7 +16,7 @@ export type EmbedOptions = {
   /** CSS selector or element the scan iframe is appended to */
   container: string | HTMLElement
   lang?: 'en' | 'es'
-  theme?: 'light' | 'dark' | 'system'
+  themeMode?: 'light' | 'dark' | 'system'
   onCompleted?: (event: ScanEvent) => void
   onFailed?: (event: ScanEvent) => void
   onAborted?: (event: ScanEvent) => void
@@ -51,7 +51,9 @@ export const parseScanUrl = (options: EmbedOptions): URL => {
   }
 
   if (options.lang) url.searchParams.set('lang', options.lang)
-  if (options.theme) url.searchParams.set('theme', options.theme)
+  if (options.themeMode) {
+    url.searchParams.set('theme', options.themeMode)
+  }
   return url
 }
 

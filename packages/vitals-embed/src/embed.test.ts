@@ -18,12 +18,12 @@ const callbacks = () => ({
 })
 
 describe('parseScanUrl', () => {
-  it('returns the url unchanged without lang or theme', () => {
+  it('returns the url unchanged without lang or themeMode', () => {
     expect(parse().href).toBe(EMBED_URL)
   })
 
-  it('appends lang and theme while keeping the token hash', () => {
-    const url = parse({ lang: 'es', theme: 'dark' })
+  it('appends lang and themeMode while keeping the token hash', () => {
+    const url = parse({ lang: 'es', themeMode: 'dark' })
 
     expect(url.hash).toBe('#token=tok_1')
     expect(url.searchParams.get('lang')).toBe('es')
