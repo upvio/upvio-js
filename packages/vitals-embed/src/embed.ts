@@ -15,7 +15,7 @@ export type EmbedOptions = {
   url: string
   /** CSS selector or element the scan iframe is appended to */
   container: string | HTMLElement
-  lang?: string
+  lang?: 'en' | 'es'
   theme?: 'light' | 'dark' | 'system'
   onCompleted?: (event: ScanEvent) => void
   onFailed?: (event: ScanEvent) => void

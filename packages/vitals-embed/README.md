@@ -54,7 +54,7 @@ pnpm add @upvio/vitals-embed
 | ------------- | ------------------------------------------------------------ |
 | `url`         | The `url` returned by `vitals.scans.createEmbedSession`      |
 | `container`   | CSS selector or element the iframe is appended to            |
-| `lang`        | Interface language, e.g. `en`                                |
+| `lang`        | Interface language: `en` or `es`                             |
 | `theme`       | `light`, `dark` or `system`                                  |
 | `onCompleted` | The scan succeeded                                           |
 | `onFailed`    | The scan failed                                              |
