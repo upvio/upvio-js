@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { isScanMessage } from './messages'
+import { isScanMessage } from './messages.js'
 
 const status = (value: string) => ({
   type: 'SCAN_STATUS',

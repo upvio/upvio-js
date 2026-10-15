@@ -1,10 +1,10 @@
-import { isScanMessage } from './messages'
+import { isScanMessage } from './messages.js'
 
 import type {
   CancelConfirmMessage,
   ScanMessage,
   TerminalScanStatus,
-} from './messages'
+} from './messages.js'
 
 export type ScanEvent = { scanId: string }
 

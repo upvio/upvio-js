@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from 'vitest'
 
-import { handleMessage, isFromScan, parseScanUrl } from './embed'
+import { handleMessage, isFromScan, parseScanUrl } from './embed.js'
 
-import type { EmbedOptions } from './embed'
+import type { EmbedOptions } from './embed.js'
 
 const SCAN_ORIGIN = 'https://scan.upvio.com'
 const EMBED_URL = `${SCAN_ORIGIN}/acme/scans/scan_1/embed#token=tok_1`
