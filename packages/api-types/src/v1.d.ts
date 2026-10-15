@@ -4,92 +4,7 @@
  */
 
 export interface paths {
-    "/businesses/{businessId}/appointments": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-            };
-            cookie?: never;
-        };
-        /**
-         * List Appointments
-         * @description List Appointments within a Business
-         */
-        get: operations["listAppointments"];
-        put?: never;
-        /**
-         * Create an Appointment
-         * @description Create an Appointment within a Business
-         */
-        post: operations["createAppointment"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/businesses/{businessId}/appointments/{appointmentId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-                /** @description Appointment ID */
-                appointmentId: string;
-            };
-            cookie?: never;
-        };
-        /**
-         * Retrieve an Appointment
-         * @description Retrieve an Appointments within a Business
-         */
-        get: operations["retrieveAppointment"];
-        put?: never;
-        post?: never;
-        /**
-         * Delete an Appointment
-         * @description Delete an Appointments within a Business
-         */
-        delete: operations["deleteAppointment"];
-        options?: never;
-        head?: never;
-        /**
-         * Update an Appointment
-         * @description Update an Appointments within a Business
-         */
-        patch: operations["updateAppointment"];
-        trace?: never;
-    };
-    "/businesses/{businessId}/appointments/{appointmentId}/tags": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-                /** @description Appointment ID */
-                appointmentId: string;
-            };
-            cookie?: never;
-        };
-        get?: never;
-        /**
-         * Update Appointment Tags
-         * @description Update the tags associated with an appointment
-         */
-        put: operations["updateAppointmentTags"];
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/businesses/{businessId}/services/{serviceId}/availableTimes": {
+    "/businesses/{businessId}/staff/{staffId}/working-hours-schedules": {
         parameters: {
             query?: never;
             header?: never;
@@ -97,19 +12,24 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Service Available Times
-         * @description Retrieve available times for a service
+         * List Staff Working Hours Schedules
+         * @description Experimental Feature. Subject to change.
+         *     Retrieve a list of Working Hours Schedules for a Staff.
          */
-        get: operations["listServiceAvailableTimes"];
+        get: operations["listStaffWorkingHoursSchedules"];
         put?: never;
-        post?: never;
+        /**
+         * Create Staff Working Hours Schedule
+         * @description Experimental Feature. Subject to change. Create a Working Hours Schedule for a Staff. Must not conflict with an existing Working Hours Schedule.
+         */
+        post: operations["createStaffWorkingHoursSchedule"];
         delete?: never;
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/businesses": {
+    "/businesses/{businessId}/staff/{staffId}/working-hours-schedules/{workingHoursScheduleId}": {
         parameters: {
             query?: never;
             header?: never;
@@ -117,10 +37,35 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * List Businesses
-         * @description List all Businesses that can be accessed within the current context.
+         * Retrieve Staff Working Hours Schedule
+         * @description Experimental Feature. Subject to change.
+         *     Retrieve a Working Hours Schedule for a Staff.
          */
-        get: operations["listBusinesses"];
+        get: operations["retrieveStaffWorkingHoursSchedule"];
+        put?: never;
+        post?: never;
+        /**
+         * Delete Staff Working Hours Schedule
+         * @description Experimental Feature. Subject to change.
+         */
+        delete: operations["deleteStaffWorkingHoursSchedule"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/businesses/{businessId}/vitals/templates": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List Vitals Templates
+         * @description List all available vitals templates for a business
+         */
+        get: operations["listVitalsTemplates"];
         put?: never;
         post?: never;
         delete?: never;
@@ -129,199 +74,96 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/businesses/{businessId}": {
+    "/businesses/{businessId}/vitals/templates/{templateId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Retrieve a Vitals Template
+         * @description Retrieve a vitals template by ID.
+         */
+        get: operations["retrieveVitalsTemplate"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/businesses/{businessId}/vitals/scans": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List Vitals Scans
+         * @description Returns a list of vitals scans for a business. The scans are returned sorted by creation date, with the most recent scans appearing first.
+         */
+        get: operations["listVitalsScans"];
+        put?: never;
+        /**
+         * Create a Vitals Scan
+         * @description Create a new vitals scan for a patient with optional pre-filled input data. The successReturnUrl, failureReturnUrl, abortReturnUrl and skipResultsScreen fields are only supported on STANDARD links and are rejected with VitalsLinkFieldUnsupportedError when vitalsLinkId refers to a TOUCH_POINT link.
+         */
+        post: operations["createVitalsScan"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/businesses/{businessId}/vitals/scans/{scanId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Retrieve a Vitals Scan
+         * @description Retrieve a vitals scan by ID.
+         */
+        get: operations["retrieveVitalsScan"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/businesses/{businessId}/vitals/scans/{scanId}/embed-sessions": {
         parameters: {
             query?: never;
             header?: never;
             path: {
-                /** @description Business ID */
+                /** @description The ID of the Business. */
                 businessId: string;
-            };
-            cookie?: never;
-        };
-        /**
-         * Retrieve a Business
-         * @description Retrieve a Business
-         */
-        get: operations["retrieveBusiness"];
-        /**
-         * Update a Business
-         * @description Update a Business
-         */
-        put: operations["updateBusiness"];
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/businesses/{businessId}/form-submissions": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List Form Submissions
-         * @description List all forms
-         */
-        get: operations["listFormSubmissions"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/businesses/{businessId}/form-submissions/{formSubmissionId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Retrieve a Form Submission
-         * @description Retrieve a Form Submission by ID.
-         */
-        get: operations["retrieveFormSubmission"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/businesses/{businessId}/forms": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List Forms
-         * @description List all forms
-         */
-        get: operations["listForms"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/businesses/{businessId}/forms/{formId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Retrieve a Form
-         * @description Retrieve a Form by ID.
-         */
-        get: operations["retrieveForm"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/businesses/{businessId}/locations": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-            };
-            cookie?: never;
-        };
-        /**
-         * List Locations
-         * @description List all locations for a business.
-         */
-        get: operations["listLocations"];
-        put?: never;
-        /**
-         * Create a Location
-         * @description Create a new location for the business.
-         */
-        post: operations["createLocation"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/businesses/{businessId}/locations/{locationId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-                /** @description Location ID */
-                locationId: string;
-            };
-            cookie?: never;
-        };
-        /**
-         * Retrieve a Location
-         * @description Retrieve a specific location by its ID.
-         */
-        get: operations["retrieveLocation"];
-        /**
-         * Update a Location
-         * @description Update an existing location.
-         */
-        put: operations["updateLocation"];
-        post?: never;
-        /**
-         * Delete a Location
-         * @description Delete an existing location.
-         */
-        delete: operations["deleteLocation"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/businesses/{businessId}/patients/{patientId}/magic-links": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-                /** @description Patient ID */
-                patientId: string;
+                /** @description The ID of the Vitals Scan. */
+                scanId: string;
             };
             cookie?: never;
         };
         get?: never;
         put?: never;
         /**
-         * Create a magic link for a patient
-         * @description Create a magic link for a patient. The returned URL authenticates the patient and redirects them to the specified URL.
+         * Create a Vitals Scan Embed Session
+         * @description Create a URL that opens a pending or started vitals scan inside an iframe on one of the business's embedAllowedOrigins, without the patient signing in. The URL is valid for one hour and can be loaded more than once until it expires. Create a new session each time the page that embeds the scan is rendered. Requires the VitalsScanEmbedSession:write:all scope, the vitals.embed feature and at least one embed allowed origin.
          */
-        post: operations["createPatientMagicLink"];
+        post: operations["createVitalsScanEmbedSession"];
         delete?: never;
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/businesses/{businessId}/notifications/booking-event-templates": {
+    "/businesses/{businessId}/vitals/links": {
         parameters: {
             query?: never;
             header?: never;
@@ -329,169 +171,10 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * List Booking Event Templates
-         * @description List all booking event notification templates for a business.
+         * List Vitals Links
+         * @description List all vitals links for a business with pagination
          */
-        get: operations["listBookingEventTemplates"];
-        put?: never;
-        /**
-         * Create a Booking Event Template
-         * @description Create a new booking event notification template.
-         */
-        post: operations["createBookingEventTemplate"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/businesses/{businessId}/notifications/booking-event-templates/{bookingEventTemplateId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Retrieve a Booking Event Template
-         * @description Retrieve a booking event notification template by ID.
-         */
-        get: operations["retrieveBookingEventTemplate"];
-        put?: never;
-        post?: never;
-        /**
-         * Delete a Booking Event Template
-         * @description Soft-delete a booking event notification template.
-         */
-        delete: operations["deleteBookingEventTemplate"];
-        options?: never;
-        head?: never;
-        /**
-         * Update a Booking Event Template
-         * @description Update an existing booking event notification template.
-         */
-        patch: operations["updateBookingEventTemplate"];
-        trace?: never;
-    };
-    "/businesses/{businessId}/notifications/post-appointment-message-templates": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List Post-Appointment Message Templates
-         * @description List all post-appointment message templates for a business.
-         */
-        get: operations["listPostAppointmentMessageTemplates"];
-        put?: never;
-        /**
-         * Create a Post-Appointment Message Template
-         * @description Create a new post-appointment message template.
-         */
-        post: operations["createPostAppointmentMessageTemplate"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/businesses/{businessId}/notifications/post-appointment-message-templates/{postAppointmentMessageTemplateId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Retrieve a Post-Appointment Message Template
-         * @description Retrieve a post-appointment message template by ID.
-         */
-        get: operations["retrievePostAppointmentMessageTemplate"];
-        put?: never;
-        post?: never;
-        /**
-         * Delete a Post-Appointment Message Template
-         * @description Soft-delete a post-appointment message template.
-         */
-        delete: operations["deletePostAppointmentMessageTemplate"];
-        options?: never;
-        head?: never;
-        /**
-         * Update a Post-Appointment Message Template
-         * @description Update an existing post-appointment message template.
-         */
-        patch: operations["updatePostAppointmentMessageTemplate"];
-        trace?: never;
-    };
-    "/businesses/{businessId}/notifications/reminder-templates": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List Reminder Templates
-         * @description List all reminder templates for a business.
-         */
-        get: operations["listReminderTemplates"];
-        put?: never;
-        /**
-         * Create a Reminder Template
-         * @description Create a new reminder template.
-         */
-        post: operations["createReminderTemplate"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/businesses/{businessId}/notifications/reminder-templates/{reminderTemplateId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Retrieve a Reminder Template
-         * @description Retrieve a reminder template by ID.
-         */
-        get: operations["retrieveReminderTemplate"];
-        put?: never;
-        post?: never;
-        /**
-         * Delete a Reminder Template
-         * @description Soft-delete a reminder template.
-         */
-        delete: operations["deleteReminderTemplate"];
-        options?: never;
-        head?: never;
-        /**
-         * Update a Reminder Template
-         * @description Update an existing reminder template.
-         */
-        patch: operations["updateReminderTemplate"];
-        trace?: never;
-    };
-    "/businesses/{businessId}/outgoing-webhooks": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-            };
-            cookie?: never;
-        };
-        /**
-         * List Outgoing Webhooks
-         * @description List all outgoing webhooks within a business.
-         */
-        get: operations["listOutgoingWebhooks"];
+        get: operations["listVitalsLinks"];
         put?: never;
         post?: never;
         delete?: never;
@@ -500,7 +183,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/businesses/{businessId}/patients": {
+    "/businesses/{businessId}/vitals/links/{linkId}": {
         parameters: {
             query?: never;
             header?: never;
@@ -508,23 +191,19 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * List Patients
-         * @description List Patients within a Business
+         * Retrieve a Vitals Link
+         * @description Retrieve a vitals link by ID.
          */
-        get: operations["listPatients"];
+        get: operations["retrieveVitalsLink"];
         put?: never;
-        /**
-         * Create a Patient
-         * @description Create a patient. By default, if a patient with the same email already exists, they will be updated (upsert behavior). Set mode to "create" to return an error instead.
-         */
-        post: operations["createPatient"];
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/businesses/{businessId}/patients/{patientId}": {
+    "/businesses/{businessId}/time-blockers": {
         parameters: {
             query?: never;
             header?: never;
@@ -532,141 +211,33 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Retrieve a Patient
-         * @description Retrieve a Patient
+         * List Time Blockers
+         * @description List Time Blockers within a Business
          */
-        get: operations["retrievePatient"];
-        /**
-         * Update a patient
-         * @description Update a patient
-         */
-        put: operations["updatePatient"];
-        post?: never;
-        /**
-         * Archive a Patient
-         * @description Archive a patient
-         */
-        delete: operations["archivePatient"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/businesses/{businessId}/service-categories": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-            };
-            cookie?: never;
-        };
-        /**
-         * List Service Categories
-         * @description List Service Categories within a Business
-         */
-        get: operations["listServiceCategories"];
+        get: operations["listTimeBlockers"];
         put?: never;
-        /**
-         * Create a Service Category
-         * @description Create a Service Category
-         */
-        post: operations["createServiceCategory"];
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/businesses/{businessId}/service-categories/{serviceCategoryId}": {
+    "/businesses/{businessId}/time-blockers/{timeBlockerId}": {
         parameters: {
             query?: never;
             header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-                /** @description Service Category ID */
-                serviceCategoryId: string;
-            };
+            path?: never;
             cookie?: never;
         };
         /**
-         * Retrieve a Service Category
-         * @description Retrieve a Service Category within a Business
+         * Retrieve a Time Blocker
+         * @description Retrieve a Time Blocker
          */
-        get: operations["retrieveServiceCategory"];
-        /**
-         * Update a Service Category
-         * @description Update a Service Category
-         */
-        put: operations["updateServiceCategory"];
-        post?: never;
-        /**
-         * Delete a Service Category
-         * @description Delete a Service Category
-         */
-        delete: operations["deleteServiceCategory"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/businesses/{businessId}/services": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-            };
-            cookie?: never;
-        };
-        /**
-         * List Services
-         * @description List Services within a Business
-         */
-        get: operations["listServices"];
+        get: operations["retrieveTimeBlocker"];
         put?: never;
-        /**
-         * Create a Service
-         * @description Create a Service
-         */
-        post: operations["createService"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/businesses/{businessId}/services/{serviceId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-                /** @description Service ID */
-                serviceId: string;
-            };
-            cookie?: never;
-        };
-        /**
-         * Retrieve a Service
-         * @description Retrieve a Service
-         */
-        get: operations["retrieveService"];
-        /**
-         * Update a Service
-         * @description Update a Service
-         */
-        put: operations["updateService"];
         post?: never;
-        /**
-         * Delete a Service
-         * @description Delete a Service
-         */
-        delete: operations["deleteService"];
+        delete?: never;
         options?: never;
         head?: never;
         patch?: never;
@@ -763,7 +334,127 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/businesses/{businessId}/time-blockers": {
+    "/businesses/{businessId}/services": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        /**
+         * List Services
+         * @description List Services within a Business
+         */
+        get: operations["listServices"];
+        put?: never;
+        /**
+         * Create a Service
+         * @description Create a Service
+         */
+        post: operations["createService"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/businesses/{businessId}/services/{serviceId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Service ID */
+                serviceId: string;
+            };
+            cookie?: never;
+        };
+        /**
+         * Retrieve a Service
+         * @description Retrieve a Service
+         */
+        get: operations["retrieveService"];
+        /**
+         * Update a Service
+         * @description Update a Service
+         */
+        put: operations["updateService"];
+        post?: never;
+        /**
+         * Delete a Service
+         * @description Delete a Service
+         */
+        delete: operations["deleteService"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/businesses/{businessId}/service-categories": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        /**
+         * List Service Categories
+         * @description List Service Categories within a Business
+         */
+        get: operations["listServiceCategories"];
+        put?: never;
+        /**
+         * Create a Service Category
+         * @description Create a Service Category
+         */
+        post: operations["createServiceCategory"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/businesses/{businessId}/service-categories/{serviceCategoryId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Service Category ID */
+                serviceCategoryId: string;
+            };
+            cookie?: never;
+        };
+        /**
+         * Retrieve a Service Category
+         * @description Retrieve a Service Category within a Business
+         */
+        get: operations["retrieveServiceCategory"];
+        /**
+         * Update a Service Category
+         * @description Update a Service Category
+         */
+        put: operations["updateServiceCategory"];
+        post?: never;
+        /**
+         * Delete a Service Category
+         * @description Delete a Service Category
+         */
+        delete: operations["deleteServiceCategory"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/businesses/{businessId}/patients": {
         parameters: {
             query?: never;
             header?: never;
@@ -771,10 +462,65 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * List Time Blockers
-         * @description List Time Blockers within a Business
+         * List Patients
+         * @description List Patients within a Business
          */
-        get: operations["listTimeBlockers"];
+        get: operations["listPatients"];
+        put?: never;
+        /**
+         * Create a Patient
+         * @description Create a patient. By default, if a patient with the same email already exists, they will be updated (upsert behavior). Set mode to "create" to return an error instead.
+         */
+        post: operations["createPatient"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/businesses/{businessId}/patients/{patientId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Retrieve a Patient
+         * @description Retrieve a Patient
+         */
+        get: operations["retrievePatient"];
+        /**
+         * Update a patient
+         * @description Update a patient
+         */
+        put: operations["updatePatient"];
+        post?: never;
+        /**
+         * Archive a Patient
+         * @description Archive a patient
+         */
+        delete: operations["archivePatient"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/businesses/{businessId}/outgoing-webhooks": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        /**
+         * List Outgoing Webhooks
+         * @description List all outgoing webhooks within a business.
+         */
+        get: operations["listOutgoingWebhooks"];
         put?: never;
         post?: never;
         delete?: never;
@@ -783,7 +529,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/businesses/{businessId}/time-blockers/{timeBlockerId}": {
+    "/businesses/{businessId}/notifications/reminder-templates": {
         parameters: {
             query?: never;
             header?: never;
@@ -791,10 +537,251 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Retrieve a Time Blocker
-         * @description Retrieve a Time Blocker
+         * List Reminder Templates
+         * @description List all reminder templates for a business.
          */
-        get: operations["retrieveTimeBlocker"];
+        get: operations["listReminderTemplates"];
+        put?: never;
+        /**
+         * Create a Reminder Template
+         * @description Create a new reminder template.
+         */
+        post: operations["createReminderTemplate"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/businesses/{businessId}/notifications/reminder-templates/{reminderTemplateId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Retrieve a Reminder Template
+         * @description Retrieve a reminder template by ID.
+         */
+        get: operations["retrieveReminderTemplate"];
+        put?: never;
+        post?: never;
+        /**
+         * Delete a Reminder Template
+         * @description Soft-delete a reminder template.
+         */
+        delete: operations["deleteReminderTemplate"];
+        options?: never;
+        head?: never;
+        /**
+         * Update a Reminder Template
+         * @description Update an existing reminder template.
+         */
+        patch: operations["updateReminderTemplate"];
+        trace?: never;
+    };
+    "/businesses/{businessId}/notifications/post-appointment-message-templates": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List Post-Appointment Message Templates
+         * @description List all post-appointment message templates for a business.
+         */
+        get: operations["listPostAppointmentMessageTemplates"];
+        put?: never;
+        /**
+         * Create a Post-Appointment Message Template
+         * @description Create a new post-appointment message template.
+         */
+        post: operations["createPostAppointmentMessageTemplate"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/businesses/{businessId}/notifications/post-appointment-message-templates/{postAppointmentMessageTemplateId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Retrieve a Post-Appointment Message Template
+         * @description Retrieve a post-appointment message template by ID.
+         */
+        get: operations["retrievePostAppointmentMessageTemplate"];
+        put?: never;
+        post?: never;
+        /**
+         * Delete a Post-Appointment Message Template
+         * @description Soft-delete a post-appointment message template.
+         */
+        delete: operations["deletePostAppointmentMessageTemplate"];
+        options?: never;
+        head?: never;
+        /**
+         * Update a Post-Appointment Message Template
+         * @description Update an existing post-appointment message template.
+         */
+        patch: operations["updatePostAppointmentMessageTemplate"];
+        trace?: never;
+    };
+    "/businesses/{businessId}/notifications/booking-event-templates": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List Booking Event Templates
+         * @description List all booking event notification templates for a business.
+         */
+        get: operations["listBookingEventTemplates"];
+        put?: never;
+        /**
+         * Create a Booking Event Template
+         * @description Create a new booking event notification template.
+         */
+        post: operations["createBookingEventTemplate"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/businesses/{businessId}/notifications/booking-event-templates/{bookingEventTemplateId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Retrieve a Booking Event Template
+         * @description Retrieve a booking event notification template by ID.
+         */
+        get: operations["retrieveBookingEventTemplate"];
+        put?: never;
+        post?: never;
+        /**
+         * Delete a Booking Event Template
+         * @description Soft-delete a booking event notification template.
+         */
+        delete: operations["deleteBookingEventTemplate"];
+        options?: never;
+        head?: never;
+        /**
+         * Update a Booking Event Template
+         * @description Update an existing booking event notification template.
+         */
+        patch: operations["updateBookingEventTemplate"];
+        trace?: never;
+    };
+    "/businesses/{businessId}/patients/{patientId}/magic-links": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Patient ID */
+                patientId: string;
+            };
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Create a magic link for a patient
+         * @description Create a magic link for a patient. The returned URL authenticates the patient and redirects them to the specified URL. By default the patient portal submits the one-time code automatically; set `autoSubmit` to `false` to require the patient to confirm before the code is submitted.
+         */
+        post: operations["createPatientMagicLink"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/businesses/{businessId}/locations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        /**
+         * List Locations
+         * @description List all locations for a business.
+         */
+        get: operations["listLocations"];
+        put?: never;
+        /**
+         * Create a Location
+         * @description Create a new location for the business.
+         */
+        post: operations["createLocation"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/businesses/{businessId}/locations/{locationId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Location ID */
+                locationId: string;
+            };
+            cookie?: never;
+        };
+        /**
+         * Retrieve a Location
+         * @description Retrieve a specific location by its ID.
+         */
+        get: operations["retrieveLocation"];
+        /**
+         * Update a Location
+         * @description Update an existing location.
+         */
+        put: operations["updateLocation"];
+        post?: never;
+        /**
+         * Delete a Location
+         * @description Delete an existing location.
+         */
+        delete: operations["deleteLocation"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/businesses/{businessId}/forms": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List Forms
+         * @description List all forms
+         */
+        get: operations["listForms"];
         put?: never;
         post?: never;
         delete?: never;
@@ -803,7 +790,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/businesses/{businessId}/vitals/links": {
+    "/businesses/{businessId}/forms/{formId}": {
         parameters: {
             query?: never;
             header?: never;
@@ -811,10 +798,10 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * List Vitals Links
-         * @description List all vitals links for a business with pagination
+         * Retrieve a Form
+         * @description Retrieve a Form by ID.
          */
-        get: operations["listVitalsLinks"];
+        get: operations["retrieveForm"];
         put?: never;
         post?: never;
         delete?: never;
@@ -823,7 +810,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/businesses/{businessId}/vitals/links/{linkId}": {
+    "/businesses/{businessId}/form-submissions": {
         parameters: {
             query?: never;
             header?: never;
@@ -831,10 +818,10 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Retrieve a Vitals Link
-         * @description Retrieve a vitals link by ID.
+         * List Form Submissions
+         * @description List all forms
          */
-        get: operations["retrieveVitalsLink"];
+        get: operations["listFormSubmissions"];
         put?: never;
         post?: never;
         delete?: never;
@@ -843,7 +830,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/businesses/{businessId}/vitals/scans": {
+    "/businesses/{businessId}/form-submissions/{formSubmissionId}": {
         parameters: {
             query?: never;
             header?: never;
@@ -851,34 +838,10 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * List Vitals Scans
-         * @description List all vitals scans for a business with pagination
+         * Retrieve a Form Submission
+         * @description Retrieve a Form Submission by ID.
          */
-        get: operations["listVitalsScans"];
-        put?: never;
-        /**
-         * Create a Vitals Scan
-         * @description Create a new vitals scan for a patient with optional pre-filled input data.
-         */
-        post: operations["createVitalsScan"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/businesses/{businessId}/vitals/scans/{scanId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Retrieve a Vitals Scan
-         * @description Retrieve a vitals scan by ID.
-         */
-        get: operations["retrieveVitalsScan"];
+        get: operations["retrieveFormSubmission"];
         put?: never;
         post?: never;
         delete?: never;
@@ -887,18 +850,21 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/businesses/{businessId}/vitals/templates": {
+    "/businesses/{businessId}/custom-fields": {
         parameters: {
             query?: never;
             header?: never;
-            path?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+            };
             cookie?: never;
         };
         /**
-         * List Vitals Templates
-         * @description List all available vitals templates for a business
+         * List Custom Fields
+         * @description List the custom fields defined within a Business. Use the `alias` of each field as the key in the patient `customFields` object.
          */
-        get: operations["listVitalsTemplates"];
+        get: operations["listCustomFields"];
         put?: never;
         post?: never;
         delete?: never;
@@ -907,7 +873,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/businesses/{businessId}/vitals/templates/{templateId}": {
+    "/businesses": {
         parameters: {
             query?: never;
             header?: never;
@@ -915,10 +881,10 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Retrieve a Vitals Template
-         * @description Retrieve a vitals template by ID.
+         * List Businesses
+         * @description List all Businesses that can be accessed within the current context.
          */
-        get: operations["retrieveVitalsTemplate"];
+        get: operations["listBusinesses"];
         put?: never;
         post?: never;
         delete?: never;
@@ -927,32 +893,34 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/businesses/{businessId}/staff/{staffId}/working-hours-schedules": {
+    "/businesses/{businessId}": {
         parameters: {
             query?: never;
             header?: never;
-            path?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+            };
             cookie?: never;
         };
         /**
-         * List Staff Working Hours Schedules
-         * @description Experimental Feature. Subject to change.
-         *     Retrieve a list of Working Hours Schedules for a Staff.
+         * Retrieve a Business
+         * @description Retrieve a Business
          */
-        get: operations["listStaffWorkingHoursSchedules"];
-        put?: never;
+        get: operations["retrieveBusiness"];
         /**
-         * Create Staff Working Hours Schedule
-         * @description Experimental Feature. Subject to change. Create a Working Hours Schedule for a Staff. Must not conflict with an existing Working Hours Schedule.
+         * Update a Business
+         * @description Update a Business
          */
-        post: operations["createStaffWorkingHoursSchedule"];
+        put: operations["updateBusiness"];
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/businesses/{businessId}/staff/{staffId}/working-hours-schedules/{workingHoursScheduleId}": {
+    "/businesses/{businessId}/services/{serviceId}/availableTimes": {
         parameters: {
             query?: never;
             header?: never;
@@ -960,25 +928,371 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Retrieve Staff Working Hours Schedule
-         * @description Experimental Feature. Subject to change.
-         *     Retrieve a Working Hours Schedule for a Staff.
+         * Service Available Times
+         * @description Retrieve available times for a service
          */
-        get: operations["retrieveStaffWorkingHoursSchedule"];
+        get: operations["listServiceAvailableTimes"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/businesses/{businessId}/appointments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        /**
+         * List Appointments
+         * @description List Appointments within a Business
+         */
+        get: operations["listAppointments"];
+        put?: never;
+        /**
+         * Create an Appointment
+         * @description Create an Appointment within a Business
+         */
+        post: operations["createAppointment"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/businesses/{businessId}/appointments/{appointmentId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Appointment ID */
+                appointmentId: string;
+            };
+            cookie?: never;
+        };
+        /**
+         * Retrieve an Appointment
+         * @description Retrieve an Appointments within a Business
+         */
+        get: operations["retrieveAppointment"];
         put?: never;
         post?: never;
         /**
-         * Delete Staff Working Hours Schedule
-         * @description Experimental Feature. Subject to change.
+         * Delete an Appointment
+         * @description Delete an Appointments within a Business
          */
-        delete: operations["deleteStaffWorkingHoursSchedule"];
+        delete: operations["deleteAppointment"];
+        options?: never;
+        head?: never;
+        /**
+         * Update an Appointment
+         * @description Update an Appointments within a Business
+         */
+        patch: operations["updateAppointment"];
+        trace?: never;
+    };
+    "/businesses/{businessId}/appointments/{appointmentId}/tags": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Appointment ID */
+                appointmentId: string;
+            };
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Update Appointment Tags
+         * @description Update the tags associated with an appointment
+         */
+        put: operations["updateAppointmentTags"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/businesses/{businessId}/appointments/{appointmentId}/zoom-meeting": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Appointment ID */
+                appointmentId: string;
+            };
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Attach Zoom Meeting
+         * @description Create and attach a Zoom meeting link to an appointment. Useful for retrying when Zoom link creation failed during appointment creation.
+         */
+        post: operations["createAppointmentZoomMeeting"];
+        delete?: never;
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
 }
-export type webhooks = Record<string, never>;
+export interface webhooks {
+    "appointment.create": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Appointment Created
+         * @description Sent when an appointment is booked.
+         */
+        post: operations["appointmentOncreateWebhook"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "appointment.update": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Appointment Updated
+         * @description Sent when an appointment is changed, including reschedules and cancellations. `previousAttributes` contains the fields as they were before the change.
+         */
+        post: operations["appointmentOnupdateWebhook"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "appointment.delete": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Appointment Deleted
+         * @description Sent when an appointment is permanently deleted.
+         */
+        post: operations["appointmentOndeleteWebhook"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "appointment.request": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Appointment Requested
+         * @description Sent when an appointment is requested and is waiting for approval.
+         */
+        post: operations["appointmentOnrequestWebhook"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "patient.create": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Patient Created
+         * @description Sent when a patient is added to a business, whether through the dashboard, the booking flow or the API.
+         */
+        post: operations["patientOncreateWebhook"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "patient.update": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Patient Updated
+         * @description Sent when any field on a patient record changes.
+         */
+        post: operations["patientOnupdateWebhook"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "patient.archive": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Patient Archived
+         * @description Sent when a patient is archived. Archived patients are hidden from the dashboard but are not deleted.
+         */
+        post: operations["patientOnarchiveWebhook"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "patient.restore": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Patient Restored
+         * @description Sent when a previously archived patient is restored.
+         */
+        post: operations["patientOnrestoreWebhook"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "vitalsScan.create": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Vitals Scan Created
+         * @description Sent when a vitals scan is created, before the patient has taken it. The scan is `PENDING` and has no results yet.
+         */
+        post: operations["vitalsScanOncreateWebhook"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "vitalsScan.complete": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Vitals Scan Completed
+         * @description Sent when a vitals scan finishes successfully and its results are available.
+         */
+        post: operations["vitalsScanOncompleteWebhook"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "vitalsScan.fail": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Vitals Scan Failed
+         * @description Sent when a vitals scan could not be completed. `failureInfo.failureReason` says why.
+         */
+        post: operations["vitalsScanOnfailWebhook"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "vitalsScan.abort": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Vitals Scan Aborted
+         * @description Sent when a vitals scan is abandoned, either because the patient left it or because it sat unfinished long enough for us to close it out.
+         */
+        post: operations["vitalsScanOnabortWebhook"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+}
 export interface components {
     schemas: {
         /**
@@ -990,134 +1304,1643 @@ export interface components {
             error?: {
                 /** @example 404 */
                 code?: number;
+                /** @example NotFoundError */
+                type?: string;
                 /** @example Not Found */
                 title?: string;
             };
         };
-        /** Appointment Create Input */
-        AppointmentCreateInput: {
+        /**
+         * Working Hours Schedule
+         * @description A schedule to use with Staff to plan availability.
+         */
+        WorkingHoursSchedule: {
+            /**
+             * Format: uuid
+             * @description Unique identifier across the platform.
+             */
+            readonly id: string;
             /**
              * Format: date-time
-             * @description Date and time of the appointment.
+             * @description Time when the resource was created (ISO 8601 format).
              */
-            date: string;
+            readonly createdAt: string;
+            /**
+             * Format: date-time
+             * @description Time when the resource was created (ISO 8601 format).
+             */
+            readonly updatedAt: string;
             /**
              * Format: uuid
-             * @description Patient ID to book the appointment for.
+             * @description The ID of the Staff this resource belongs to.
              */
-            patientId: string;
-            /** @description ID of the service to book the appointment for. */
-            serviceId: string;
-            /** @description Service duration in minutes */
-            duration: number;
+            staffId: string;
+            /** @description A configuration to define active hours. */
+            workingHours: {
+                /**
+                 * @description A group of active hours for a single day.
+                 * @example [
+                 *       [
+                 *         900,
+                 *         1200
+                 *       ],
+                 *       [
+                 *         1300,
+                 *         1700
+                 *       ]
+                 *     ]
+                 */
+                monday?: number[][];
+                /**
+                 * @description A group of active hours for a single day.
+                 * @example [
+                 *       [
+                 *         900,
+                 *         1200
+                 *       ],
+                 *       [
+                 *         1300,
+                 *         1700
+                 *       ]
+                 *     ]
+                 */
+                tuesday?: number[][];
+                /**
+                 * @description A group of active hours for a single day.
+                 * @example [
+                 *       [
+                 *         900,
+                 *         1200
+                 *       ],
+                 *       [
+                 *         1300,
+                 *         1700
+                 *       ]
+                 *     ]
+                 */
+                wednesday?: number[][];
+                /**
+                 * @description A group of active hours for a single day.
+                 * @example [
+                 *       [
+                 *         900,
+                 *         1200
+                 *       ],
+                 *       [
+                 *         1300,
+                 *         1700
+                 *       ]
+                 *     ]
+                 */
+                thursday?: number[][];
+                /**
+                 * @description A group of active hours for a single day.
+                 * @example [
+                 *       [
+                 *         900,
+                 *         1200
+                 *       ],
+                 *       [
+                 *         1300,
+                 *         1700
+                 *       ]
+                 *     ]
+                 */
+                friday?: number[][];
+                /**
+                 * @description A group of active hours for a single day.
+                 * @example [
+                 *       [
+                 *         900,
+                 *         1200
+                 *       ],
+                 *       [
+                 *         1300,
+                 *         1700
+                 *       ]
+                 *     ]
+                 */
+                saturday?: number[][];
+                /**
+                 * @description A group of active hours for a single day.
+                 * @example [
+                 *       [
+                 *         900,
+                 *         1200
+                 *       ],
+                 *       [
+                 *         1300,
+                 *         1700
+                 *       ]
+                 *     ]
+                 */
+                sunday?: number[][];
+            };
+            /**
+             * @description The timezone for this schedule
+             * @example America/New_York
+             */
+            timezone?: string;
+            /**
+             * Format: date-time
+             * @example 2024-01-01T00:00:00Z
+             */
+            dateStart: string;
+            /**
+             * Format: date-time
+             * @example 2024-01-08T00:00:00Z
+             */
+            dateEnd?: string;
+        };
+        VitalsTemplate: {
+            /** @description The unique identifier for the template. */
+            id: string;
+            /**
+             * Format: date-time
+             * @description Time when the resource was created (ISO 8601 format).
+             */
+            readonly createdAt: string;
+            /**
+             * Format: date-time
+             * @description Time when the resource was last updated (ISO 8601 format).
+             */
+            readonly updatedAt: string;
+            /** @description The name of the template. */
+            name: string;
+            /** @description An optional description of the template. */
+            description?: string | null;
+            /** @description The number of credits consumed per scan using this template. */
+            credits: number;
+            /** @description The metrics included in this template. */
+            metrics: components["schemas"]["VitalsMetric"][];
+            /** @description The number of links using this template. */
+            linksCount: number;
+            /**
+             * Format: date-time
+             * @description When the template was archived, if applicable.
+             */
+            archivedAt?: string | null;
+        };
+        VitalsScan: {
             /**
              * Format: uuid
-             * @description ID of the staff member to book the appointment with. If not provided, the least busy staff member for the service will be assigned.
+             * @description Unique identifier across the platform.
+             */
+            readonly id: string;
+            /**
+             * Format: date-time
+             * @description Time when the resource was created (ISO 8601 format).
+             */
+            readonly createdAt: string;
+            /**
+             * Format: date-time
+             * @description Time when the resource was last updated (ISO 8601 format).
+             */
+            readonly updatedAt: string;
+            /**
+             * Format: uuid
+             * @description Unique identifier across the platform.
+             */
+            readonly patientId?: string;
+            /** @description The ID of the vitals link used for this scan. */
+            vitalsLinkId?: string;
+            /**
+             * @description The status of the vitals scan.
+             * @enum {string}
+             */
+            status: "PENDING" | "STARTED" | "SUCCEEDED" | "FAILED" | "ABORTED";
+            results?: components["schemas"]["VitalsScanResults"];
+            /** @description The metrics included in this scan. */
+            includedMetrics: components["schemas"]["VitalsMetric"][];
+            /**
+             * Format: date-time
+             * @description When the scan was started.
+             */
+            startedAt?: string | null;
+            inputData?: components["schemas"]["VitalsScanInputData"];
+            /**
+             * Format: uuid
+             * @description ID of the new scan that retried this one.
+             */
+            retriedByScanId?: string | null;
+            /**
+             * Format: uri
+             * @description HTTPS URL to redirect to when the scan completes successfully.
+             */
+            successReturnUrl?: string | null;
+            /**
+             * Format: uri
+             * @description HTTPS URL to redirect to when the scan fails.
+             */
+            failureReturnUrl?: string | null;
+            /**
+             * Format: uri
+             * @description HTTPS URL to redirect to when the scan is aborted.
+             */
+            abortReturnUrl?: string | null;
+            /** @description When true, the patient app skips the post-scan results screen and redirects immediately to successReturnUrl. When skipResultsScreen is true, successReturnUrl is guaranteed to be non-null (enforced at scan creation). */
+            skipResultsScreen?: boolean | null;
+            settings?: components["schemas"]["VitalsScanSettings"] | null;
+            /**
+             * @description How the identity behind the scan was established. EMAIL = verified patient session, API = created via the business API, NONE = no email verification.
+             * @enum {string|null}
+             */
+            verificationMethod?: "EMAIL" | "API" | "NONE" | null;
+            /** @description Arbitrary string key/value pairs attached to the scan. Up to 10 keys; each key up to 40 characters and each value up to 500 characters. Always present; an empty object when none are set. */
+            metadata: {
+                [key: string]: string;
+            };
+            failureInfo?: components["schemas"]["VitalsScanFailureInfo"];
+        };
+        /** @description Why the scan failed. Only present when status is FAILED. */
+        VitalsScanFailureInfo: {
+            /**
+             * @description Why the scan failed. `timeout`: the measurement ran past the maximum scan time while its progress was stalled below the completion threshold. `results_processing_timeout`: the measurement finished but its results were not processed in time. `no_measurement_results`: the measurement finished but produced no results. `other`: the measurement failed for any other reason.
+             * @enum {string}
+             */
+            failureReason: "timeout" | "results_processing_timeout" | "no_measurement_results" | "other";
+            /** @description How long the scan ran before failing, in milliseconds. Only present when failureReason is `timeout` or `results_processing_timeout`. */
+            totalScanDurationMs?: number;
+            /** @description Total time the scan made no progress, in milliseconds. Only present when failureReason is `timeout` or `results_processing_timeout`. */
+            stallDurationMs?: number;
+            /** @description Measurement progress when the scan failed, as a percentage (0–100). Only present when failureReason is `timeout` or `results_processing_timeout`. */
+            finalProgressPercentage?: number;
+            /** @description Maximum scan time allowed before the scan could time out, in milliseconds. Only present when failureReason is `timeout` or `results_processing_timeout`. */
+            maxScanTimeThresholdMs?: number;
+            /** @description Maximum time without progress allowed before the scan could time out, in milliseconds. Only present when failureReason is `timeout` or `results_processing_timeout`. */
+            maxStallTimeThresholdMs?: number;
+        } | null;
+        /** @description Per-scan UI/flow customization. All keys are optional; omitted keys fall back to the patient app's defaults. */
+        VitalsScanSettings: {
+            /**
+             * @description Controls whether the patient app renders its header during this scan.
+             * @enum {string}
+             */
+            headerVisibility?: "hidden" | "visible";
+        };
+        /** @description Pre-filled patient health profile data for the scan. Only present when provided during scan creation. */
+        VitalsScanInputData: {
+            /**
+             * @description Patient gender.
+             * @enum {string}
+             */
+            gender?: "male" | "female" | "other";
+            /** @description ISO 3166-1 alpha-2 country code. */
+            countryCode?: string;
+            /** @description Patient age in years. */
+            age?: number;
+            /** @description Date of birth in YYYY-MM-DD format. */
+            dob?: string;
+            /** @description Patient race/ethnicity. */
+            race?: string;
+            /** @description Patient height in cm. */
+            height?: number;
+            /** @description Patient weight in kg. */
+            weight?: number;
+            /** @description Waist circumference in cm. */
+            waistCircumference?: number;
+            /** @description Neck circumference in cm. */
+            neckCircumference?: number;
+            /** @description Hip circumference in cm. */
+            hipCircumference?: number;
+            /**
+             * @description Patient smoking status.
+             * @enum {string}
+             */
+            smokingStatus?: "never" | "former" | "current";
+            /**
+             * @description Patient diabetes status.
+             * @enum {string}
+             */
+            diabetesStatus?: "none" | "preDiabetes" | "diabetes";
+            /**
+             * @description Hypertension treatment status.
+             * @enum {string}
+             */
+            hypertensionTreatment?: "notNeeded" | "no" | "yes";
+            /**
+             * @description Patient physical activity level.
+             * @enum {string}
+             */
+            activityLevel?: "inactive" | "exercise10Mins" | "exercise20to60Mins" | "exercise1to3Hours" | "exerciseOver3Hours";
+            /**
+             * @description Chronic medication status.
+             * @enum {string}
+             */
+            chronicMedicationStatus?: "none" | "oneOrTwoDiseases" | "threeOrMoreDiseases";
+            /** @description Total cholesterol level in mg/dL. */
+            cholesterol?: number;
+            /** @description HDL cholesterol level in mg/dL. */
+            cholesterolHdl?: number;
+            /** @description LDL cholesterol level in mg/dL. */
+            cholesterolLdl?: number;
+            /**
+             * @description Family history of diabetes.
+             * @enum {string}
+             */
+            familyDiabetesHistory?: "none" | "noneFirstDegree" | "firstDegree";
+            /**
+             * @description Parental history of hypertension.
+             * @enum {string}
+             */
+            parentalHypertensionHistory?: "none" | "one" | "both";
+            /** @description Whether patient has history of high glucose. */
+            historyOfHighGlucose?: boolean;
+            /** @description Whether patient has history of hypertension. */
+            historyOfHypertension?: boolean;
+            /** @description Whether patient eats vegetables and fruit daily. */
+            vegetableFruitDiet?: boolean;
+            /** @description Fasting glucose level in mg/dL. */
+            fastingGlucose?: number;
+            /** @description Triglyceride level in mg/dL. */
+            triglyceride?: number;
+        } | null;
+        /** @description The results of a Vitals Scan. Only present when status is SUCCEEDED. */
+        VitalsScanResults: {
+            metrics?: components["schemas"]["VitalsScanMetrics"];
+        } | null;
+        /** @description Metric values from the scan. Only metrics listed in includedMetrics will be present. */
+        VitalsScanMetrics: {
+            /** @description Heart rate in beats per minute (BPM). */
+            heartRate?: number | null;
+            /** @description Heart rate variability in milliseconds (ms). */
+            heartRateVariability?: number | null;
+            /** @description Breathing rate in breaths per minute (b/min). */
+            breathingRate?: number | null;
+            /** @description Stress index on a 0–10 scale (modified Baevsky method). Higher values indicate more stress. */
+            stressIndex?: number | null;
+            /** @description Parasympathetic activity as a percentage (0–100). */
+            parasympatheticActivity?: number | null;
+            /** @description Cardiac workload (rate-pressure product) in mmHg/s. */
+            cardiacWorkload?: number | null;
+            /** @description Diastolic blood pressure in mmHg. */
+            bloodPressureDiastolic?: number | null;
+            /** @description Systolic blood pressure in mmHg. */
+            bloodPressureSystolic?: number | null;
+            /** @description Body Mass Index (BMI) in kg/m². */
+            bmiClassification?: number | null;
+            /** @description Overall wellness score on a 0–100 scale. Higher values indicate better wellness. */
+            wellnessScore?: number | null;
+            /** @description Vascular age in years. */
+            vascularAge?: number | null;
+            /** @description 10-year atherosclerotic cardiovascular disease (ASCVD) risk as a percentage (0–100). */
+            atheroscleroticCvdRisk?: number | null;
+            /** @description 10-year risk of a hard cardiovascular event as a percentage (0–100). */
+            cardiovascularEventRisk?: number | null;
+            /** @description Framingham cardiovascular risk score in points: the sum of the points assigned to each risk factor under the Framingham general cardiovascular disease point system. Higher totals indicate higher risk. */
+            cardiovascularRiskScore?: number | null;
+            /** @description Probability of developing hypertension within 4 years, as a percentage (0–100). */
+            hypertensionRisk?: number | null;
+            /** @description Probability of developing diabetes within 8 years, as a percentage (0–100). */
+            diabetesRisk?: number | null;
+            /** @description Fatty liver disease (NAFLD) risk category: `0` = Low, `1` = Moderate, `2` = High. */
+            fattyLiverDiseaseRisk?: number | null;
+            /** @description Waist-to-height ratio (WHtR), unitless. */
+            waistToHeightRatio?: number | null;
+            /** @description Body fat as a percentage of body weight (0–100). */
+            bodyFatPercentage?: number | null;
+            /** @description Body roundness index (BRI), unitless. */
+            bodyRoundnessIndex?: number | null;
+            /** @description A Body Shape Index (ABSI), unitless. */
+            aBodyShapeIndex?: number | null;
+            /** @description Conicity index (CI), unitless, ranging from 1.00 to about 1.73. */
+            conicityIndex?: number | null;
+            /** @description Basal metabolic rate in kcal/day. */
+            basalMetabolicRate?: number | null;
+            /** @description Total daily energy expenditure (TDEE) in kcal/day. */
+            totalDailyEnergyExpenditure?: number | null;
+        };
+        VitalsScanEmbedSession: {
+            /**
+             * Format: uri
+             * @description The URL to load in an iframe on one of the business's embedAllowedOrigins. It opens the scan without the patient signing in.
+             */
+            url: string;
+            /**
+             * Format: date-time
+             * @description When the URL stops working.
+             */
+            expiresAt: string;
+        };
+        VitalsLink: {
+            /**
+             * Format: uuid
+             * @description Unique identifier across the platform.
+             */
+            readonly id: string;
+            /**
+             * Format: date-time
+             * @description Time when the resource was created (ISO 8601 format).
+             */
+            readonly createdAt: string;
+            /**
+             * Format: date-time
+             * @description Time when the resource was last updated (ISO 8601 format).
+             */
+            readonly updatedAt: string;
+            /** @description The name of the link. */
+            name: string;
+            /** @description An optional description of the link. */
+            description?: string | null;
+            /** @description The unique slug used in the link URL. */
+            slug: string;
+            /**
+             * @description The status of the link.
+             * @enum {string}
+             */
+            status: "ACTIVE" | "ARCHIVED" | "DISABLED";
+            /** @description The ID of the template this link uses. */
+            vitalsTemplateId: string;
+            /** @description The number of scans performed using this link. */
+            scansCount: number;
+            /** @description The maximum number of scans allowed for this link. */
+            maxScans?: number | null;
+            /**
+             * Format: date-time
+             * @description When the link expires, if applicable.
+             */
+            expiresAt?: string | null;
+            /**
+             * Format: uri
+             * @description The full URL for this vitals link.
+             */
+            url: string;
+        };
+        /**
+         * User
+         * @description An account used for authenticating into the platform. Within the context of a Business, you should use Staff instead.
+         */
+        User: {
+            /**
+             * Format: uuid
+             * @description Unique identifier across the platform.
+             */
+            readonly id: string;
+            /**
+             * Format: email
+             * @description Email address.
+             */
+            email: string;
+            /**
+             * @description The name of the User account. The Staff name is always used in place of this around the platform.
+             * @example John Doe
+             */
+            name?: string;
+        };
+        TimeBlocker: {
+            /**
+             * Format: uuid
+             * @description Unique identifier across the platform.
+             */
+            readonly id?: string;
+            /**
+             * Format: date-time
+             * @description Time when the resource was created (ISO 8601 format).
+             */
+            readonly createdAt?: string;
+            /**
+             * Format: date-time
+             * @description Time when the resource was last updated (ISO 8601 format).
+             */
+            readonly updatedAt?: string;
+            /**
+             * Format: uuid
+             * @description The ID of the Staff this resource belongs to.
              */
             staffId?: string;
-            /** @description Timezone of the client. If not provided, the business timezone will be used. */
-            clientTimezone?: string;
             /**
-             * @description Location of the appointment. Can be a physical address or a URL.
-             * @example https://telehealth.upvio.com/session/fc92e2ce-e6d1-443f-aaf0-eae4820485c0
+             * Format: date-time
+             * @description Start date and time of the time blocker (ISO 8601 format).
              */
-            location?: string;
+            startDate?: string;
+            /**
+             * Format: date-time
+             * @description End date and time of the time blocker (ISO 8601 format).
+             */
+            endDate?: string;
+            /** @description Reason for the time blocker. */
+            reason?: string | null;
         };
-        /** @description The bookable times for a given filter. */
-        AvailableTimes: {
+        /**
+         * Staff
+         * @description A user within a Business that can use and/or manage resources.
+         */
+        Staff: {
             /**
-             * @description The start time of the time slot. ISO 8601 format.
-             * @example 2022-07-01T10:00:00.000Z
+             * Format: uuid
+             * @description Unique identifier across the platform.
              */
-            time?: string;
-            staffs?: {
+            readonly id: string;
+            /**
+             * Format: date-time
+             * @description Time when the resource was created (ISO 8601 format).
+             */
+            readonly createdAt?: string;
+            /**
+             * Format: date-time
+             * @description Time when the resource was created (ISO 8601 format).
+             */
+            readonly updatedAt?: string;
+            /**
+             * Format: uuid
+             * @deprecated
+             * @description The ID of the Business this resource belongs to.
+             */
+            businessId?: string;
+            /**
+             * Format: email
+             * @description Unique Email Address that the Staff uses to login.
+             */
+            email: string;
+            /**
+             * @description An optional unique alias for the Staff member.
+             * @example john
+             */
+            alias?: string | null;
+            /**
+             * @description The full legal name of the staff member.
+             * @example John Doe
+             */
+            name: string;
+            /**
+             * @description The status of the staff member. Only ACTIVE staff can be booked.
+             * @enum {string}
+             */
+            status: "ACTIVE" | "DISABLED" | "ARCHIVED" | "PENDING_INVITE" | "NOT_INVITED";
+            /**
+             * @deprecated
+             * @description Deprecated - Use status instead. Returns true when status is ACTIVE.
+             */
+            enabled: boolean;
+            /**
+             * @description The URL where patients can book this staff member directly.
+             * @example https://forms.upvio.com/book/acme/staff/123
+             */
+            bookingURL?: string;
+            /** @description A list of roles assigned to the Staff. */
+            roles: string[];
+            /** @description A list of Staff IDs that are managed by this Staff. */
+            managedStaffIds?: string[];
+            /**
+             * @description Timezone string.
+             * @example UTC
+             */
+            timezone?: string | null;
+        };
+        /** ServiceCategory */
+        ServiceCategory: {
+            /**
+             * Format: uuid
+             * @description Unique identifier across the platform.
+             */
+            readonly id?: string;
+            /**
+             * Format: date-time
+             * @description Time when the resource was created (ISO 8601 format).
+             */
+            readonly createdAt?: string;
+            /**
+             * Format: date-time
+             * @description Time when the resource was created (ISO 8601 format).
+             */
+            readonly updatedAt?: string;
+            name: string;
+            /** @description The URL for patients to book this service category. */
+            bookingURL?: string;
+        };
+        /** Service */
+        Service: {
+            /**
+             * Format: uuid
+             * @description Unique identifier across the platform.
+             */
+            readonly id?: string;
+            /**
+             * Format: date-time
+             * @description Time when the resource was created (ISO 8601 format).
+             */
+            readonly createdAt?: string;
+            /**
+             * Format: date-time
+             * @description Time when the resource was created (ISO 8601 format).
+             */
+            readonly updatedAt?: string;
+            /**
+             * @description The unique alias for this service.
+             * @example gp-consultation
+             */
+            alias?: string | null;
+            /**
+             * @description The service name.
+             * @example GP Consultation
+             */
+            name: string;
+            /** @description The service description. */
+            description?: string | null;
+            /**
+             * Format: url
+             * @description The URL for patients to book this service.
+             */
+            readonly bookingURL?: string;
+            /** @description Disabled services cannot be used across the platform. */
+            enabled?: boolean | null;
+            /** @description The list of staff members ids that provide this service. An empty array means this service is provided by all staff members in the business. */
+            staffsIds?: string[];
+            /** @description Optional extra Staff Members that can provide this service for group bookings. */
+            additionalStaffIds?: string[];
+            /** @description Categories that this service belongs to. */
+            categoriesIds?: string[];
+            /**
+             * @description Determines the number of minutes in advance that customers can book or reschedule an appointment.
+             * @example 30
+             */
+            leadTime?: number | null;
+            /**
+             * @description Determines the number of minutes in advance that customers can cancel an appointment.
+             * @example 60
+             */
+            cancelLeadTime?: number | null;
+            /**
+             * @description Determines the intervals between appointments. An interval of 15 minutes, for example, means a customer could schedule an appointment at 8:00, 8:15, 8:30, and so on.
+             * @example 30
+             */
+            timeIncrement?: number | null;
+            /** @description The maximum amount of days of availability to be listed when booking. */
+            availabilityLimitDays?: number | null;
+            /** @description Embedded location details */
+            location?: {
                 /**
                  * Format: uuid
-                 * @description The ID of the Staff Member
+                 * @description Unique identifier across the platform.
+                 */
+                readonly id?: string;
+                /** @description The name of the location. */
+                name?: string;
+                /** @description The address of the location. */
+                address?: string;
+            } | null;
+            /**
+             * @description The type of location that this service is provided at.
+             * @example meet
+             */
+            locationType?: string | null;
+            /** @description The location that this service is provided at. */
+            locationValue?: string | null;
+            /**
+             * @description The currency that this service is priced in.
+             * @example USD
+             */
+            currency?: string | null;
+            /** @description Durations that this service can be booked for. */
+            durations: {
+                /** @example 30 */
+                duration: number;
+                /** @example 0 */
+                price: number;
+            }[];
+            /**
+             * @description Whether bookings for this service require approval.
+             * @example false
+             */
+            bookingsRequireApproval?: boolean | null;
+            /**
+             * @description Determines the maximum amount of bookings that can be made per timeslot for this service.
+             * @example 1
+             */
+            bookingsPerTimeslot?: number | null;
+            /**
+             * @description Minutes of free time required before the start of new bookings for this service
+             * @example 30
+             */
+            bufferBeforeMinutes?: number | null;
+            /**
+             * @description Minutes of free time required after the end of new bookings for this service
+             * @example 30
+             */
+            bufferAfterMinutes?: number | null;
+        };
+        ReminderTemplate: {
+            /**
+             * Format: uuid
+             * @description Unique identifier across the platform.
+             */
+            readonly id?: string;
+            /**
+             * Format: date-time
+             * @description Time when the resource was created (ISO 8601 format).
+             */
+            readonly createdAt?: string;
+            /**
+             * Format: date-time
+             * @description Time when the resource was last updated (ISO 8601 format).
+             */
+            readonly updatedAt?: string;
+            /**
+             * Format: uuid
+             * @description The ID of the business this template belongs to.
+             */
+            businessId?: string;
+            /** @description The IDs of the services this template applies to. An empty array means all services. */
+            serviceIds?: string[];
+            /** @description The number of minutes before the appointment to send the reminder. */
+            minutes?: number;
+            /**
+             * @description The type of notification (EMAIL or SMS).
+             * @enum {string}
+             */
+            type?: "EMAIL" | "SMS";
+            /** @description The resource type this reminder applies to. */
+            resourceType?: string;
+            /** @description Whether this template is enabled. */
+            enabled?: boolean;
+            /** @description Custom message template override. Null if using the default. */
+            messageTemplate?: {
+                /** @description The unique identifier for the message template. */
+                id?: string;
+                /**
+                 * @description The message template type.
+                 * @enum {string}
+                 */
+                type?: "email" | "sms";
+                /** @description The email subject line. */
+                subject?: string;
+                /** @description The message content with template variables. */
+                content?: string;
+            } | null;
+            /** @description The default message template for this type and resource type combination. */
+            defaultTemplate?: {
+                /** @description The unique identifier for the message template. */
+                id?: string;
+                /**
+                 * @description The message template type.
+                 * @enum {string}
+                 */
+                type?: "email" | "sms";
+                /** @description The email subject line. */
+                subject?: string;
+                /** @description The message content with template variables. */
+                content?: string;
+            };
+        };
+        /** Reminder Template Create Input */
+        ReminderTemplateCreateInput: {
+            /** @description The number of minutes before the appointment to send the reminder. */
+            minutes: number;
+            /**
+             * @description The type of notification (EMAIL or SMS).
+             * @enum {string}
+             */
+            type: "EMAIL" | "SMS";
+            /**
+             * @description The resource type this reminder applies to.
+             * @enum {string}
+             */
+            resourceType: "PATIENT" | "STAFF";
+            /** @description The IDs of the services this template applies to. Defaults to an empty array (all services). */
+            serviceIds?: string[];
+            /** @description Custom message template override. */
+            messageTemplate?: {
+                /**
+                 * @description The message template type.
+                 * @enum {string}
+                 */
+                type: "email" | "sms";
+                /** @description The email subject line. */
+                subject: string;
+                /** @description The message content with template variables. */
+                content: string;
+            };
+        };
+        /** Reminder Template Update Input */
+        ReminderTemplateUpdateInput: {
+            /** @description Whether this template is enabled. */
+            enabled?: boolean;
+            /** @description Custom message template override. */
+            messageTemplate?: {
+                /**
+                 * @description The message template type.
+                 * @enum {string}
+                 */
+                type: "email" | "sms";
+                /** @description The email subject line. */
+                subject: string;
+                /** @description The message content with template variables. */
+                content: string;
+            };
+        };
+        PostAppointmentMessageTemplate: {
+            /**
+             * Format: uuid
+             * @description Unique identifier across the platform.
+             */
+            readonly id?: string;
+            /**
+             * Format: date-time
+             * @description Time when the resource was created (ISO 8601 format).
+             */
+            readonly createdAt?: string;
+            /**
+             * Format: date-time
+             * @description Time when the resource was last updated (ISO 8601 format).
+             */
+            readonly updatedAt?: string;
+            /**
+             * Format: uuid
+             * @description The ID of the business this template belongs to.
+             */
+            businessId?: string;
+            /** @description The IDs of the services this template applies to. An empty array means all services. */
+            serviceIds?: string[];
+            /** @description The number of minutes after the appointment to send the message. */
+            minutes?: number;
+            /**
+             * @description The type of notification (EMAIL or SMS).
+             * @enum {string}
+             */
+            type?: "EMAIL" | "SMS";
+            /** @description The recipient of the message. */
+            recipient?: string;
+            /** @description Whether this template is enabled. */
+            enabled?: boolean;
+            /** @description Custom message template override. Null if using the default. */
+            messageTemplate?: {
+                /** @description The unique identifier for the message template. */
+                id?: string;
+                /**
+                 * @description The message template type.
+                 * @enum {string}
+                 */
+                type?: "email" | "sms";
+                /** @description The email subject line. */
+                subject?: string;
+                /** @description The message content with template variables. */
+                content?: string;
+            } | null;
+            /** @description The default message template for this type and recipient combination. */
+            defaultTemplate?: {
+                /** @description The unique identifier for the message template. */
+                id?: string;
+                /**
+                 * @description The message template type.
+                 * @enum {string}
+                 */
+                type?: "email" | "sms";
+                /** @description The email subject line. */
+                subject?: string;
+                /** @description The message content with template variables. */
+                content?: string;
+            };
+        };
+        /** Post-Appointment Message Template Create Input */
+        PostAppointmentMessageTemplateCreateInput: {
+            /** @description The number of minutes after the appointment to send the message. */
+            minutes: number;
+            /**
+             * @description The type of notification (EMAIL or SMS).
+             * @enum {string}
+             */
+            type: "EMAIL" | "SMS";
+            /**
+             * @description The recipient of the message.
+             * @enum {string}
+             */
+            recipient: "BUSINESS_OWNER" | "GUESTS" | "PATIENT" | "STAFF";
+            /** @description The IDs of the services this template applies to. Defaults to an empty array (all services). */
+            serviceIds?: string[];
+            /** @description Custom message template override. */
+            messageTemplate?: {
+                /**
+                 * @description The message template type.
+                 * @enum {string}
+                 */
+                type: "email" | "sms";
+                /** @description The email subject line. */
+                subject: string;
+                /** @description The message content with template variables. */
+                content: string;
+            };
+        };
+        /** Post-Appointment Message Template Update Input */
+        PostAppointmentMessageTemplateUpdateInput: {
+            /** @description Whether this template is enabled. */
+            enabled?: boolean;
+            /** @description Custom message template override. */
+            messageTemplate?: {
+                /**
+                 * @description The message template type.
+                 * @enum {string}
+                 */
+                type: "email" | "sms";
+                /** @description The email subject line. */
+                subject: string;
+                /** @description The message content with template variables. */
+                content: string;
+            };
+        };
+        /** Patient */
+        Patient: {
+            /** @description Unique identifier for the given patient. */
+            id: string;
+            /**
+             * Format: uuid
+             * @description The ID of the Business this resource belongs to.
+             */
+            businessId: string;
+            /**
+             * Format: date-time
+             * @description Time when the resource was created (ISO 8601 format).
+             */
+            readonly createdAt: string;
+            /**
+             * Format: date-time
+             * @description Time when the resource was created (ISO 8601 format).
+             */
+            readonly updatedAt: string;
+            /**
+             * Format: date-time
+             * @description Time when the resource was archived (ISO 8601 format).
+             */
+            readonly archivedAt?: string | null;
+            /** @description Reason for archiving the patient. */
+            archivedReason?: string | null;
+            /** @description The email address of the patient. */
+            email: string;
+            /** @description The full legal name of the patient. */
+            name: string;
+            /** @description The mobile phone number of the patient. */
+            phoneMobile?: string | null;
+            /** @description The biological sex of the patient */
+            biologicalSex?: (string & (("FEMALE" | "MALE" | "OTHER") | null)) | null;
+            /** @description The gender of the patient */
+            gender?: string | null;
+            /**
+             * @description Timezone string.
+             * @example UTC
+             */
+            timezone?: string | null;
+            /**
+             * @description The preferred language of the patient
+             * @enum {string|null}
+             */
+            preferredLanguage?: "en" | "es" | null;
+            /**
+             * Format: date
+             * @description The date of birth of the patient (YYYY-MM-DD)
+             */
+            dob?: string | null;
+            /** @description The height of the patient in centimeters */
+            height?: number | null;
+            /** @description The weight of the patient in kilograms */
+            weight?: number | null;
+            /**
+             * @description The activity level of the patient
+             * @enum {string|null}
+             */
+            activityLevel?: "inactive" | "exercise10Mins" | "exercise20to60Mins" | "exercise1to3Hours" | "exerciseOver3Hours" | null;
+            /** @description The total cholesterol level of the patient */
+            cholesterol?: number | null;
+            /** @description The HDL cholesterol level of the patient */
+            cholesterolHdl?: number | null;
+            /** @description The LDL cholesterol level of the patient */
+            cholesterolLdl?: number | null;
+            /**
+             * @description The chronic medication status of the patient
+             * @enum {string|null}
+             */
+            chronicMedicationStatus?: "none" | "oneOrTwoDiseases" | "threeOrMoreDiseases" | null;
+            /**
+             * @description The diabetes status of the patient
+             * @enum {string|null}
+             */
+            diabetesStatus?: "none" | "preDiabetes" | "diabetes" | null;
+            /**
+             * @description The hypertension treatment status of the patient
+             * @enum {string|null}
+             */
+            hypertensionTreatment?: "notNeeded" | "no" | "yes" | null;
+            /** @description The race/ethnicity of the patient */
+            race?: string | null;
+            /**
+             * @description The smoking status of the patient
+             * @enum {string|null}
+             */
+            smokingStatus?: "never" | "former" | "current" | null;
+            /** @description The waist circumference of the patient in centimeters */
+            waistCircumference?: number | null;
+            /** @description The neck circumference of the patient in centimeters */
+            neckCircumference?: number | null;
+            /** @description The hip circumference of the patient in centimeters */
+            hipCircumference?: number | null;
+            /**
+             * @description The family diabetes history of the patient
+             * @enum {string|null}
+             */
+            familyDiabetesHistory?: "none" | "noneFirstDegree" | "firstDegree" | null;
+            /**
+             * @description The parental hypertension history of the patient
+             * @enum {string|null}
+             */
+            parentalHypertensionHistory?: "none" | "one" | "both" | null;
+            /** @description Whether the patient has a history of high glucose */
+            historyOfHighGlucose?: boolean | null;
+            /** @description Whether the patient has a history of hypertension */
+            historyOfHypertension?: boolean | null;
+            /** @description Whether the patient consumes vegetables and fruits daily */
+            vegetableFruitDiet?: boolean | null;
+            /** @description The fasting glucose level of the patient */
+            fastingGlucose?: number | null;
+            /** @description The triglyceride level of the patient */
+            triglyceride?: number | null;
+            /**
+             * @description Custom field values keyed by the custom field `alias`. See `listCustomFields` for the available fields.
+             *     Only fields with a value are included.
+             */
+            customFields?: {
+                [key: string]: string | number | boolean;
+            };
+        };
+        /**
+         * Outgoing Webhook
+         * @description Endpoint that receives events from Upvio.
+         */
+        OutgoingWebhook: {
+            /**
+             * Format: uuid
+             * @description Unique identifier across the platform.
+             */
+            readonly id: string;
+            /**
+             * Format: date-time
+             * @description Time when the resource was created (ISO 8601 format).
+             */
+            readonly createdAt?: string;
+            /**
+             * Format: date-time
+             * @description Time when the resource was created (ISO 8601 format).
+             */
+            readonly updatedAt?: string;
+            /** @description Only enabled webhooks will receive events. */
+            enabled: boolean;
+            /**
+             * @description The https:// URL that will receive events.
+             * @example https://example.com/webhooks/upvio
+             */
+            endpoint: string;
+            /** @description The events this webhook receives. An empty list falls back to the appointment events. See the `webhooks` section of this document for the payload delivered by each event. */
+            enabledEventNames?: components["schemas"]["WebhookEventName"][];
+        };
+        MagicLink: {
+            /** @description The magic link ID. */
+            id: string;
+            /**
+             * Format: uri
+             * @description The magic link URL that authenticates the patient.
+             */
+            url: string;
+            /**
+             * Format: uri
+             * @description The URL the patient is redirected to after authentication.
+             */
+            redirectUrl: string;
+            /**
+             * Format: date-time
+             * @description Time when the resource was created (ISO 8601 format).
+             */
+            readonly createdAt: string;
+            /**
+             * Format: date-time
+             * @description When the magic link expires.
+             */
+            expiresAt: string;
+        };
+        /**
+         * Location
+         * @description A physical or virtual location where services can be provided
+         */
+        Location: {
+            /**
+             * Format: uuid
+             * @description Unique identifier across the platform.
+             */
+            readonly id: string;
+            /**
+             * @description The name of the location
+             * @example Downtown Office
+             */
+            name: string;
+            /**
+             * @description A description of the location
+             * @example Our main office in the city center
+             */
+            description?: string | null;
+            /**
+             * @description Instructions for finding or accessing the location
+             * @example Enter through the main entrance and take the elevator to the 5th floor
+             */
+            instructions?: string | null;
+            /**
+             * @description The physical address of the location
+             * @example 123 Main St, New York, NY 10001
+             */
+            address?: string | null;
+            /**
+             * Format: float
+             * @description Latitude of the location
+             */
+            lat?: number | null;
+            /**
+             * Format: float
+             * @description Longitude of the location
+             */
+            lng?: number | null;
+            /**
+             * @description The timezone of the location
+             * @example America/New_York
+             */
+            timezone?: string;
+            /** @description Phone number of the location */
+            phone?: string | null;
+            /**
+             * Format: email
+             * @description Email address of the location
+             */
+            email?: string | null;
+            /**
+             * Format: uri
+             * @description URL of the location's picture
+             */
+            pictureUrl?: string | null;
+            /** @description Services offered at the location */
+            services?: {
+                /**
+                 * Format: uuid
+                 * @description Unique identifier across the platform.
+                 */
+                readonly id?: string;
+                /** @description Name of the service */
+                name?: string;
+            }[];
+            /**
+             * Format: date-time
+             * @description Timestamp of when the location was created
+             */
+            createdAt?: string;
+            /**
+             * Format: date-time
+             * @description Timestamp of when the location was last updated
+             */
+            updatedAt?: string;
+        };
+        /**
+         * Form
+         * @description A form to collect data from users.
+         */
+        Form: {
+            /**
+             * Format: uuid
+             * @description Unique identifier across the platform.
+             */
+            readonly id: string;
+            /**
+             * @description The unique alias of the form.
+             * @example booking-form
+             */
+            alias: string;
+            /**
+             * @description The title of the form.
+             * @example Booking Form
+             */
+            title: string;
+            /**
+             * @description The description of the form.
+             * @example Default form used for appointment bookings.
+             */
+            description?: string | null;
+            /**
+             * @description The category of the form.
+             * @example General Practice
+             */
+            category?: string | null;
+            /**
+             * @description The visibility of the form.
+             * @enum {string}
+             */
+            visibility?: "LISTED" | "UNLISTED";
+            /** @description The total number of submissions for the form. */
+            submissionsCount?: number;
+            /** @description The number of unread submissions for the form. */
+            unreadSubmissionsCount?: number;
+            /**
+             * Format: date-time
+             * @description The date and time when the form was published.
+             */
+            publishedAt?: string | null;
+            /**
+             * Format: date-time
+             * @description Time when the resource was created (ISO 8601 format).
+             */
+            readonly createdAt: string;
+            /**
+             * Format: date-time
+             * @description Time when the resource was last updated (ISO 8601 format).
+             */
+            readonly updatedAt: string;
+            /** @description The URL to access the form. */
+            url?: string;
+            /**
+             * @description The current status of the form.
+             * @enum {string}
+             */
+            status: "Draft" | "Published" | "PublishedWithDraft";
+            /** @description The steps that make up this form. */
+            steps?: Record<string, never>[];
+            /** @description The draft version of the form, if available. */
+            draft?: {
+                /**
+                 * Format: uuid
+                 * @description Unique identifier across the platform.
+                 */
+                readonly id?: string;
+                /** @description The steps that make up the draft form. */
+                steps?: Record<string, never>[];
+            };
+        };
+        /**
+         * Form Submission
+         * @description A form submission created by a client when a form is submitted.
+         */
+        FormSubmission: {
+            /**
+             * Format: uuid
+             * @description Unique identifier across the platform.
+             */
+            readonly id?: string;
+            /**
+             * @description The unique identifier of the form that created this submission.
+             * @example form1
+             */
+            formId?: string;
+            /**
+             * @description The unique identifier of the patient who submitted the form.
+             * @example patient1
+             */
+            patientId?: string;
+            /**
+             * @description Whether the patient was authenticated when submitting the form.
+             * @example true
+             */
+            patientVerified?: boolean;
+            /**
+             * @description If the form included a booking form then an appointment ID will be associated with the submission.
+             * @example appointment1
+             */
+            appointmentId?: string;
+            questions?: {
+                /**
+                 * @description The unique identifier of the question.
+                 * @example patient-name
                  */
                 id?: string;
-                /** @description The number of available slots for this time slot. */
-                availableSlots?: number;
+                /**
+                 * @description The type of the question (e.g., text, multiple choice).
+                 * @example text
+                 */
+                type?: string;
+                /** @description The title of the question. */
+                title?: string;
+                /**
+                 * @description The key used to identify the question for the patient.
+                 * @example patientName
+                 */
+                patientKey?: string | null;
             }[];
-        }[];
-        /** Appointment Create Input */
-        BusinessUpdateInput: {
-            /** @description Display name for a Business. */
-            name?: string;
-            /** @description Email address for a Business. */
-            email?: string;
-            /** @description Timezone the Business operates in. */
-            timezone?: string;
+            answers?: {
+                /**
+                 * @description The ID that matches the question ID.
+                 * @example patient-name
+                 */
+                id?: string;
+                /**
+                 * @description The answer provided by the patient.
+                 * @example Jane Doe
+                 */
+                value?: string;
+            }[];
+            /**
+             * Format: date-time
+             * @description The date and time when the form submission was created.
+             */
+            createdAt?: string;
+            /**
+             * Format: date-time
+             * @description The date and time when the form submission was started.
+             */
+            startedAt?: string;
+            /**
+             * Format: date-time
+             * @description The date and time when the form submission was submitted.
+             */
+            completedAt?: string;
         };
-        /** Location Create Input */
-        LocationCreateInput: {
-            /** @description Name of the location. */
+        /**
+         * CustomField
+         * @description A custom field that can store additional data on a patient.
+         */
+        CustomField: {
+            /**
+             * Format: uuid
+             * @description Unique identifier across the platform.
+             */
+            readonly id: string;
+            /**
+             * Format: uuid
+             * @description The ID of the Business this resource belongs to.
+             */
+            businessId: string;
+            /**
+             * Format: date-time
+             * @description Time when the resource was created (ISO 8601 format).
+             */
+            readonly createdAt: string;
+            /**
+             * Format: date-time
+             * @description Time when the resource was created (ISO 8601 format).
+             */
+            readonly updatedAt: string;
+            /** @description The key used to read and write this field in the patient `customFields` object. */
+            alias: string;
+            /** @description The display name of the custom field. */
             name: string;
-            /** @description Description of the location. */
+            /** @description A description of the custom field. */
             description?: string;
-            /** @description Instructions for the location. */
-            instructions?: string;
-            /** @description Address of the location. */
-            address?: string;
             /**
-             * Format: float
-             * @description Latitude of the location.
+             * @description The type of value stored in the field.
+             *     TEXT, DATE (YYYY-MM-DD) and SELECT values are strings, NUMBER values are numbers and BOOLEAN values are booleans.
+             * @enum {string}
              */
-            lat?: number;
-            /**
-             * Format: float
-             * @description Longitude of the location.
-             */
-            lng?: number;
-            /** @description Timezone of the location. */
-            timezone?: string;
-            /**
-             * @description Phone number for the location.
-             * @example +15555555555
-             */
-            phone?: string;
-            /** @description ID of the picture uploaded via file upload API. */
-            pictureId?: string;
-            /**
-             * Format: email
-             * @description Email address for the location.
-             */
-            email?: string;
+            fieldType: "BOOLEAN" | "DATE" | "NUMBER" | "SELECT" | "TEXT";
+            /** @description The values accepted by a SELECT field. */
+            allowedValues?: string[] | null;
         };
-        /** Location Update Input */
-        LocationUpdateInput: {
-            /** @description Name of the location. */
+        /**
+         * Business
+         * @description All resources are contained within a Business.
+         */
+        Business: {
+            /**
+             * Format: uuid
+             * @description Unique identifier across the platform.
+             */
+            readonly id: string;
+            /**
+             * Format: date-time
+             * @description Time when the resource was created (ISO 8601 format).
+             */
+            readonly createdAt?: string;
+            /**
+             * Format: date-time
+             * @description Time when the resource was last updated (ISO 8601 format).
+             */
+            readonly updatedAt?: string;
+            /**
+             * @description Unique business alias across the platform. Used for forms and public booking pages.
+             * @example acme
+             */
+            alias?: string;
+            /**
+             * @description The name of the Business.
+             * @example ACME Corp
+             */
             name?: string;
-            /** @description Description of the location. */
-            description?: string;
-            /** @description Instructions for the location. */
-            instructions?: string;
-            /** @description Address of the location. */
-            address?: string;
-            /**
-             * Format: float
-             * @description Latitude of the location.
-             */
-            lat?: number;
-            /**
-             * Format: float
-             * @description Longitude of the location.
-             */
-            lng?: number;
-            /** @description Timezone of the location. */
-            timezone?: string;
-            /**
-             * @description Phone number for the location.
-             * @example +15555555555
-             */
-            phone?: string;
-            /** @description ID of the picture uploaded via file upload API. */
-            pictureId?: string;
             /**
              * Format: email
-             * @description Email address for the location.
+             * @description Email address.
              */
             email?: string;
+            /**
+             * @description URL to the logo image.
+             * @example https://account.upvio.com/upvio.favicon.png
+             */
+            logoURL?: string | null;
+            defaultStaffWorkingHours?: {
+                /**
+                 * @description A group of active hours for a single day.
+                 * @example [
+                 *       [
+                 *         900,
+                 *         1200
+                 *       ],
+                 *       [
+                 *         1300,
+                 *         1700
+                 *       ]
+                 *     ]
+                 */
+                monday?: number[][];
+                /**
+                 * @description A group of active hours for a single day.
+                 * @example [
+                 *       [
+                 *         900,
+                 *         1200
+                 *       ],
+                 *       [
+                 *         1300,
+                 *         1700
+                 *       ]
+                 *     ]
+                 */
+                tuesday?: number[][];
+                /**
+                 * @description A group of active hours for a single day.
+                 * @example [
+                 *       [
+                 *         900,
+                 *         1200
+                 *       ],
+                 *       [
+                 *         1300,
+                 *         1700
+                 *       ]
+                 *     ]
+                 */
+                wednesday?: number[][];
+                /**
+                 * @description A group of active hours for a single day.
+                 * @example [
+                 *       [
+                 *         900,
+                 *         1200
+                 *       ],
+                 *       [
+                 *         1300,
+                 *         1700
+                 *       ]
+                 *     ]
+                 */
+                thursday?: number[][];
+                /**
+                 * @description A group of active hours for a single day.
+                 * @example [
+                 *       [
+                 *         900,
+                 *         1200
+                 *       ],
+                 *       [
+                 *         1300,
+                 *         1700
+                 *       ]
+                 *     ]
+                 */
+                friday?: number[][];
+                /**
+                 * @description A group of active hours for a single day.
+                 * @example [
+                 *       [
+                 *         900,
+                 *         1200
+                 *       ],
+                 *       [
+                 *         1300,
+                 *         1700
+                 *       ]
+                 *     ]
+                 */
+                saturday?: number[][];
+                /**
+                 * @description A group of active hours for a single day.
+                 * @example [
+                 *       [
+                 *         900,
+                 *         1200
+                 *       ],
+                 *       [
+                 *         1300,
+                 *         1700
+                 *       ]
+                 *     ]
+                 */
+                sunday?: number[][];
+            } | null;
+            /** @description Disabled businesses prevent any staff from using the platform. */
+            enabled?: boolean;
+            /**
+             * @description Timezone string.
+             * @example UTC
+             */
+            timezone?: string | null;
+        };
+        BookingEventTemplate: {
+            /**
+             * Format: uuid
+             * @description Unique identifier across the platform.
+             */
+            readonly id?: string;
+            /**
+             * Format: date-time
+             * @description Time when the resource was created (ISO 8601 format).
+             */
+            readonly createdAt?: string;
+            /**
+             * Format: date-time
+             * @description Time when the resource was last updated (ISO 8601 format).
+             */
+            readonly updatedAt?: string;
+            /**
+             * Format: uuid
+             * @description The ID of the business this template belongs to.
+             */
+            businessId?: string;
+            /** @description The IDs of the services this template applies to. An empty array means all services. */
+            serviceIds?: string[];
+            /** @description The booking event that triggers this notification. */
+            event?: string;
+            /**
+             * @description The type of notification (EMAIL or SMS).
+             * @enum {string}
+             */
+            type?: "EMAIL" | "SMS";
+            /** @description The recipient of the notification. */
+            recipient?: string;
+            /** @description Whether this template is enabled. */
+            enabled?: boolean;
+            /** @description Custom message template override. Null if using the default. */
+            messageTemplate?: {
+                /** @description The unique identifier for the message template. */
+                id?: string;
+                /**
+                 * @description The message template type.
+                 * @enum {string}
+                 */
+                type?: "email" | "sms";
+                /** @description The email subject line. */
+                subject?: string;
+                /** @description The message content with template variables. */
+                content?: string;
+            } | null;
+            /** @description The default message template for this event, type, and recipient combination. */
+            defaultTemplate?: {
+                /** @description The unique identifier for the message template. */
+                id?: string;
+                /**
+                 * @description The message template type.
+                 * @enum {string}
+                 */
+                type?: "email" | "sms";
+                /** @description The email subject line. */
+                subject?: string;
+                /** @description The message content with template variables. */
+                content?: string;
+            };
+        };
+        /** Booking Event Template Create Input */
+        BookingEventTemplateCreateInput: {
+            /**
+             * @description The booking event that triggers this notification.
+             * @enum {string}
+             */
+            event: "APPOINTMENT_CREATED" | "APPOINTMENT_UPDATED" | "APPOINTMENT_DELETED" | "RECURRING_APPOINTMENT_CREATED" | "RECURRING_APPOINTMENT_UPDATED" | "RECURRING_APPOINTMENT_DELETED";
+            /**
+             * @description The type of notification (EMAIL or SMS).
+             * @enum {string}
+             */
+            type: "EMAIL" | "SMS";
+            /**
+             * @description The recipient of the notification.
+             * @enum {string}
+             */
+            recipient: "BUSINESS_OWNER" | "GUESTS" | "PATIENT" | "STAFF";
+            /** @description The IDs of the services this template applies to. Defaults to an empty array (all services). */
+            serviceIds?: string[];
+            /** @description Custom message template override. */
+            messageTemplate?: {
+                /**
+                 * @description The message template type.
+                 * @enum {string}
+                 */
+                type: "email" | "sms";
+                /** @description The email subject line. */
+                subject: string;
+                /** @description The message content with template variables. */
+                content: string;
+            };
+        };
+        /** Booking Event Template Update Input */
+        BookingEventTemplateUpdateInput: {
+            /** @description Whether this template is enabled. */
+            enabled?: boolean;
+            /** @description Custom message template override. */
+            messageTemplate?: {
+                /**
+                 * @description The message template type.
+                 * @enum {string}
+                 */
+                type: "email" | "sms";
+                /** @description The email subject line. */
+                subject: string;
+                /** @description The message content with template variables. */
+                content: string;
+            };
         };
         /**
          * Appointment
@@ -1305,1533 +3128,524 @@ export interface components {
             /** @description A list of tags associated with the appointment. */
             tags?: string[];
         };
-        BookingEventTemplate: {
+        /** Location Create Input */
+        LocationCreateInput: {
+            /** @description Name of the location. */
+            name: string;
+            /** @description Description of the location. */
+            description?: string;
+            /** @description Instructions for the location. */
+            instructions?: string;
+            /** @description Address of the location. */
+            address?: string;
             /**
-             * Format: uuid
-             * @description Unique identifier across the platform.
+             * Format: float
+             * @description Latitude of the location.
              */
-            readonly id?: string;
+            lat?: number;
             /**
-             * Format: date-time
-             * @description Time when the resource was created (ISO 8601 format).
+             * Format: float
+             * @description Longitude of the location.
              */
-            readonly createdAt?: string;
+            lng?: number;
+            /** @description Timezone of the location. */
+            timezone?: string;
             /**
-             * Format: date-time
-             * @description Time when the resource was last updated (ISO 8601 format).
+             * @description Phone number for the location.
+             * @example +15555555555
              */
-            readonly updatedAt?: string;
-            /**
-             * Format: uuid
-             * @description The ID of the business this template belongs to.
-             */
-            businessId?: string;
-            /** @description The IDs of the services this template applies to. An empty array means all services. */
-            serviceIds?: string[];
-            /** @description The booking event that triggers this notification. */
-            event?: string;
-            /**
-             * @description The type of notification (EMAIL or SMS).
-             * @enum {string}
-             */
-            type?: "EMAIL" | "SMS";
-            /** @description The recipient of the notification. */
-            recipient?: string;
-            /** @description Whether this template is enabled. */
-            enabled?: boolean;
-            /** @description Custom message template override. Null if using the default. */
-            messageTemplate?: {
-                /** @description The unique identifier for the message template. */
-                id?: string;
-                /**
-                 * @description The message template type.
-                 * @enum {string}
-                 */
-                type?: "email" | "sms";
-                /** @description The email subject line. */
-                subject?: string;
-                /** @description The message content with template variables. */
-                content?: string;
-            } | null;
-            /** @description The default message template for this event, type, and recipient combination. */
-            defaultTemplate?: {
-                /** @description The unique identifier for the message template. */
-                id?: string;
-                /**
-                 * @description The message template type.
-                 * @enum {string}
-                 */
-                type?: "email" | "sms";
-                /** @description The email subject line. */
-                subject?: string;
-                /** @description The message content with template variables. */
-                content?: string;
-            };
-        };
-        /** Booking Event Template Create Input */
-        BookingEventTemplateCreateInput: {
-            /**
-             * @description The booking event that triggers this notification.
-             * @enum {string}
-             */
-            event: "APPOINTMENT_CREATED" | "APPOINTMENT_UPDATED" | "APPOINTMENT_DELETED" | "RECURRING_APPOINTMENT_CREATED" | "RECURRING_APPOINTMENT_UPDATED" | "RECURRING_APPOINTMENT_DELETED";
-            /**
-             * @description The type of notification (EMAIL or SMS).
-             * @enum {string}
-             */
-            type: "EMAIL" | "SMS";
-            /**
-             * @description The recipient of the notification.
-             * @enum {string}
-             */
-            recipient: "BUSINESS_OWNER" | "GUESTS" | "PATIENT" | "STAFF";
-            /** @description The IDs of the services this template applies to. Defaults to an empty array (all services). */
-            serviceIds?: string[];
-            /** @description Custom message template override. */
-            messageTemplate?: {
-                /**
-                 * @description The message template type.
-                 * @enum {string}
-                 */
-                type: "email" | "sms";
-                /** @description The email subject line. */
-                subject: string;
-                /** @description The message content with template variables. */
-                content: string;
-            };
-        };
-        /** Booking Event Template Update Input */
-        BookingEventTemplateUpdateInput: {
-            /** @description Whether this template is enabled. */
-            enabled?: boolean;
-            /** @description Custom message template override. */
-            messageTemplate?: {
-                /**
-                 * @description The message template type.
-                 * @enum {string}
-                 */
-                type: "email" | "sms";
-                /** @description The email subject line. */
-                subject: string;
-                /** @description The message content with template variables. */
-                content: string;
-            };
-        };
-        /**
-         * Business
-         * @description All resources are contained within a Business.
-         */
-        Business: {
-            /**
-             * Format: uuid
-             * @description Unique identifier across the platform.
-             */
-            readonly id: string;
-            /**
-             * Format: date-time
-             * @description Time when the resource was created (ISO 8601 format).
-             */
-            readonly createdAt?: string;
-            /**
-             * Format: date-time
-             * @description Time when the resource was last updated (ISO 8601 format).
-             */
-            readonly updatedAt?: string;
-            /**
-             * @description Unique business alias across the platform. Used for forms and public booking pages.
-             * @example acme
-             */
-            alias?: string;
-            /**
-             * @description The name of the Business.
-             * @example ACME Corp
-             */
-            name?: string;
+            phone?: string;
+            /** @description ID of the picture uploaded via file upload API. */
+            pictureId?: string;
             /**
              * Format: email
-             * @description Email address.
+             * @description Email address for the location.
              */
             email?: string;
-            /**
-             * @description URL to the logo image.
-             * @example https://account.upvio.com/upvio.favicon.png
-             */
-            logoURL?: string | null;
-            defaultStaffWorkingHours?: {
-                /**
-                 * @description A group of active hours for a single day.
-                 * @example [
-                 *       [
-                 *         900,
-                 *         1200
-                 *       ],
-                 *       [
-                 *         1300,
-                 *         1700
-                 *       ]
-                 *     ]
-                 */
-                monday?: number[][];
-                /**
-                 * @description A group of active hours for a single day.
-                 * @example [
-                 *       [
-                 *         900,
-                 *         1200
-                 *       ],
-                 *       [
-                 *         1300,
-                 *         1700
-                 *       ]
-                 *     ]
-                 */
-                tuesday?: number[][];
-                /**
-                 * @description A group of active hours for a single day.
-                 * @example [
-                 *       [
-                 *         900,
-                 *         1200
-                 *       ],
-                 *       [
-                 *         1300,
-                 *         1700
-                 *       ]
-                 *     ]
-                 */
-                wednesday?: number[][];
-                /**
-                 * @description A group of active hours for a single day.
-                 * @example [
-                 *       [
-                 *         900,
-                 *         1200
-                 *       ],
-                 *       [
-                 *         1300,
-                 *         1700
-                 *       ]
-                 *     ]
-                 */
-                thursday?: number[][];
-                /**
-                 * @description A group of active hours for a single day.
-                 * @example [
-                 *       [
-                 *         900,
-                 *         1200
-                 *       ],
-                 *       [
-                 *         1300,
-                 *         1700
-                 *       ]
-                 *     ]
-                 */
-                friday?: number[][];
-                /**
-                 * @description A group of active hours for a single day.
-                 * @example [
-                 *       [
-                 *         900,
-                 *         1200
-                 *       ],
-                 *       [
-                 *         1300,
-                 *         1700
-                 *       ]
-                 *     ]
-                 */
-                saturday?: number[][];
-                /**
-                 * @description A group of active hours for a single day.
-                 * @example [
-                 *       [
-                 *         900,
-                 *         1200
-                 *       ],
-                 *       [
-                 *         1300,
-                 *         1700
-                 *       ]
-                 *     ]
-                 */
-                sunday?: number[][];
-            } | null;
-            /** @description Disabled businesses prevent any staff from using the platform. */
-            enabled?: boolean;
-            /**
-             * @description Timezone string.
-             * @example UTC
-             */
-            timezone?: string | null;
         };
-        /**
-         * Form Submission
-         * @description A form submission created by a client when a form is submitted.
-         */
-        FormSubmission: {
-            /**
-             * Format: uuid
-             * @description Unique identifier across the platform.
-             */
-            readonly id?: string;
-            /**
-             * @description The unique identifier of the form that created this submission.
-             * @example form1
-             */
-            formId?: string;
-            /**
-             * @description The unique identifier of the patient who submitted the form.
-             * @example patient1
-             */
-            patientId?: string;
-            /**
-             * @description Whether the patient was authenticated when submitting the form.
-             * @example true
-             */
-            patientVerified?: boolean;
-            /**
-             * @description If the form included a booking form then an appointment ID will be associated with the submission.
-             * @example appointment1
-             */
-            appointmentId?: string;
-            questions?: {
-                /**
-                 * @description The unique identifier of the question.
-                 * @example patient-name
-                 */
-                id?: string;
-                /**
-                 * @description The type of the question (e.g., text, multiple choice).
-                 * @example text
-                 */
-                type?: string;
-                /** @description The title of the question. */
-                title?: string;
-                /**
-                 * @description The key used to identify the question for the patient.
-                 * @example patientName
-                 */
-                patientKey?: string | null;
-            }[];
-            answers?: {
-                /**
-                 * @description The ID that matches the question ID.
-                 * @example patient-name
-                 */
-                id?: string;
-                /**
-                 * @description The answer provided by the patient.
-                 * @example Jane Doe
-                 */
-                value?: string;
-            }[];
-            /**
-             * Format: date-time
-             * @description The date and time when the form submission was created.
-             */
-            createdAt?: string;
-            /**
-             * Format: date-time
-             * @description The date and time when the form submission was started.
-             */
-            startedAt?: string;
-            /**
-             * Format: date-time
-             * @description The date and time when the form submission was submitted.
-             */
-            completedAt?: string;
-        };
-        /**
-         * Form
-         * @description A form to collect data from users.
-         */
-        Form: {
-            /**
-             * Format: uuid
-             * @description Unique identifier across the platform.
-             */
-            readonly id: string;
-            /**
-             * @description The unique alias of the form.
-             * @example booking-form
-             */
-            alias: string;
-            /**
-             * @description The title of the form.
-             * @example Booking Form
-             */
-            title: string;
-            /**
-             * @description The description of the form.
-             * @example Default form used for appointment bookings.
-             */
-            description?: string | null;
-            /**
-             * @description The category of the form.
-             * @example General Practice
-             */
-            category?: string | null;
-            /**
-             * @description The visibility of the form.
-             * @enum {string}
-             */
-            visibility?: "LISTED" | "UNLISTED";
-            /** @description The total number of submissions for the form. */
-            submissionsCount?: number;
-            /** @description The number of unread submissions for the form. */
-            unreadSubmissionsCount?: number;
-            /**
-             * Format: date-time
-             * @description The date and time when the form was published.
-             */
-            publishedAt?: string | null;
-            /**
-             * Format: date-time
-             * @description Time when the resource was created (ISO 8601 format).
-             */
-            readonly createdAt: string;
-            /**
-             * Format: date-time
-             * @description Time when the resource was last updated (ISO 8601 format).
-             */
-            readonly updatedAt: string;
-            /** @description The URL to access the form. */
-            url?: string;
-            /**
-             * @description The current status of the form.
-             * @enum {string}
-             */
-            status: "Draft" | "Published" | "PublishedWithDraft";
-            /** @description The steps that make up this form. */
-            steps?: Record<string, never>[];
-            /** @description The draft version of the form, if available. */
-            draft?: {
-                /**
-                 * Format: uuid
-                 * @description Unique identifier across the platform.
-                 */
-                readonly id?: string;
-                /** @description The steps that make up the draft form. */
-                steps?: Record<string, never>[];
-            };
-        };
-        /**
-         * Location
-         * @description A physical or virtual location where services can be provided
-         */
-        Location: {
-            /**
-             * Format: uuid
-             * @description Unique identifier across the platform.
-             */
-            readonly id: string;
-            /**
-             * @description The name of the location
-             * @example Downtown Office
-             */
-            name: string;
-            /**
-             * @description A description of the location
-             * @example Our main office in the city center
-             */
-            description?: string | null;
-            /**
-             * @description Instructions for finding or accessing the location
-             * @example Enter through the main entrance and take the elevator to the 5th floor
-             */
-            instructions?: string | null;
-            /**
-             * @description The physical address of the location
-             * @example 123 Main St, New York, NY 10001
-             */
-            address?: string | null;
+        /** Location Update Input */
+        LocationUpdateInput: {
+            /** @description Name of the location. */
+            name?: string;
+            /** @description Description of the location. */
+            description?: string;
+            /** @description Instructions for the location. */
+            instructions?: string;
+            /** @description Address of the location. */
+            address?: string;
             /**
              * Format: float
-             * @description Latitude of the location
+             * @description Latitude of the location.
              */
-            lat?: number | null;
+            lat?: number;
             /**
              * Format: float
-             * @description Longitude of the location
+             * @description Longitude of the location.
              */
-            lng?: number | null;
-            /**
-             * @description The timezone of the location
-             * @example America/New_York
-             */
+            lng?: number;
+            /** @description Timezone of the location. */
             timezone?: string;
-            /** @description Phone number of the location */
-            phone?: string | null;
+            /**
+             * @description Phone number for the location.
+             * @example +15555555555
+             */
+            phone?: string;
+            /** @description ID of the picture uploaded via file upload API. */
+            pictureId?: string;
             /**
              * Format: email
-             * @description Email address of the location
+             * @description Email address for the location.
              */
-            email?: string | null;
+            email?: string;
+        };
+        /** Appointment Create Input */
+        BusinessUpdateInput: {
+            /** @description Display name for a Business. */
+            name?: string;
+            /** @description Email address for a Business. */
+            email?: string;
+            /** @description Timezone the Business operates in. */
+            timezone?: string;
+        };
+        /** @description The bookable times for a given filter. */
+        AvailableTimes: {
             /**
-             * Format: uri
-             * @description URL of the location's picture
+             * @description The start time of the time slot. ISO 8601 format.
+             * @example 2022-07-01T10:00:00.000Z
              */
-            pictureUrl?: string | null;
-            /** @description Services offered at the location */
-            services?: {
+            time?: string;
+            staffs?: {
                 /**
                  * Format: uuid
-                 * @description Unique identifier across the platform.
+                 * @description The ID of the Staff Member
                  */
-                readonly id?: string;
-                /** @description Name of the service */
-                name?: string;
+                id?: string;
+                /** @description The number of available slots for this time slot. */
+                availableSlots?: number;
             }[];
+        }[];
+        /** Appointment Create Input */
+        AppointmentCreateInput: {
             /**
              * Format: date-time
-             * @description Timestamp of when the location was created
+             * @description Date and time of the appointment.
              */
-            createdAt?: string;
-            /**
-             * Format: date-time
-             * @description Timestamp of when the location was last updated
-             */
-            updatedAt?: string;
-        };
-        MagicLink: {
-            /** @description The magic link ID. */
-            id: string;
-            /**
-             * Format: uri
-             * @description The magic link URL that authenticates the patient.
-             */
-            url: string;
-            /**
-             * Format: uri
-             * @description The URL the patient is redirected to after authentication.
-             */
-            redirectUrl: string;
-            /**
-             * Format: date-time
-             * @description Time when the resource was created (ISO 8601 format).
-             */
-            readonly createdAt: string;
-            /**
-             * Format: date-time
-             * @description When the magic link expires.
-             */
-            expiresAt: string;
-        };
-        /**
-         * Outgoing Webhook
-         * @description Endpoint that receives events from Upvio.
-         */
-        OutgoingWebhook: {
+            date: string;
             /**
              * Format: uuid
-             * @description Unique identifier across the platform.
+             * @description Patient ID to book the appointment for.
              */
-            readonly id: string;
-            /**
-             * Format: date-time
-             * @description Time when the resource was created (ISO 8601 format).
-             */
-            readonly createdAt?: string;
-            /**
-             * Format: date-time
-             * @description Time when the resource was created (ISO 8601 format).
-             */
-            readonly updatedAt?: string;
-            /** @description Only enabled webhooks will receive events. */
-            enabled: boolean;
-            /**
-             * @description The URL that will receive events.
-             * @example https://example.com/webhooks/upvio
-             */
-            endpoint: string;
-        };
-        /**
-         * Outgoing Webhook Payload
-         * @description The raw payload that is delivered to an outgoing webhook endpoint.
-         */
-        OutgoingWebhookPayload: {
+            patientId: string;
+            /** @description ID of the service to book the appointment for. */
+            serviceId: string;
+            /** @description Service duration in minutes */
+            duration: number;
             /**
              * Format: uuid
-             * @description Unique identifier across the platform.
-             */
-            readonly id: string;
-            /**
-             * Format: date-time
-             * @description Time when the resource was created (ISO 8601 format).
-             */
-            readonly createdAt: string;
-            /**
-             * @description The name of the event. The format is [resource].[action]. e.g appointment.create
-             * @enum {string}
-             */
-            name: "appointment.create" | "appointment.update" | "appointment.delete" | "appointment.request";
-            business: {
-                /**
-                 * Format: uuid
-                 * @description Unique identifier across the platform.
-                 */
-                readonly id?: string;
-                /**
-                 * @description The name of the business.
-                 * @example Acme Clinic
-                 */
-                name?: string;
-            };
-            data: components["schemas"]["Appointment"];
-        };
-        /** Patient */
-        Patient: {
-            /** @description Unique identifier for the given patient. */
-            id: string;
-            /**
-             * Format: date-time
-             * @description Time when the resource was created (ISO 8601 format).
-             */
-            readonly createdAt: string;
-            /**
-             * Format: date-time
-             * @description Time when the resource was created (ISO 8601 format).
-             */
-            readonly updatedAt: string;
-            /**
-             * Format: date-time
-             * @description Time when the resource was archived (ISO 8601 format).
-             */
-            readonly archivedAt?: string | null;
-            /** @description Reason for archiving the patient. */
-            archivedReason?: string | null;
-            /** @description The email address of the patient. */
-            email: string;
-            /** @description The full legal name of the patient. */
-            name: string;
-            /** @description The mobile phone number of the patient. */
-            phoneMobile?: string | null;
-            /** @description The biological sex of the patient */
-            biologicalSex?: (string & (("FEMALE" | "MALE" | "OTHER") | null)) | null;
-            /** @description The gender of the patient */
-            gender?: string | null;
-            /**
-             * @description Timezone string.
-             * @example UTC
-             */
-            timezone?: string | null;
-            /**
-             * Format: date
-             * @description The date of birth of the patient (YYYY-MM-DD)
-             */
-            dob?: string | null;
-            /** @description The height of the patient in centimeters */
-            height?: number | null;
-            /** @description The weight of the patient in kilograms */
-            weight?: number | null;
-            /**
-             * @description The activity level of the patient
-             * @enum {string|null}
-             */
-            activityLevel?: "inactive" | "exercise10Mins" | "exercise20to60Mins" | "exercise1to3Hours" | "exerciseOver3Hours" | null;
-            /** @description The total cholesterol level of the patient */
-            cholesterol?: number | null;
-            /** @description The HDL cholesterol level of the patient */
-            cholesterolHdl?: number | null;
-            /** @description The LDL cholesterol level of the patient */
-            cholesterolLdl?: number | null;
-            /**
-             * @description The chronic medication status of the patient
-             * @enum {string|null}
-             */
-            chronicMedicationStatus?: "none" | "oneOrTwoDiseases" | "threeOrMoreDiseases" | null;
-            /**
-             * @description The diabetes status of the patient
-             * @enum {string|null}
-             */
-            diabetesStatus?: "none" | "preDiabetes" | "diabetes" | null;
-            /**
-             * @description The hypertension treatment status of the patient
-             * @enum {string|null}
-             */
-            hypertensionTreatment?: "notNeeded" | "no" | "yes" | null;
-            /** @description The race/ethnicity of the patient */
-            race?: string | null;
-            /**
-             * @description The smoking status of the patient
-             * @enum {string|null}
-             */
-            smokingStatus?: "never" | "former" | "current" | null;
-            /** @description The waist circumference of the patient in centimeters */
-            waistCircumference?: number | null;
-            /**
-             * @description The family diabetes history of the patient
-             * @enum {string|null}
-             */
-            familyDiabetesHistory?: "none" | "noneFirstDegree" | "firstDegree" | null;
-            /**
-             * @description The parental hypertension history of the patient
-             * @enum {string|null}
-             */
-            parentalHypertensionHistory?: "none" | "one" | "both" | null;
-            /** @description Whether the patient has a history of high glucose */
-            historyOfHighGlucose?: boolean | null;
-            /** @description Whether the patient has a history of hypertension */
-            historyOfHypertension?: boolean | null;
-            /** @description Whether the patient consumes vegetables and fruits daily */
-            vegetableFruitDiet?: boolean | null;
-            /** @description The fasting glucose level of the patient */
-            fastingGlucose?: number | null;
-            /** @description The triglyceride level of the patient */
-            triglyceride?: number | null;
-        };
-        PostAppointmentMessageTemplate: {
-            /**
-             * Format: uuid
-             * @description Unique identifier across the platform.
-             */
-            readonly id?: string;
-            /**
-             * Format: date-time
-             * @description Time when the resource was created (ISO 8601 format).
-             */
-            readonly createdAt?: string;
-            /**
-             * Format: date-time
-             * @description Time when the resource was last updated (ISO 8601 format).
-             */
-            readonly updatedAt?: string;
-            /**
-             * Format: uuid
-             * @description The ID of the business this template belongs to.
-             */
-            businessId?: string;
-            /** @description The IDs of the services this template applies to. An empty array means all services. */
-            serviceIds?: string[];
-            /** @description The number of minutes after the appointment to send the message. */
-            minutes?: number;
-            /**
-             * @description The type of notification (EMAIL or SMS).
-             * @enum {string}
-             */
-            type?: "EMAIL" | "SMS";
-            /** @description The recipient of the message. */
-            recipient?: string;
-            /** @description Whether this template is enabled. */
-            enabled?: boolean;
-            /** @description Custom message template override. Null if using the default. */
-            messageTemplate?: {
-                /** @description The unique identifier for the message template. */
-                id?: string;
-                /**
-                 * @description The message template type.
-                 * @enum {string}
-                 */
-                type?: "email" | "sms";
-                /** @description The email subject line. */
-                subject?: string;
-                /** @description The message content with template variables. */
-                content?: string;
-            } | null;
-            /** @description The default message template for this type and recipient combination. */
-            defaultTemplate?: {
-                /** @description The unique identifier for the message template. */
-                id?: string;
-                /**
-                 * @description The message template type.
-                 * @enum {string}
-                 */
-                type?: "email" | "sms";
-                /** @description The email subject line. */
-                subject?: string;
-                /** @description The message content with template variables. */
-                content?: string;
-            };
-        };
-        /** Post-Appointment Message Template Create Input */
-        PostAppointmentMessageTemplateCreateInput: {
-            /** @description The number of minutes after the appointment to send the message. */
-            minutes: number;
-            /**
-             * @description The type of notification (EMAIL or SMS).
-             * @enum {string}
-             */
-            type: "EMAIL" | "SMS";
-            /**
-             * @description The recipient of the message.
-             * @enum {string}
-             */
-            recipient: "BUSINESS_OWNER" | "GUESTS" | "PATIENT" | "STAFF";
-            /** @description The IDs of the services this template applies to. Defaults to an empty array (all services). */
-            serviceIds?: string[];
-            /** @description Custom message template override. */
-            messageTemplate?: {
-                /**
-                 * @description The message template type.
-                 * @enum {string}
-                 */
-                type: "email" | "sms";
-                /** @description The email subject line. */
-                subject: string;
-                /** @description The message content with template variables. */
-                content: string;
-            };
-        };
-        /** Post-Appointment Message Template Update Input */
-        PostAppointmentMessageTemplateUpdateInput: {
-            /** @description Whether this template is enabled. */
-            enabled?: boolean;
-            /** @description Custom message template override. */
-            messageTemplate?: {
-                /**
-                 * @description The message template type.
-                 * @enum {string}
-                 */
-                type: "email" | "sms";
-                /** @description The email subject line. */
-                subject: string;
-                /** @description The message content with template variables. */
-                content: string;
-            };
-        };
-        ReminderTemplate: {
-            /**
-             * Format: uuid
-             * @description Unique identifier across the platform.
-             */
-            readonly id?: string;
-            /**
-             * Format: date-time
-             * @description Time when the resource was created (ISO 8601 format).
-             */
-            readonly createdAt?: string;
-            /**
-             * Format: date-time
-             * @description Time when the resource was last updated (ISO 8601 format).
-             */
-            readonly updatedAt?: string;
-            /**
-             * Format: uuid
-             * @description The ID of the business this template belongs to.
-             */
-            businessId?: string;
-            /** @description The IDs of the services this template applies to. An empty array means all services. */
-            serviceIds?: string[];
-            /** @description The number of minutes before the appointment to send the reminder. */
-            minutes?: number;
-            /**
-             * @description The type of notification (EMAIL or SMS).
-             * @enum {string}
-             */
-            type?: "EMAIL" | "SMS";
-            /** @description The resource type this reminder applies to. */
-            resourceType?: string;
-            /** @description Whether this template is enabled. */
-            enabled?: boolean;
-            /** @description Custom message template override. Null if using the default. */
-            messageTemplate?: {
-                /** @description The unique identifier for the message template. */
-                id?: string;
-                /**
-                 * @description The message template type.
-                 * @enum {string}
-                 */
-                type?: "email" | "sms";
-                /** @description The email subject line. */
-                subject?: string;
-                /** @description The message content with template variables. */
-                content?: string;
-            } | null;
-            /** @description The default message template for this type and resource type combination. */
-            defaultTemplate?: {
-                /** @description The unique identifier for the message template. */
-                id?: string;
-                /**
-                 * @description The message template type.
-                 * @enum {string}
-                 */
-                type?: "email" | "sms";
-                /** @description The email subject line. */
-                subject?: string;
-                /** @description The message content with template variables. */
-                content?: string;
-            };
-        };
-        /** Reminder Template Create Input */
-        ReminderTemplateCreateInput: {
-            /** @description The number of minutes before the appointment to send the reminder. */
-            minutes: number;
-            /**
-             * @description The type of notification (EMAIL or SMS).
-             * @enum {string}
-             */
-            type: "EMAIL" | "SMS";
-            /**
-             * @description The resource type this reminder applies to.
-             * @enum {string}
-             */
-            resourceType: "PATIENT" | "STAFF";
-            /** @description The IDs of the services this template applies to. Defaults to an empty array (all services). */
-            serviceIds?: string[];
-            /** @description Custom message template override. */
-            messageTemplate?: {
-                /**
-                 * @description The message template type.
-                 * @enum {string}
-                 */
-                type: "email" | "sms";
-                /** @description The email subject line. */
-                subject: string;
-                /** @description The message content with template variables. */
-                content: string;
-            };
-        };
-        /** Reminder Template Update Input */
-        ReminderTemplateUpdateInput: {
-            /** @description Whether this template is enabled. */
-            enabled?: boolean;
-            /** @description Custom message template override. */
-            messageTemplate?: {
-                /**
-                 * @description The message template type.
-                 * @enum {string}
-                 */
-                type: "email" | "sms";
-                /** @description The email subject line. */
-                subject: string;
-                /** @description The message content with template variables. */
-                content: string;
-            };
-        };
-        /** Service */
-        Service: {
-            /**
-             * Format: uuid
-             * @description Unique identifier across the platform.
-             */
-            readonly id?: string;
-            /**
-             * Format: date-time
-             * @description Time when the resource was created (ISO 8601 format).
-             */
-            readonly createdAt?: string;
-            /**
-             * Format: date-time
-             * @description Time when the resource was created (ISO 8601 format).
-             */
-            readonly updatedAt?: string;
-            /**
-             * @description The unique alias for this service.
-             * @example gp-consultation
-             */
-            alias?: string | null;
-            /**
-             * @description The service name.
-             * @example GP Consultation
-             */
-            name: string;
-            /** @description The service description. */
-            description?: string | null;
-            /**
-             * Format: url
-             * @description The URL for patients to book this service.
-             */
-            readonly bookingURL?: string;
-            /** @description Disabled services cannot be used across the platform. */
-            enabled?: boolean | null;
-            /** @description The list of staff members ids that provide this service. An empty array means this service is provided by all staff members in the business. */
-            staffsIds?: string[];
-            /** @description Optional extra Staff Members that can provide this service for group bookings. */
-            additionalStaffIds?: string[];
-            /** @description Categories that this service belongs to. */
-            categoriesIds?: string[];
-            /**
-             * @description Determines the number of minutes in advance that customers can book or reschedule an appointment.
-             * @example 30
-             */
-            leadTime?: number | null;
-            /**
-             * @description Determines the number of minutes in advance that customers can cancel an appointment.
-             * @example 60
-             */
-            cancelLeadTime?: number | null;
-            /**
-             * @description Determines the intervals between appointments. An interval of 15 minutes, for example, means a customer could schedule an appointment at 8:00, 8:15, 8:30, and so on.
-             * @example 30
-             */
-            timeIncrement?: number | null;
-            /** @description The maximum amount of days of availability to be listed when booking. */
-            availabilityLimitDays?: number | null;
-            /** @description Embedded location details */
-            location?: {
-                /**
-                 * Format: uuid
-                 * @description Unique identifier across the platform.
-                 */
-                readonly id?: string;
-                /** @description The name of the location. */
-                name?: string;
-                /** @description The address of the location. */
-                address?: string;
-            } | null;
-            /**
-             * @description The type of location that this service is provided at.
-             * @example meet
-             */
-            locationType?: string | null;
-            /** @description The location that this service is provided at. */
-            locationValue?: string | null;
-            /**
-             * @description The currency that this service is priced in.
-             * @example USD
-             */
-            currency?: string | null;
-            /** @description Durations that this service can be booked for. */
-            durations: {
-                /** @example 30 */
-                duration: number;
-                /** @example 0 */
-                price: number;
-            }[];
-            /**
-             * @description Whether bookings for this service require approval.
-             * @example false
-             */
-            bookingsRequireApproval?: boolean | null;
-            /**
-             * @description Determines the maximum amount of bookings that can be made per timeslot for this service.
-             * @example 1
-             */
-            bookingsPerTimeslot?: number | null;
-            /**
-             * @description Minutes of free time required before the start of new bookings for this service
-             * @example 30
-             */
-            bufferBeforeMinutes?: number | null;
-            /**
-             * @description Minutes of free time required after the end of new bookings for this service
-             * @example 30
-             */
-            bufferAfterMinutes?: number | null;
-        };
-        /** ServiceCategory */
-        ServiceCategory: {
-            /**
-             * Format: uuid
-             * @description Unique identifier across the platform.
-             */
-            readonly id?: string;
-            /**
-             * Format: date-time
-             * @description Time when the resource was created (ISO 8601 format).
-             */
-            readonly createdAt?: string;
-            /**
-             * Format: date-time
-             * @description Time when the resource was created (ISO 8601 format).
-             */
-            readonly updatedAt?: string;
-            name: string;
-            /** @description The URL for patients to book this service category. */
-            bookingURL?: string;
-        };
-        /**
-         * Staff
-         * @description A user within a Business that can use and/or manage resources.
-         */
-        Staff: {
-            /**
-             * Format: uuid
-             * @description Unique identifier across the platform.
-             */
-            readonly id: string;
-            /**
-             * Format: date-time
-             * @description Time when the resource was created (ISO 8601 format).
-             */
-            readonly createdAt?: string;
-            /**
-             * Format: date-time
-             * @description Time when the resource was created (ISO 8601 format).
-             */
-            readonly updatedAt?: string;
-            /**
-             * Format: uuid
-             * @deprecated
-             * @description The ID of the Business this resource belongs to.
-             */
-            businessId?: string;
-            /**
-             * Format: email
-             * @description Unique Email Address that the Staff uses to login.
-             */
-            email: string;
-            /**
-             * @description An optional unique alias for the Staff member.
-             * @example john
-             */
-            alias?: string | null;
-            /**
-             * @description The full legal name of the staff member.
-             * @example John Doe
-             */
-            name: string;
-            /**
-             * @description The status of the staff member. Only ACTIVE staff can be booked.
-             * @enum {string}
-             */
-            status: "ACTIVE" | "DISABLED" | "ARCHIVED" | "PENDING_INVITE" | "NOT_INVITED";
-            /**
-             * @deprecated
-             * @description Deprecated - Use status instead. Returns true when status is ACTIVE.
-             */
-            enabled: boolean;
-            /**
-             * @description The URL where patients can book this staff member directly.
-             * @example https://forms.upvio.com/book/acme/staff/123
-             */
-            bookingURL?: string;
-            /** @description A list of roles assigned to the Staff. */
-            roles: string[];
-            /** @description A list of Staff IDs that are managed by this Staff. */
-            managedStaffIds?: string[];
-            /**
-             * @description Timezone string.
-             * @example UTC
-             */
-            timezone?: string | null;
-        };
-        TimeBlocker: {
-            /**
-             * Format: uuid
-             * @description Unique identifier across the platform.
-             */
-            readonly id?: string;
-            /**
-             * Format: date-time
-             * @description Time when the resource was created (ISO 8601 format).
-             */
-            readonly createdAt?: string;
-            /**
-             * Format: date-time
-             * @description Time when the resource was last updated (ISO 8601 format).
-             */
-            readonly updatedAt?: string;
-            /**
-             * Format: uuid
-             * @description The ID of the Staff this resource belongs to.
+             * @description ID of the staff member to book the appointment with. If not provided, the least busy staff member for the service will be assigned.
              */
             staffId?: string;
+            /** @description Timezone of the client. If not provided, the business timezone will be used. */
+            clientTimezone?: string;
             /**
-             * Format: date-time
-             * @description Start date and time of the time blocker (ISO 8601 format).
+             * @description Location of the appointment. Can be a physical address or a URL.
+             * @example https://telehealth.upvio.com/session/fc92e2ce-e6d1-443f-aaf0-eae4820485c0
              */
-            startDate?: string;
-            /**
-             * Format: date-time
-             * @description End date and time of the time blocker (ISO 8601 format).
-             */
-            endDate?: string;
-            /** @description Reason for the time blocker. */
-            reason?: string | null;
+            location?: string;
         };
         /**
-         * User
-         * @description An account used for authenticating into the platform. Within the context of a Business, you should use Staff instead.
+         * @description The name of an event that can be sent to a webhook endpoint.
+         * @enum {string}
          */
-        User: {
+        WebhookEventName: "appointment.create" | "appointment.update" | "appointment.delete" | "appointment.request" | "patient.create" | "patient.update" | "patient.archive" | "patient.restore" | "vitalsScan.create" | "vitalsScan.complete" | "vitalsScan.fail" | "vitalsScan.abort";
+        /** @description An appointment and the resources it is linked to. */
+        AppointmentWebhookPayload: {
             /**
-             * Format: uuid
-             * @description Unique identifier across the platform.
+             * @description Unique identifier across the Upvio platform.
+             * @example ckq7v1w1k0000zqxk8v6q1m2n
              */
-            readonly id: string;
-            /**
-             * Format: email
-             * @description Email address.
-             */
-            email: string;
-            /**
-             * @description The name of the User account. The Staff name is always used in place of this around the platform.
-             * @example John Doe
-             */
-            name?: string;
-        };
-        VitalsLink: {
-            /**
-             * Format: uuid
-             * @description Unique identifier across the platform.
-             */
-            readonly id: string;
-            /**
-             * Format: date-time
-             * @description Time when the resource was created (ISO 8601 format).
-             */
-            readonly createdAt: string;
-            /**
-             * Format: date-time
-             * @description Time when the resource was last updated (ISO 8601 format).
-             */
-            readonly updatedAt: string;
-            /** @description The name of the link. */
-            name: string;
-            /** @description An optional description of the link. */
-            description?: string | null;
-            /** @description The unique slug used in the link URL. */
-            slug: string;
-            /**
-             * @description The status of the link.
-             * @enum {string}
-             */
-            status: "ACTIVE" | "ARCHIVED" | "DISABLED";
-            /** @description The ID of the template this link uses. */
-            vitalsTemplateId: string;
-            /** @description The number of scans performed using this link. */
-            scansCount: number;
-            /** @description The maximum number of scans allowed for this link. */
-            maxScans?: number | null;
-            /**
-             * Format: date-time
-             * @description When the link expires, if applicable.
-             */
-            expiresAt?: string | null;
-            /**
-             * Format: uri
-             * @description The full URL for this vitals link.
-             */
-            url: string;
-        };
-        VitalsScan: {
-            /**
-             * Format: uuid
-             * @description Unique identifier across the platform.
-             */
-            readonly id: string;
-            /**
-             * Format: date-time
-             * @description Time when the resource was created (ISO 8601 format).
-             */
-            readonly createdAt: string;
-            /**
-             * Format: date-time
-             * @description Time when the resource was last updated (ISO 8601 format).
-             */
-            readonly updatedAt: string;
-            /**
-             * Format: uuid
-             * @description Unique identifier across the platform.
-             */
-            readonly patientId?: string;
-            /** @description The ID of the vitals link used for this scan. */
-            vitalsLinkId?: string;
-            /**
-             * @description The status of the vitals scan.
-             * @enum {string}
-             */
-            status: "PENDING" | "STARTED" | "SUCCEEDED" | "FAILED" | "ABORTED";
-            results?: components["schemas"]["VitalsScanResults"];
-            /** @description The metrics included in this scan. */
-            includedMetrics: components["schemas"]["VitalsMetric"][];
-            /**
-             * Format: date-time
-             * @description When the scan was started.
-             */
-            startedAt?: string | null;
-            inputData?: components["schemas"]["VitalsScanInputData"];
-        };
-        /** @description Pre-filled patient health profile data for the scan. Only present when provided during scan creation. */
-        VitalsScanInputData: {
-            /**
-             * @description Patient gender.
-             * @enum {string}
-             */
-            gender?: "male" | "female" | "other";
-            /** @description ISO 3166-1 alpha-2 country code. */
-            countryCode?: string;
-            /** @description Patient age in years. */
-            age?: number;
-            /** @description Date of birth in YYYY-MM-DD format. */
-            dob?: string;
-            /** @description Patient race/ethnicity. */
-            race?: string;
-            /** @description Patient height in cm. */
-            height?: number;
-            /** @description Patient weight in kg. */
-            weight?: number;
-            /** @description Waist circumference in cm. */
-            waistCircumference?: number;
-            /**
-             * @description Patient smoking status.
-             * @enum {string}
-             */
-            smokingStatus?: "never" | "former" | "current";
-            /**
-             * @description Patient diabetes status.
-             * @enum {string}
-             */
-            diabetesStatus?: "none" | "preDiabetes" | "diabetes";
-            /**
-             * @description Hypertension treatment status.
-             * @enum {string}
-             */
-            hypertensionTreatment?: "notNeeded" | "no" | "yes";
-            /**
-             * @description Patient physical activity level.
-             * @enum {string}
-             */
-            activityLevel?: "inactive" | "exercise10Mins" | "exercise20to60Mins" | "exercise1to3Hours" | "exerciseOver3Hours";
-            /**
-             * @description Chronic medication status.
-             * @enum {string}
-             */
-            chronicMedicationStatus?: "none" | "oneOrTwoDiseases" | "threeOrMoreDiseases";
-            /** @description Total cholesterol level. */
-            cholesterol?: number;
-            /** @description HDL cholesterol level. */
-            cholesterolHdl?: number;
-            /** @description LDL cholesterol level. */
-            cholesterolLdl?: number;
-            /**
-             * @description Family history of diabetes.
-             * @enum {string}
-             */
-            familyDiabetesHistory?: "none" | "noneFirstDegree" | "firstDegree";
-            /**
-             * @description Parental history of hypertension.
-             * @enum {string}
-             */
-            parentalHypertensionHistory?: "none" | "one" | "both";
-            /** @description Whether patient has history of high glucose. */
-            historyOfHighGlucose?: boolean;
-            /** @description Whether patient has history of hypertension. */
-            historyOfHypertension?: boolean;
-            /** @description Whether patient eats vegetables and fruit daily. */
-            vegetableFruitDiet?: boolean;
-            /** @description Fasting glucose level. */
-            fastingGlucose?: number;
-            /** @description Triglyceride level. */
-            triglyceride?: number;
-        } | null;
-        /** @description The results of a Vitals Scan. Only present when status is SUCCEEDED. */
-        VitalsScanResults: {
-            metrics?: components["schemas"]["VitalsScanMetrics"];
-        } | null;
-        /** @description Metric values from the scan. Only metrics listed in includedMetrics will be present. */
-        VitalsScanMetrics: {
-            /** @description Heart rate in beats per minute (BPM). */
-            heartRate?: number | null;
-            /** @description Heart rate variability in milliseconds (ms). */
-            heartRateVariability?: number | null;
-            /** @description Breathing rate in breaths per minute (b/min). */
-            breathingRate?: number | null;
-            /** @description Stress index value. */
-            stressIndex?: number | null;
-            /** @description Parasympathetic activity percentage (%). */
-            parasympatheticActivity?: number | null;
-            /** @description Cardiac workload in mmHg/s. */
-            cardiacWorkload?: number | null;
-            /** @description Diastolic blood pressure in mmHg. */
-            bloodPressureDiastolic?: number | null;
-            /** @description Systolic blood pressure in mmHg. */
-            bloodPressureSystolic?: number | null;
-            /** @description Body Mass Index (BMI) in kg/m². */
-            bmiClassification?: number | null;
-            /** @description Overall wellness score. */
-            wellnessScore?: number | null;
-            /** @description Vascular age in years. */
-            vascularAge?: number | null;
-            /** @description Atherosclerotic cardiovascular disease risk percentage (%). */
-            atheroscleroticCvdRisk?: number | null;
-            /** @description Cardiovascular event risk percentage (%). */
-            cardiovascularEventRisk?: number | null;
-            /** @description Cardiovascular risk score. */
-            cardiovascularRiskScore?: number | null;
-            /** @description Hypertension risk value. */
-            hypertensionRisk?: number | null;
-            /** @description Diabetes risk percentage (%). */
-            diabetesRisk?: number | null;
-            /** @description Fatty liver disease (NAFLD) risk value. */
-            fattyLiverDiseaseRisk?: number | null;
-            /** @description Waist-to-height ratio (WHtR). */
-            waistToHeightRatio?: number | null;
-            /** @description Body fat percentage (%). */
-            bodyFatPercentage?: number | null;
-            /** @description Body roundness index (BRI). */
-            bodyRoundnessIndex?: number | null;
-            /** @description A Body Shape Index (ABSI). */
-            aBodyShapeIndex?: number | null;
-            /** @description Conicity index (CI). */
-            conicityIndex?: number | null;
-            /** @description Basal metabolic rate in kcal/day. */
-            basalMetabolicRate?: number | null;
-            /** @description Total daily energy expenditure (TDEE) in kcal/day. */
-            totalDailyEnergyExpenditure?: number | null;
-        };
-        VitalsTemplate: {
-            /** @description The unique identifier for the template. */
             id: string;
             /**
              * Format: date-time
-             * @description Time when the resource was created (ISO 8601 format).
+             * @description ISO 8601 timestamp.
+             * @example 2026-01-31T09:30:00.000Z
              */
-            readonly createdAt: string;
+            createdAt: string;
             /**
              * Format: date-time
-             * @description Time when the resource was last updated (ISO 8601 format).
+             * @description ISO 8601 timestamp.
+             * @example 2026-01-31T09:30:00.000Z
              */
-            readonly updatedAt: string;
-            /** @description The name of the template. */
-            name: string;
-            /** @description An optional description of the template. */
-            description?: string | null;
-            /** @description The number of credits consumed per scan using this template. */
-            credits: number;
-            /** @description The metrics included in this template. */
-            metrics: components["schemas"]["VitalsMetric"][];
-            /** @description The number of links using this template. */
-            linksCount: number;
+            updatedAt: string;
             /**
              * Format: date-time
-             * @description When the template was archived, if applicable.
+             * @description When the appointment starts, in UTC.
+             * @example 2026-01-31T09:30:00.000Z
              */
-            archivedAt?: string | null;
-        };
-        /**
-         * Working Hours Schedule
-         * @description A schedule to use with Staff to plan availability.
-         */
-        WorkingHoursSchedule: {
+            date: string;
+            /** @description The start date before the appointment was last rescheduled, if it ever was. */
+            originalDate?: string | null;
+            /** @description Duration in minutes. */
+            duration: number;
+            currency?: string | null;
+            price?: number | null;
+            approved: boolean;
+            cancelled: boolean;
             /**
-             * Format: uuid
-             * @description Unique identifier across the platform.
+             * @description Unique identifier across the Upvio platform.
+             * @example ckq7v1w1k0000zqxk8v6q1m2n
              */
-            readonly id: string;
+            businessId: string;
             /**
-             * Format: date-time
-             * @description Time when the resource was created (ISO 8601 format).
+             * @description Unique identifier across the Upvio platform.
+             * @example ckq7v1w1k0000zqxk8v6q1m2n
              */
-            readonly createdAt: string;
+            serviceId: string;
+            service: {
+                /**
+                 * @description Unique identifier across the Upvio platform.
+                 * @example ckq7v1w1k0000zqxk8v6q1m2n
+                 */
+                id: string;
+                name: string;
+                alias?: string | null;
+                /**
+                 * @deprecated
+                 * @description Deprecated. Use `links` instead.
+                 */
+                links?: {
+                    /**
+                     * Format: uri
+                     * @description Absolute URL.
+                     */
+                    book: string;
+                } & {
+                    [key: string]: unknown;
+                };
+            } & {
+                [key: string]: unknown;
+            };
+            adHocServiceId?: string | null;
             /**
-             * Format: date-time
-             * @description Time when the resource was created (ISO 8601 format).
-             */
-            readonly updatedAt: string;
-            /**
-             * Format: uuid
-             * @description The ID of the Staff this resource belongs to.
+             * @description Unique identifier across the Upvio platform.
+             * @example ckq7v1w1k0000zqxk8v6q1m2n
              */
             staffId: string;
-            /** @description A configuration to define active hours. */
-            workingHours: {
+            staff: {
                 /**
-                 * @description A group of active hours for a single day.
-                 * @example [
-                 *       [
-                 *         900,
-                 *         1200
-                 *       ],
-                 *       [
-                 *         1300,
-                 *         1700
-                 *       ]
-                 *     ]
+                 * @description Unique identifier across the Upvio platform.
+                 * @example ckq7v1w1k0000zqxk8v6q1m2n
                  */
-                monday?: number[][];
+                id: string;
+                name: string;
+                email?: string | null;
                 /**
-                 * @description A group of active hours for a single day.
-                 * @example [
-                 *       [
-                 *         900,
-                 *         1200
-                 *       ],
-                 *       [
-                 *         1300,
-                 *         1700
-                 *       ]
-                 *     ]
+                 * @deprecated
+                 * @description Deprecated. Use `links` instead.
                  */
-                tuesday?: number[][];
-                /**
-                 * @description A group of active hours for a single day.
-                 * @example [
-                 *       [
-                 *         900,
-                 *         1200
-                 *       ],
-                 *       [
-                 *         1300,
-                 *         1700
-                 *       ]
-                 *     ]
-                 */
-                wednesday?: number[][];
-                /**
-                 * @description A group of active hours for a single day.
-                 * @example [
-                 *       [
-                 *         900,
-                 *         1200
-                 *       ],
-                 *       [
-                 *         1300,
-                 *         1700
-                 *       ]
-                 *     ]
-                 */
-                thursday?: number[][];
-                /**
-                 * @description A group of active hours for a single day.
-                 * @example [
-                 *       [
-                 *         900,
-                 *         1200
-                 *       ],
-                 *       [
-                 *         1300,
-                 *         1700
-                 *       ]
-                 *     ]
-                 */
-                friday?: number[][];
-                /**
-                 * @description A group of active hours for a single day.
-                 * @example [
-                 *       [
-                 *         900,
-                 *         1200
-                 *       ],
-                 *       [
-                 *         1300,
-                 *         1700
-                 *       ]
-                 *     ]
-                 */
-                saturday?: number[][];
-                /**
-                 * @description A group of active hours for a single day.
-                 * @example [
-                 *       [
-                 *         900,
-                 *         1200
-                 *       ],
-                 *       [
-                 *         1300,
-                 *         1700
-                 *       ]
-                 *     ]
-                 */
-                sunday?: number[][];
+                links?: {
+                    /**
+                     * Format: uri
+                     * @description Absolute URL.
+                     */
+                    book: string;
+                } & {
+                    [key: string]: unknown;
+                };
+            } & {
+                [key: string]: unknown;
             };
             /**
-             * @description The timezone for this schedule
-             * @example America/New_York
+             * @deprecated
+             * @description Deprecated. Use `staff.name`.
              */
-            timezone?: string;
+            staffName?: string | null;
+            /** @default [] */
+            additionalStaffIds: string[];
+            /**
+             * @description Unique identifier across the Upvio platform.
+             * @example ckq7v1w1k0000zqxk8v6q1m2n
+             */
+            patientId: string;
+            patient: {
+                /**
+                 * @description Unique identifier across the Upvio platform.
+                 * @example ckq7v1w1k0000zqxk8v6q1m2n
+                 */
+                id: string;
+                name?: string | null;
+                email?: string | null;
+                phone?: string | null;
+            } & {
+                [key: string]: unknown;
+            };
+            /**
+             * @deprecated
+             * @description Deprecated. Use `patient.name`.
+             */
+            patientName?: string | null;
+            patientTimezone?: string | null;
+            location?: ({
+                /**
+                 * @description Unique identifier across the Upvio platform.
+                 * @example ckq7v1w1k0000zqxk8v6q1m2n
+                 */
+                id: string;
+                name: string;
+                address?: string | null;
+            } & {
+                [key: string]: unknown;
+            }) | null;
+            locationType?: string | null;
+            locationValue?: string | null;
+            hangoutLink?: string | null;
+            answers?: ({
+                id: string;
+                question?: string | null;
+                answer?: unknown | null;
+                variableName?: string | null;
+            } & {
+                [key: string]: unknown;
+            })[] | null;
+            /**
+             * @deprecated
+             * @description Deprecated. Use `answers`.
+             */
+            custom?: {
+                [key: string]: unknown;
+            } | null;
+            paymentProvider?: string | null;
+            paymentId?: string | null;
+            transactionUrl?: string | null;
+            groupBookingId?: string | null;
+            recurringAppointmentId?: string | null;
+            recurrence?: unknown | null;
+            rrule?: string | null;
+            links: {
+                /**
+                 * Format: uri
+                 * @description Absolute URL.
+                 */
+                reschedule: string;
+                /**
+                 * Format: uri
+                 * @description Absolute URL.
+                 */
+                cancel: string;
+            } & {
+                [key: string]: unknown;
+            };
+            /**
+             * Format: uri
+             * @deprecated
+             * @description Deprecated. Use `links.reschedule`.
+             */
+            rescheduleUrl: string;
+            /**
+             * Format: uri
+             * @deprecated
+             * @description Deprecated. Use `links.cancel`.
+             */
+            cancelUrl: string;
+            /** @description The values of any fields that changed, as they were before the update. */
+            previousAttributes?: {
+                [key: string]: unknown;
+            } | null;
+        } & {
+            [key: string]: unknown;
+        };
+        /** @description A patient record within a business. */
+        PatientWebhookPayload: {
+            /**
+             * @description Unique identifier across the Upvio platform.
+             * @example ckq7v1w1k0000zqxk8v6q1m2n
+             */
+            id: string;
+            /**
+             * @description The business this patient belongs to.
+             * @example ckq7v1w1k0000zqxk8v6q1m2n
+             */
+            businessId: string;
             /**
              * Format: date-time
-             * @example 2024-01-01T00:00:00Z
+             * @description ISO 8601 timestamp.
+             * @example 2026-01-31T09:30:00.000Z
              */
-            dateStart: string;
+            createdAt: string;
             /**
              * Format: date-time
-             * @example 2024-01-08T00:00:00Z
+             * @description ISO 8601 timestamp.
+             * @example 2026-01-31T09:30:00.000Z
              */
-            dateEnd?: string;
+            updatedAt: string;
+            /** @description ISO 8601 timestamp, or null when it has not happened yet. */
+            archivedAt?: string | null;
+            archivedReason?: string | null;
+            name: string;
+            email: string;
+            phoneMobile?: string | null;
+            timezone?: string | null;
+            preferredLanguage?: ("en" | "es") | null;
+            /**
+             * Format: date
+             * @description Date of birth in YYYY-MM-DD format.
+             */
+            dob?: string | null;
+            gender?: string | null;
+            biologicalSex?: ("FEMALE" | "MALE" | "OTHER") | null;
+            race?: string | null;
+            /** @description Height in cm. */
+            height?: number | null;
+            /** @description Weight in kg. */
+            weight?: number | null;
+            waistCircumference?: number | null;
+            neckCircumference?: number | null;
+            hipCircumference?: number | null;
+            activityLevel?: ("exercise10Mins" | "exercise1to3Hours" | "exercise20to60Mins" | "exerciseOver3Hours" | "inactive") | null;
+            smokingStatus?: ("current" | "former" | "never") | null;
+            diabetesStatus?: ("diabetes" | "none" | "preDiabetes") | null;
+            chronicMedicationStatus?: ("none" | "oneOrTwoDiseases" | "threeOrMoreDiseases") | null;
+            hypertensionTreatment?: ("no" | "notNeeded" | "yes") | null;
+            familyDiabetesHistory?: ("firstDegree" | "none" | "noneFirstDegree") | null;
+            parentalHypertensionHistory?: ("both" | "none" | "one") | null;
+            historyOfHighGlucose?: boolean | null;
+            historyOfHypertension?: boolean | null;
+            vegetableFruitDiet?: boolean | null;
+            cholesterol?: number | null;
+            cholesterolHdl?: number | null;
+            cholesterolLdl?: number | null;
+            fastingGlucose?: number | null;
+            triglyceride?: number | null;
+        };
+        /** @description The archival state of a patient. */
+        PatientArchivalWebhookPayload: {
+            /**
+             * @description Unique identifier across the Upvio platform.
+             * @example ckq7v1w1k0000zqxk8v6q1m2n
+             */
+            id: string;
+            /**
+             * @description The business this patient belongs to.
+             * @example ckq7v1w1k0000zqxk8v6q1m2n
+             */
+            businessId: string;
+            /** @description ISO 8601 timestamp, or null when it has not happened yet. */
+            archivedAt?: string | null;
+            archivedReason?: string | null;
+        };
+        /** @description A vitals scan and, once complete, its measured results. */
+        VitalsScanWebhookPayload: {
+            /**
+             * @description Unique identifier across the Upvio platform.
+             * @example ckq7v1w1k0000zqxk8v6q1m2n
+             */
+            id: string;
+            /**
+             * @description The business this scan belongs to.
+             * @example ckq7v1w1k0000zqxk8v6q1m2n
+             */
+            businessId: string;
+            /**
+             * Format: date-time
+             * @description ISO 8601 timestamp.
+             * @example 2026-01-31T09:30:00.000Z
+             */
+            createdAt: string;
+            /**
+             * Format: date-time
+             * @description ISO 8601 timestamp.
+             * @example 2026-01-31T09:30:00.000Z
+             */
+            updatedAt: string;
+            /** @description ISO 8601 timestamp, or null when it has not happened yet. */
+            startedAt?: string | null;
+            /** @description When the scan last moved to a new status. */
+            statusUpdatedAt?: string | null;
+            /** @enum {string} */
+            status: "ABORTED" | "FAILED" | "PENDING" | "STARTED" | "SUCCEEDED";
+            /** @description How the identity behind the scan was established. `EMAIL` is a verified patient session, `API` was created through the business API, `NONE` had no email verification. */
+            verificationMethod?: ("API" | "EMAIL" | "NONE") | null;
+            patientId?: string | null;
+            vitalsLinkId?: string | null;
+            /** @default [] */
+            includedMetrics: string[];
+            results?: components["schemas"]["VitalsScanWebhookResults"] | null;
+            /** @description Why the scan failed. Only present when status is `FAILED`. */
+            failureInfo?: components["schemas"]["VitalsScanWebhookFailureInfo"] | null;
+            /** @description Whatever custom metadata was attached when the scan was created. */
+            metadata?: {
+                [key: string]: unknown;
+            } | null;
+        };
+        /** @description Measured metrics. Only the metrics listed in `includedMetrics` are populated. */
+        VitalsScanWebhookResults: {
+            metrics: {
+                /** @description Heart rate in beats per minute (BPM). */
+                heartRate?: number | null;
+                /** @description Heart rate variability in milliseconds (ms). */
+                heartRateVariability?: number | null;
+                /** @description Breathing rate in breaths per minute (b/min). */
+                breathingRate?: number | null;
+                /** @description Stress index on a 0–10 scale (modified Baevsky method). Higher values indicate more stress. */
+                stressIndex?: number | null;
+                /** @description Parasympathetic activity as a percentage (0–100). */
+                parasympatheticActivity?: number | null;
+                /** @description Cardiac workload (rate-pressure product) in mmHg/s. */
+                cardiacWorkload?: number | null;
+                /** @description Diastolic blood pressure in mmHg. */
+                bloodPressureDiastolic?: number | null;
+                /** @description Systolic blood pressure in mmHg. */
+                bloodPressureSystolic?: number | null;
+                /** @description Body Mass Index (BMI) in kg/m². */
+                bmiClassification?: number | null;
+                /** @description Overall wellness score on a 0–100 scale. Higher values indicate better wellness. */
+                wellnessScore?: number | null;
+                /** @description Vascular age in years. */
+                vascularAge?: number | null;
+                /** @description 10-year atherosclerotic cardiovascular disease (ASCVD) risk as a percentage (0–100). */
+                atheroscleroticCvdRisk?: number | null;
+                /** @description 10-year risk of a hard cardiovascular event as a percentage (0–100). */
+                cardiovascularEventRisk?: number | null;
+                /** @description Framingham cardiovascular risk score in points: the sum of the points assigned to each risk factor under the Framingham general cardiovascular disease point system. Higher totals indicate higher risk. */
+                cardiovascularRiskScore?: number | null;
+                /** @description Probability of developing hypertension within 4 years, as a percentage (0–100). */
+                hypertensionRisk?: number | null;
+                /** @description Probability of developing diabetes within 8 years, as a percentage (0–100). */
+                diabetesRisk?: number | null;
+                /** @description Fatty liver disease (NAFLD) risk category: `0` = Low, `1` = Moderate, `2` = High. */
+                fattyLiverDiseaseRisk?: number | null;
+                /** @description Waist-to-height ratio (WHtR), unitless. */
+                waistToHeightRatio?: number | null;
+                /** @description Body fat as a percentage of body weight (0–100). */
+                bodyFatPercentage?: number | null;
+                /** @description Body roundness index (BRI), unitless. */
+                bodyRoundnessIndex?: number | null;
+                /** @description A Body Shape Index (ABSI), unitless. */
+                aBodyShapeIndex?: number | null;
+                /** @description Conicity index (CI), unitless, ranging from 1.00 to about 1.73. */
+                conicityIndex?: number | null;
+                /** @description Basal metabolic rate in kcal/day. */
+                basalMetabolicRate?: number | null;
+                /** @description Total daily energy expenditure (TDEE) in kcal/day. */
+                totalDailyEnergyExpenditure?: number | null;
+            };
+        };
+        VitalsScanWebhookFailureInfo: {
+            /**
+             * @description Why the scan failed. `timeout`: the measurement ran past the maximum scan time while its progress was stalled below the completion threshold. `results_processing_timeout`: the measurement finished but its results were not processed in time. `no_measurement_results`: the measurement finished but produced no results. `other`: the measurement failed for any other reason.
+             * @enum {string}
+             */
+            failureReason: "timeout" | "results_processing_timeout" | "no_measurement_results" | "other";
+            /** @description How long the scan ran before failing, in milliseconds. Only present when `failureReason` is `timeout` or `results_processing_timeout`. */
+            totalScanDurationMs?: number;
+            /** @description Total time the scan made no progress, in milliseconds. Only present when `failureReason` is `timeout` or `results_processing_timeout`. */
+            stallDurationMs?: number;
+            /** @description Measurement progress when the scan failed, as a percentage (0–100). Only present when `failureReason` is `timeout` or `results_processing_timeout`. */
+            finalProgressPercentage?: number;
+            /** @description Maximum scan time allowed before the scan could time out, in milliseconds. Only present when `failureReason` is `timeout` or `results_processing_timeout`. */
+            maxScanTimeThresholdMs?: number;
+            /** @description Maximum time without progress allowed before the scan could time out, in milliseconds. Only present when `failureReason` is `timeout` or `results_processing_timeout`. */
+            maxStallTimeThresholdMs?: number;
         };
     };
     responses: never;
@@ -2842,2180 +3656,6 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    listAppointments: {
-        parameters: {
-            query: {
-                /** @description Start of date range */
-                startDate: string;
-                /** @description End of date range */
-                endDate: string;
-                /** @description ID of the patient to filter appointments by */
-                patientId?: string;
-            };
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A list of Appointments */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["Appointment"][];
-                    };
-                };
-            };
-        };
-    };
-    createAppointment: {
-        parameters: {
-            query?: {
-                /** @description If true, the appointment will be created even if the staff is busy */
-                ignoreBusyTimes?: boolean;
-            };
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-            };
-            cookie?: never;
-        };
-        /** @description Appointment data */
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["AppointmentCreateInput"];
-            };
-        };
-        responses: {
-            /** @description Created appointment */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["Appointment"];
-                    };
-                };
-            };
-        };
-    };
-    retrieveAppointment: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-                /** @description Appointment ID */
-                appointmentId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description An Appointment */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["Appointment"];
-                    };
-                };
-            };
-        };
-    };
-    deleteAppointment: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-                /** @description Appointment ID */
-                appointmentId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Confirmation that the appointment has been deleted */
-            204: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    updateAppointment: {
-        parameters: {
-            query?: {
-                /** @description If true, the appointment will be updated even if the staff is busy at the new time */
-                ignoreBusyTimes?: boolean;
-            };
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-                /** @description Appointment ID */
-                appointmentId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Updated Appointment */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["Appointment"];
-                    };
-                };
-            };
-        };
-    };
-    updateAppointmentTags: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-                /** @description Appointment ID */
-                appointmentId: string;
-            };
-            cookie?: never;
-        };
-        /** @description Tags to associate with the appointment */
-        requestBody: {
-            content: {
-                "application/json": {
-                    /** @description List of tags to associate with the appointment */
-                    tags: string[];
-                };
-            };
-        };
-        responses: {
-            /** @description Updated appointment with tags */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["Appointment"];
-                    };
-                };
-            };
-            /** @description Bad request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Appointment not found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    listServiceAvailableTimes: {
-        parameters: {
-            query: {
-                /** @description The start date of the range to retrieve available times for (ISO 8601 format). */
-                startDate: string;
-                /** @description The end date of the range to retrieve available times for (ISO 8601 format). */
-                endDate: string;
-                /** @description The duration of the service in minutes. */
-                duration: number;
-                /** @description The staff members to filter the available times by. */
-                staffIds?: string[];
-                /** @description If true, unavailable slots will be included in the response. */
-                includeUnavailableSlots?: boolean;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description The available times for this service */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["AvailableTimes"];
-                    };
-                };
-            };
-        };
-    };
-    listBusinesses: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description List of Businesses */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["Business"][];
-                    };
-                };
-            };
-        };
-    };
-    retrieveBusiness: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Business */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["Business"];
-                    };
-                };
-            };
-        };
-    };
-    updateBusiness: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-            };
-            cookie?: never;
-        };
-        /** @description Attributes used to update a Business. */
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["BusinessUpdateInput"];
-            };
-        };
-        responses: {
-            /** @description Updated Business */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["Business"];
-                    };
-                };
-            };
-        };
-    };
-    listFormSubmissions: {
-        parameters: {
-            query?: {
-                limit?: number;
-                offset?: number;
-                filters?: {
-                    /** @description Filter by Form ID. */
-                    formId?: string;
-                    /** @description Filter by Patient ID. */
-                    patientId?: string;
-                };
-            };
-            header?: never;
-            path: {
-                businessId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description List of Form Submissions */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["FormSubmission"][];
-                    };
-                };
-            };
-        };
-    };
-    retrieveFormSubmission: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                businessId: string;
-                formSubmissionId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A Form Submission. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["FormSubmission"];
-                    };
-                };
-            };
-            /** @description Form Submission not found. */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    listForms: {
-        parameters: {
-            query?: {
-                visibility?: ("LISTED" | "UNLISTED")[];
-            };
-            header?: never;
-            path: {
-                businessId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description List of Forms */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["Form"][];
-                    };
-                };
-            };
-        };
-    };
-    retrieveForm: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                businessId: string;
-                formId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A Form. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["Form"];
-                    };
-                };
-            };
-            /** @description Form not found. */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    listLocations: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A list of locations. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["Location"][];
-                    };
-                };
-            };
-            /** @description Location requires authentication */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Location not found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    createLocation: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["LocationCreateInput"];
-            };
-        };
-        responses: {
-            /** @description The created location. */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["Location"];
-                    };
-                };
-            };
-            /** @description Location requires authentication */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Location not found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    retrieveLocation: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-                /** @description Location ID */
-                locationId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description The requested location. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["Location"];
-                    };
-                };
-            };
-            /** @description Location requires authentication */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Location not found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    updateLocation: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-                /** @description Location ID */
-                locationId: string;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["LocationUpdateInput"];
-            };
-        };
-        responses: {
-            /** @description The updated location. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["Location"];
-                    };
-                };
-            };
-            /** @description Location requires authentication */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Location not found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    deleteLocation: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-                /** @description Location ID */
-                locationId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Confirmation of deletion. */
-            204: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Location requires authentication */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Location not found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    createPatientMagicLink: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-                /** @description Patient ID */
-                patientId: string;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": {
-                    /**
-                     * Format: uri
-                     * @description URL to redirect the patient to after authentication. Must be a valid Upvio domain.
-                     */
-                    redirectUrl: string;
-                };
-            };
-        };
-        responses: {
-            /** @description Magic link created */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["MagicLink"];
-                    };
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Patient not found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    listBookingEventTemplates: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                businessId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description List of Booking Event Templates */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["BookingEventTemplate"][];
-                    };
-                };
-            };
-        };
-    };
-    createBookingEventTemplate: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                businessId: string;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["BookingEventTemplateCreateInput"];
-            };
-        };
-        responses: {
-            /** @description The created Booking Event Template. */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["BookingEventTemplate"];
-                    };
-                };
-            };
-            /** @description Invalid input. */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    retrieveBookingEventTemplate: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                businessId: string;
-                bookingEventTemplateId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A Booking Event Template. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["BookingEventTemplate"];
-                    };
-                };
-            };
-            /** @description Booking Event Template not found. */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    deleteBookingEventTemplate: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                businessId: string;
-                bookingEventTemplateId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Confirmation of deletion. */
-            204: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Booking Event Template not found. */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    updateBookingEventTemplate: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                businessId: string;
-                bookingEventTemplateId: string;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["BookingEventTemplateUpdateInput"];
-            };
-        };
-        responses: {
-            /** @description The updated Booking Event Template. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["BookingEventTemplate"];
-                    };
-                };
-            };
-            /** @description Invalid input. */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Booking Event Template not found. */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    listPostAppointmentMessageTemplates: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                businessId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description List of Post-Appointment Message Templates */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["PostAppointmentMessageTemplate"][];
-                    };
-                };
-            };
-        };
-    };
-    createPostAppointmentMessageTemplate: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                businessId: string;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["PostAppointmentMessageTemplateCreateInput"];
-            };
-        };
-        responses: {
-            /** @description The created Post-Appointment Message Template. */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["PostAppointmentMessageTemplate"];
-                    };
-                };
-            };
-            /** @description Invalid input. */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    retrievePostAppointmentMessageTemplate: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                businessId: string;
-                postAppointmentMessageTemplateId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A Post-Appointment Message Template. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["PostAppointmentMessageTemplate"];
-                    };
-                };
-            };
-            /** @description Post-Appointment Message Template not found. */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    deletePostAppointmentMessageTemplate: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                businessId: string;
-                postAppointmentMessageTemplateId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Confirmation of deletion. */
-            204: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Post-Appointment Message Template not found. */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    updatePostAppointmentMessageTemplate: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                businessId: string;
-                postAppointmentMessageTemplateId: string;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["PostAppointmentMessageTemplateUpdateInput"];
-            };
-        };
-        responses: {
-            /** @description The updated Post-Appointment Message Template. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["PostAppointmentMessageTemplate"];
-                    };
-                };
-            };
-            /** @description Invalid input. */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Post-Appointment Message Template not found. */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    listReminderTemplates: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                businessId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description List of Reminder Templates */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["ReminderTemplate"][];
-                    };
-                };
-            };
-        };
-    };
-    createReminderTemplate: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                businessId: string;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["ReminderTemplateCreateInput"];
-            };
-        };
-        responses: {
-            /** @description The created Reminder Template. */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["ReminderTemplate"];
-                    };
-                };
-            };
-            /** @description Invalid input. */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    retrieveReminderTemplate: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                businessId: string;
-                reminderTemplateId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A Reminder Template. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["ReminderTemplate"];
-                    };
-                };
-            };
-            /** @description Reminder Template not found. */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    deleteReminderTemplate: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                businessId: string;
-                reminderTemplateId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Confirmation of deletion. */
-            204: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Reminder Template not found. */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    updateReminderTemplate: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                businessId: string;
-                reminderTemplateId: string;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["ReminderTemplateUpdateInput"];
-            };
-        };
-        responses: {
-            /** @description The updated Reminder Template. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["ReminderTemplate"];
-                    };
-                };
-            };
-            /** @description Invalid input. */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Reminder Template not found. */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    listOutgoingWebhooks: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description List of Outgoing Webhooks */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["OutgoingWebhook"][];
-                    };
-                };
-            };
-        };
-    };
-    listPatients: {
-        parameters: {
-            query?: {
-                limit?: number;
-                offset?: number;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description List of patients */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["Patient"][];
-                        meta?: {
-                            /** @description Total number of non-archived patients in the business. */
-                            totalCount?: number;
-                        };
-                    };
-                };
-            };
-        };
-    };
-    createPatient: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": {
-                    name: string;
-                    email: string;
-                    phoneMobile?: string;
-                    /** Format: uuid */
-                    primaryStaffId?: string;
-                    /**
-                     * @description When set to "create", returns an error if a patient with the same email exists. When set to "upsert" (default), updates the existing patient.
-                     * @default upsert
-                     * @enum {string}
-                     */
-                    mode?: "create" | "upsert";
-                };
-            };
-        };
-        responses: {
-            /** @description The created Patient */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["Patient"];
-                    };
-                };
-            };
-            /** @description Conflict - A patient with this email already exists (when mode is "create") */
-            409: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    retrievePatient: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A Patient */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["Patient"];
-                    };
-                };
-            };
-        };
-    };
-    updatePatient: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": {
-                    name?: string;
-                    email?: string;
-                    phoneMobile?: string;
-                };
-            };
-        };
-        responses: {
-            /** @description The updated Patient */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Patient"];
-                };
-            };
-        };
-    };
-    archivePatient: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Confirmation that the patient has been archived */
-            204: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    listServiceCategories: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description List of Service Categories */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["ServiceCategory"][];
-                    };
-                };
-            };
-        };
-    };
-    createServiceCategory: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": {
-                    name: string;
-                };
-            };
-        };
-        responses: {
-            /** @description The created Service Category */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["ServiceCategory"];
-                    };
-                };
-            };
-        };
-    };
-    retrieveServiceCategory: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-                /** @description Service Category ID */
-                serviceCategoryId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A Service Category */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["ServiceCategory"];
-                    };
-                };
-            };
-        };
-    };
-    updateServiceCategory: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-                /** @description Service Category ID */
-                serviceCategoryId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": {
-                    name: string;
-                };
-            };
-        };
-        responses: {
-            /** @description The updated Service Category */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["ServiceCategory"];
-                    };
-                };
-            };
-        };
-    };
-    deleteServiceCategory: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-                /** @description Service Category ID */
-                serviceCategoryId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Confirmation that the Service Category has been deleted */
-            204: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    listServices: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description List of Services */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["Service"][];
-                    };
-                };
-            };
-        };
-    };
-    createService: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["Service"];
-            };
-        };
-        responses: {
-            /** @description The created Service */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["Service"];
-                    };
-                };
-            };
-        };
-    };
-    retrieveService: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-                /** @description Service ID */
-                serviceId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Retrieve a Service */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["Service"];
-                    };
-                };
-            };
-        };
-    };
-    updateService: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-                /** @description Service ID */
-                serviceId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["Service"];
-            };
-        };
-        responses: {
-            /** @description The updated Service */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["Service"];
-                    };
-                };
-            };
-        };
-    };
-    deleteService: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-                /** @description Service ID */
-                serviceId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Confirmation that the patient has been deleted */
-            204: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    listStaff: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description List of Staff Members */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["Staff"][];
-                    };
-                };
-            };
-        };
-    };
-    createStaff: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": {
-                    name: string;
-                    email: string;
-                };
-            };
-        };
-        responses: {
-            /** @description The created Staff Member */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["Staff"];
-                    };
-                };
-            };
-        };
-    };
-    retrieveStaff: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-                /** @description Staff ID */
-                staffId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A Staff member within your business */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["Staff"];
-                    };
-                };
-            };
-        };
-    };
-    updateStaff: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-                /** @description Staff ID */
-                staffId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": {
-                    name?: string;
-                    email?: string;
-                    /**
-                     * @description Timezone string.
-                     * @example UTC
-                     */
-                    timezone?: string | null;
-                };
-            };
-        };
-        responses: {
-            /** @description The updated Staff member */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Staff"];
-                };
-            };
-        };
-    };
-    deleteStaff: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-                /** @description Staff ID */
-                staffId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Confirmation that the staff member has been deleted */
-            204: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    getStaffCapacity: {
-        parameters: {
-            query?: {
-                /** @description Start of date range */
-                startDate?: string;
-                /** @description End of date range */
-                endDate?: string;
-            };
-            header?: never;
-            path: {
-                /** @description Business ID */
-                businessId: string;
-                /** @description Staff ID */
-                staffId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A Staff member within your business */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: {
-                            /** @description Total minutes blocked by external events or time blockers. */
-                            blockedTime?: {
-                                externalEvents?: number;
-                                timeBlockers?: number;
-                            };
-                            /** @description Total minutes the staff could potentially be booked (from his working hours). */
-                            bookableMinutes?: number;
-                            /** @description Total minutes the staff was available for booking (bookable minutes minus blocked minutes) */
-                            availableBookableMinutes?: number;
-                            /** @description Total minutes the staff was booked. */
-                            bookedMinutes?: number;
-                        };
-                    };
-                };
-            };
-        };
-    };
-    listTimeBlockers: {
-        parameters: {
-            query?: {
-                /** @description Start of date range filter */
-                startDate?: string;
-                /** @description End of date range filter (requires startDate) */
-                endDate?: string;
-                /** @description ID of the staff to filter time blockers by */
-                staffId?: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description List of time blockers */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["TimeBlocker"][];
-                    };
-                };
-            };
-        };
-    };
-    retrieveTimeBlocker: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A Time Blocker */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["TimeBlocker"];
-                    };
-                };
-            };
-        };
-    };
-    listVitalsLinks: {
-        parameters: {
-            query?: {
-                limit?: number;
-                offset?: number;
-                vitalsTemplateId?: string;
-                status?: "ACTIVE" | "ARCHIVED" | "DISABLED";
-            };
-            header?: never;
-            path: {
-                businessId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description List of Vitals Links */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["VitalsLink"][];
-                        meta?: {
-                            /** @description Total number of links matching the filter criteria. */
-                            totalCount?: number;
-                        };
-                    };
-                };
-            };
-        };
-    };
-    retrieveVitalsLink: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                businessId: string;
-                linkId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A Vitals Link. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["VitalsLink"];
-                    };
-                };
-            };
-            /** @description Vitals Link not found. */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    listVitalsScans: {
-        parameters: {
-            query?: {
-                limit?: number;
-                offset?: number;
-                patientId?: string;
-                vitalsLinkId?: string;
-            };
-            header?: never;
-            path: {
-                businessId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description List of Vitals Scans */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["VitalsScan"][];
-                        meta?: {
-                            /** @description Total number of scans matching the filter criteria. */
-                            totalCount?: number;
-                        };
-                    };
-                };
-            };
-        };
-    };
-    createVitalsScan: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                businessId: string;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": {
-                    /** @description The ID of the Vitals Link to create the scan under. */
-                    vitalsLinkId: string;
-                    /** @description The ID of the Patient this scan is for. */
-                    patientId: string;
-                    inputData?: components["schemas"]["VitalsScanInputData"];
-                };
-            };
-        };
-        responses: {
-            /** @description Vitals Scan created */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["VitalsScan"];
-                    };
-                };
-            };
-            /** @description Bad request (link expired, disabled, max scans reached, or insufficient credits) */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Vitals link or patient not found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    retrieveVitalsScan: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                businessId: string;
-                scanId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A Vitals Scan. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["VitalsScan"];
-                    };
-                };
-            };
-            /** @description Vitals Scan not found. */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    listVitalsTemplates: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                businessId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description List of Vitals Templates */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["VitalsTemplate"][];
-                        meta?: {
-                            /** @description Total number of templates available. */
-                            totalCount?: number;
-                        };
-                    };
-                };
-            };
-        };
-    };
-    retrieveVitalsTemplate: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                businessId: string;
-                templateId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description A Vitals Template. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: components["schemas"]["VitalsTemplate"];
-                    };
-                };
-            };
-            /** @description Vitals Template not found. */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
     listStaffWorkingHoursSchedules: {
         parameters: {
             query?: never;
@@ -5036,6 +3676,93 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: components["schemas"]["WorkingHoursSchedule"][];
+                    };
+                };
+            };
+            /** @description The staff ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The staff member does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Resource not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
                     };
                 };
             };
@@ -5174,6 +3901,93 @@ export interface operations {
                     };
                 };
             };
+            /** @description The staff ID is malformed, or the schedule does not start on a Sunday and end on a Saturday in the staff member's timezone. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Working Hours Schedule must start at the beginning of a week."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The staff member does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Resource not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
         };
     };
     retrieveStaffWorkingHoursSchedule: {
@@ -5198,6 +4012,93 @@ export interface operations {
                     "application/json": components["schemas"]["WorkingHoursSchedule"];
                 };
             };
+            /** @description The staff or working hours schedule ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The staff member or working hours schedule does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Resource not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
         };
     };
     deleteStaffWorkingHoursSchedule: {
@@ -5220,15 +4121,8715 @@ export interface operations {
                 };
                 content?: never;
             };
-            /** @description Working Hours Schedule does not exist. */
+            /** @description The staff or working hours schedule ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The staff member or working hours schedule does not exist. */
             404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Resource not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The working hours schedule could not be deleted. */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 500,
+                     *         "type": "ServerError",
+                     *         "title": "Failed to delete Working Hours Schedule"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "ServerError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    listVitalsTemplates: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of Vitals Templates */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["VitalsTemplate"][];
+                        meta?: {
+                            /** @description Total number of templates available. */
+                            totalCount?: number;
+                        };
+                    };
+                };
+            };
+            /** @description The request is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Business ID does not match API key"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    retrieveVitalsTemplate: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+                templateId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A Vitals Template. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["VitalsTemplate"];
+                    };
+                };
+            };
+            /** @description The request is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Business ID does not match API key"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description Vitals Template not found. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Vitals Template not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    listVitalsScans: {
+        parameters: {
+            query?: {
+                limit?: number;
+                offset?: number;
+                patientId?: string;
+                vitalsLinkId?: string;
+            };
+            header?: never;
+            path: {
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of Vitals Scans */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["VitalsScan"][];
+                        meta?: {
+                            /** @description Total number of scans matching the filter criteria. */
+                            totalCount?: number;
+                        };
+                    };
+                };
+            };
+            /** @description A query parameter failed validation. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "limit cannot exceed 50"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    createVitalsScan: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @description The ID of the Vitals Link to create the scan under. */
+                    vitalsLinkId: string;
+                    /** @description The ID of the Patient this scan is for. */
+                    patientId: string;
+                    inputData?: components["schemas"]["VitalsScanInputData"];
+                    /**
+                     * Format: uri
+                     * @description HTTPS URL to redirect to when the scan completes successfully.
+                     */
+                    successReturnUrl?: string | null;
+                    /**
+                     * Format: uri
+                     * @description HTTPS URL to redirect to when the scan fails.
+                     */
+                    failureReturnUrl?: string | null;
+                    /**
+                     * Format: uri
+                     * @description HTTPS URL to redirect to when the scan is aborted.
+                     */
+                    abortReturnUrl?: string | null;
+                    /** @description When true, the patient app skips the post-scan results screen and redirects immediately to successReturnUrl. Requires successReturnUrl to be set on this scan. */
+                    skipResultsScreen?: boolean;
+                    settings?: components["schemas"]["VitalsScanSettings"];
+                    /** @description Arbitrary string key/value pairs to attach to the scan. Up to 10 keys; each key up to 40 characters and each value up to 500 characters. Keys must start with a letter, end with a letter or number, and contain only letters, numbers, underscores and colons. Keys starting with "upvio" (in any case) are reserved. */
+                    metadata?: {
+                        [key: string]: string;
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Vitals Scan created */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["VitalsScan"];
+                    };
+                };
+            };
+            /** @description The scan could not be created. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "InsufficientCreditsError",
+                     *         "title": "Insufficient credits to create scan"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError" | "InsufficientCreditsError" | "VitalsLinkExpiredError" | "VitalsLinkFieldUnsupportedError" | "VitalsLinkScanLimitError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The vitals link or patient could not be found. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Vitals link not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    retrieveVitalsScan: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+                scanId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A Vitals Scan. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["VitalsScan"];
+                    };
+                };
+            };
+            /** @description The scan ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The vitals scan does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Vitals Scan not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    createVitalsScanEmbedSession: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The ID of the Business. */
+                businessId: string;
+                /** @description The ID of the Vitals Scan. */
+                scanId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The embed session was created. */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["VitalsScanEmbedSession"];
+                    };
+                };
+            };
+            /** @description The business has no embed allowed origins, or the Business ID does not match the API key. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Add an embed allowed origin before embedding scans"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, the Business cannot be accessed with it, the VitalsScanEmbedSession:write:all scope is missing, or the vitals.embed feature is not enabled. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Embedding the Scan Interface is not enabled"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "ActionUnauthorizedError" | "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business or the vitals scan does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Vitals Scan not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The vitals scan has already succeeded, failed or been aborted. */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 409,
+                     *         "type": "ConflictError",
+                     *         "title": "Vitals Scan has already finished"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "ConflictError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    listVitalsLinks: {
+        parameters: {
+            query?: {
+                limit?: number;
+                offset?: number;
+                vitalsTemplateId?: string;
+                status?: "ACTIVE" | "ARCHIVED" | "DISABLED";
+            };
+            header?: never;
+            path: {
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of Vitals Links */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["VitalsLink"][];
+                        meta?: {
+                            /** @description Total number of links matching the filter criteria. */
+                            totalCount?: number;
+                        };
+                    };
+                };
+            };
+            /** @description Invalid query parameters. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "limit must be at least 1"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    retrieveVitalsLink: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+                linkId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A Vitals Link. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["VitalsLink"];
+                    };
+                };
+            };
+            /** @description The Vitals Link ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description Vitals Link not found. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Vitals Link not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    listTimeBlockers: {
+        parameters: {
+            query?: {
+                /** @description Start of date range filter */
+                startDate?: string;
+                /** @description End of date range filter (requires startDate) */
+                endDate?: string;
+                /** @description ID of the staff to filter time blockers by */
+                staffId?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of time blockers */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["TimeBlocker"][];
+                    };
+                };
+            };
+            /** @description The query parameters are invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "startDate must be before endDate"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    retrieveTimeBlocker: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A Time Blocker */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["TimeBlocker"];
+                    };
+                };
+            };
+            /** @description The time blocker ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The time blocker does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Resource not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    listStaff: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of Staff Members */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Staff"][];
+                    };
+                };
+            };
+            /** @description The request is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Business ID does not match API key"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    createStaff: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": {
+                    name: string;
+                    email: string;
+                };
+            };
+        };
+        responses: {
+            /** @description The created Staff Member */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Staff"];
+                    };
+                };
+            };
+            /** @description The staff data is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "The specified email is already in use"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    retrieveStaff: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Staff ID */
+                staffId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A Staff member within your business */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Staff"];
+                    };
+                };
+            };
+            /** @description The staff ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The staff member does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Resource not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    updateStaff: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Staff ID */
+                staffId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": {
+                    name?: string;
+                    email?: string;
+                    /**
+                     * @description Timezone string.
+                     * @example UTC
+                     */
+                    timezone?: string | null;
+                };
+            };
+        };
+        responses: {
+            /** @description The updated Staff member */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Staff"];
+                };
+            };
+            /** @description The staff ID is malformed, the staff data is invalid, or the staff member has been archived. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "StaffArchivedError",
+                     *         "title": "Operation unavailable on archived staff."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError" | "StaffArchivedError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The staff member does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Staff with ID {staffId} not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    deleteStaff: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Staff ID */
+                staffId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Confirmation that the staff member has been deleted */
+            204: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content?: never;
             };
-            /** @description Failed to delete Working Hours Schedule. */
-            500: {
+            /** @description The staff ID is malformed, or the staff member is still assigned to services. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "This staff member is in use by some of your services: Initial Consultation. Please remove this staff from these services and try again."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, the Business cannot be accessed with it, or the staff member is the Business owner. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "This is the business owner and it cannot be archived."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The staff member does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Staff not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    getStaffCapacity: {
+        parameters: {
+            query?: {
+                /** @description Start of date range */
+                startDate?: string;
+                /** @description End of date range */
+                endDate?: string;
+            };
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Staff ID */
+                staffId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A Staff member within your business */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: {
+                            /** @description Total minutes blocked by external events or time blockers. */
+                            blockedTime?: {
+                                externalEvents?: number;
+                                timeBlockers?: number;
+                            };
+                            /** @description Total minutes the staff could potentially be booked (from his working hours). */
+                            bookableMinutes?: number;
+                            /** @description Total minutes the staff was available for booking (bookable minutes minus blocked minutes) */
+                            availableBookableMinutes?: number;
+                            /** @description Total minutes the staff was booked. */
+                            bookedMinutes?: number;
+                        };
+                    };
+                };
+            };
+            /** @description The staff ID is malformed, or the dates are invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid date ranges"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The staff member does not exist. Also returned when the date range is longer than 31 days. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Maximum range is 31 days"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    listServices: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of Services */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Service"][];
+                    };
+                };
+            };
+            /** @description The request is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Business ID does not match API key"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    createService: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["Service"];
+            };
+        };
+        responses: {
+            /** @description The created Service */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Service"];
+                    };
+                };
+            };
+            /** @description The service data is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "InvalidAliasError",
+                     *         "title": "Alias can only contain alphanumerical characters and dashes"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError" | "InvalidAliasError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    retrieveService: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Service ID */
+                serviceId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Retrieve a Service */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Service"];
+                    };
+                };
+            };
+            /** @description The service ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The service does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Resource not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    updateService: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Service ID */
+                serviceId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["Service"];
+            };
+        };
+        responses: {
+            /** @description The updated Service */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Service"];
+                    };
+                };
+            };
+            /** @description The service ID is malformed, or the service data is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "The minimum time increment is 10 minutes."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError" | "InvalidAliasError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The service does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Service not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    deleteService: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Service ID */
+                serviceId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Confirmation that the patient has been deleted */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description The service ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The service does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Service with ID {serviceId} not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    listServiceCategories: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of Service Categories */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["ServiceCategory"][];
+                    };
+                };
+            };
+            /** @description The request is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Business ID does not match API key"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    createServiceCategory: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": {
+                    name: string;
+                };
+            };
+        };
+        responses: {
+            /** @description The created Service Category */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["ServiceCategory"];
+                    };
+                };
+            };
+            /** @description The name is missing. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Missing required field name"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    retrieveServiceCategory: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Service Category ID */
+                serviceCategoryId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A Service Category */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["ServiceCategory"];
+                    };
+                };
+            };
+            /** @description The service category ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The service category does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Service Category not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    updateServiceCategory: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Service Category ID */
+                serviceCategoryId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": {
+                    name: string;
+                };
+            };
+        };
+        responses: {
+            /** @description The updated Service Category */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["ServiceCategory"];
+                    };
+                };
+            };
+            /** @description The service category ID is malformed, or the name is missing. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Missing required field name"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The service category does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Service Category not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    deleteServiceCategory: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Service Category ID */
+                serviceCategoryId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Confirmation that the Service Category has been deleted */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description The service category ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The service category does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Service Category not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    listPatients: {
+        parameters: {
+            query?: {
+                limit?: number;
+                offset?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of patients */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Patient"][];
+                        meta?: {
+                            /** @description Total number of non-archived patients in the business. */
+                            totalCount?: number;
+                        };
+                    };
+                };
+            };
+            /** @description The query parameters are invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "limit cannot exceed 100"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    createPatient: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": {
+                    name: string;
+                    email: string;
+                    phoneMobile?: string;
+                    /** Format: uuid */
+                    primaryStaffId?: string;
+                    /**
+                     * @description The preferred language of the patient
+                     * @enum {string}
+                     */
+                    preferredLanguage?: "en" | "es";
+                    /**
+                     * @description Custom field values keyed by the custom field `alias`. See `listCustomFields` for the available fields and their types.
+                     *     Only the fields provided are changed. Set a field to `null` to remove its value. Empty TEXT values are rejected.
+                     *     An unknown alias or invalid value rejects the whole request and nothing is saved.
+                     *     Custom fields cannot be set when the email matches an archived patient.
+                     */
+                    customFields?: {
+                        [key: string]: string | number | boolean | null;
+                    };
+                    /**
+                     * @description When set to "create", returns an error if a patient with the same email exists. When set to "upsert" (default), updates the existing patient.
+                     * @default upsert
+                     * @enum {string}
+                     */
+                    mode?: "create" | "upsert";
+                };
+            };
+        };
+        responses: {
+            /** @description The created Patient */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Patient"];
+                    };
+                };
+            };
+            /** @description The patient could not be created. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Unknown custom field \"foo\". Must be one of [memberId, plan]"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError" | "DataValidationError" | "PatientArchivedError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description A patient with this email already exists (when mode is "create"). */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 409,
+                     *         "type": "PatientEmailExistsError",
+                     *         "title": "A patient with this email already exists"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "PatientEmailExistsError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    retrievePatient: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A Patient */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Patient"];
+                    };
+                };
+            };
+            /** @description The patient ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The patient could not be found. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Resource not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    updatePatient: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": {
+                    name?: string;
+                    email?: string;
+                    phoneMobile?: string;
+                    /**
+                     * @description The preferred language of the patient
+                     * @enum {string}
+                     */
+                    preferredLanguage?: "en" | "es";
+                    /**
+                     * @description Custom field values keyed by the custom field `alias`. See `listCustomFields` for the available fields and their types.
+                     *     Only the fields provided are changed. Set a field to `null` to remove its value. Empty TEXT values are rejected.
+                     *     An unknown alias or invalid value rejects the whole request and nothing is saved.
+                     */
+                    customFields?: {
+                        [key: string]: string | number | boolean | null;
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description The updated Patient */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Patient"];
+                };
+            };
+            /** @description The patient could not be updated. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "PatientArchivedError",
+                     *         "title": "Operation unavailable on archived patients."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError" | "DataValidationError" | "PatientArchivedError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The patient could not be found. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Patient with ID {patientId} not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    archivePatient: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Confirmation that the patient has been archived */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description The patient ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The patient could not be found or has already been archived. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "PatientArchivedError",
+                     *         "title": "Patient has already been archived."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "PatientArchivedError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    listOutgoingWebhooks: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of Outgoing Webhooks */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["OutgoingWebhook"][];
+                    };
+                };
+            };
+            /** @description The request is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Business ID does not match API key"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    listReminderTemplates: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of Reminder Templates */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["ReminderTemplate"][];
+                    };
+                };
+            };
+            /** @description The request is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Business ID does not match API key"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    createReminderTemplate: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ReminderTemplateCreateInput"];
+            };
+        };
+        responses: {
+            /** @description The created Reminder Template. */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["ReminderTemplate"];
+                    };
+                };
+            };
+            /** @description The template data is invalid. The title lists each validation issue, prefixed with the field it applies to. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "minutes: Too small: expected number to be >=1"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    retrieveReminderTemplate: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+                reminderTemplateId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A Reminder Template. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["ReminderTemplate"];
+                    };
+                };
+            };
+            /** @description The reminder template ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The reminder template does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Reminder Template not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    deleteReminderTemplate: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+                reminderTemplateId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Confirmation of deletion. */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description The reminder template ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The reminder template does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Reminder Template not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    updateReminderTemplate: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+                reminderTemplateId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ReminderTemplateUpdateInput"];
+            };
+        };
+        responses: {
+            /** @description The updated Reminder Template. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["ReminderTemplate"];
+                    };
+                };
+            };
+            /** @description The reminder template ID is malformed, or the template data is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "At least one of enabled or messageTemplate is required."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The reminder template does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Reminder Template not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    listPostAppointmentMessageTemplates: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of Post-Appointment Message Templates */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["PostAppointmentMessageTemplate"][];
+                    };
+                };
+            };
+            /** @description The request is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Business ID does not match API key"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    createPostAppointmentMessageTemplate: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PostAppointmentMessageTemplateCreateInput"];
+            };
+        };
+        responses: {
+            /** @description The created Post-Appointment Message Template. */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["PostAppointmentMessageTemplate"];
+                    };
+                };
+            };
+            /** @description The template data is invalid. The title lists each validation issue, prefixed with the field it applies to. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "minutes: Too small: expected number to be >=10"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    retrievePostAppointmentMessageTemplate: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+                postAppointmentMessageTemplateId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A Post-Appointment Message Template. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["PostAppointmentMessageTemplate"];
+                    };
+                };
+            };
+            /** @description The post-appointment message template ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The post-appointment message template does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Post-Appointment Message Template not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    deletePostAppointmentMessageTemplate: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+                postAppointmentMessageTemplateId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Confirmation of deletion. */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description The post-appointment message template ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The post-appointment message template does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Post-Appointment Message Template not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    updatePostAppointmentMessageTemplate: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+                postAppointmentMessageTemplateId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PostAppointmentMessageTemplateUpdateInput"];
+            };
+        };
+        responses: {
+            /** @description The updated Post-Appointment Message Template. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["PostAppointmentMessageTemplate"];
+                    };
+                };
+            };
+            /** @description The post-appointment message template ID is malformed, or the template data is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "At least one of enabled or messageTemplate is required."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The post-appointment message template does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Post-Appointment Message Template not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    listBookingEventTemplates: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of Booking Event Templates */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["BookingEventTemplate"][];
+                    };
+                };
+            };
+            /** @description The request is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Business ID does not match API key"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    createBookingEventTemplate: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["BookingEventTemplateCreateInput"];
+            };
+        };
+        responses: {
+            /** @description The created Booking Event Template. */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["BookingEventTemplate"];
+                    };
+                };
+            };
+            /** @description The template data is invalid. The title lists each validation issue, prefixed with the field it applies to. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "event: Invalid option: expected one of \"APPOINTMENT_CREATED\"|\"APPOINTMENT_DELETED\"|\"APPOINTMENT_UPDATED\"|\"RECURRING_APPOINTMENT_CREATED\"|\"RECURRING_APPOINTMENT_DELETED\"|\"RECURRING_APPOINTMENT_UPDATED\""
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    retrieveBookingEventTemplate: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+                bookingEventTemplateId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A Booking Event Template. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["BookingEventTemplate"];
+                    };
+                };
+            };
+            /** @description The booking event template ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The booking event template does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Booking Event Template not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    deleteBookingEventTemplate: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+                bookingEventTemplateId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Confirmation of deletion. */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description The booking event template ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The booking event template does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Booking Event Template not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    updateBookingEventTemplate: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+                bookingEventTemplateId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["BookingEventTemplateUpdateInput"];
+            };
+        };
+        responses: {
+            /** @description The updated Booking Event Template. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["BookingEventTemplate"];
+                    };
+                };
+            };
+            /** @description The booking event template ID is malformed, or the template data is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "At least one of enabled or messageTemplate is required."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The booking event template does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Booking Event Template not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    createPatientMagicLink: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Patient ID */
+                patientId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /**
+                     * Format: uri
+                     * @description URL to redirect the patient to after authentication. Must be a valid Upvio domain.
+                     */
+                    redirectUrl: string;
+                    /**
+                     * @description When true (default), the patient portal submits the one-time code automatically. When false, the patient must confirm before the code is submitted.
+                     * @default true
+                     */
+                    autoSubmit?: boolean;
+                };
+            };
+        };
+        responses: {
+            /** @description Magic link created */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["MagicLink"];
+                    };
+                };
+            };
+            /** @description The request is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Missing redirectUrl"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The patient could not be found. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Patient not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    listLocations: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A list of locations. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Location"][];
+                    };
+                };
+            };
+            /** @description The request is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Business ID does not match API key"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    createLocation: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["LocationCreateInput"];
+            };
+        };
+        responses: {
+            /** @description The created location. */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Location"];
+                    };
+                };
+            };
+            /** @description The location data is invalid. The title lists the validation issues as a JSON array. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "[\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"name\"\n    ],\n    \"message\": \"Invalid input: expected string, received undefined\"\n  }\n]"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    retrieveLocation: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Location ID */
+                locationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The requested location. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Location"];
+                    };
+                };
+            };
+            /** @description The location ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The location does not exist or has been deleted. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Location not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    updateLocation: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Location ID */
+                locationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["LocationUpdateInput"];
+            };
+        };
+        responses: {
+            /** @description The updated location. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Location"];
+                    };
+                };
+            };
+            /** @description The location ID is malformed, no fields were provided, or the location data is invalid. Validation issues are listed in the title as a JSON array. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "No fields to update provided."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The location does not exist or has been deleted. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Could not find Location with ID {locationId} for Business with ID {businessId}"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    deleteLocation: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Location ID */
+                locationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Confirmation of deletion. */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description The location ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The location does not exist or has already been deleted. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Could not find Location with ID {locationId} for Business with ID {businessId}"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    listForms: {
+        parameters: {
+            query?: {
+                visibility?: ("LISTED" | "UNLISTED")[];
+            };
+            header?: never;
+            path: {
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of Forms */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Form"][];
+                    };
+                };
+            };
+            /** @description The request is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Business ID does not match API key"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    retrieveForm: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+                formId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A Form. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Form"];
+                    };
+                };
+            };
+            /** @description The form ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The form does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Form not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    listFormSubmissions: {
+        parameters: {
+            query?: {
+                limit?: number;
+                offset?: number;
+                filters?: {
+                    /** @description Filter by Form ID. */
+                    formId?: string;
+                    /** @description Filter by Patient ID. */
+                    patientId?: string;
+                };
+            };
+            header?: never;
+            path: {
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of Form Submissions */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["FormSubmission"][];
+                    };
+                };
+            };
+            /** @description The query parameters are invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Limit cannot be greater than 50"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    retrieveFormSubmission: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessId: string;
+                formSubmissionId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A Form Submission. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["FormSubmission"];
+                    };
+                };
+            };
+            /** @description The form submission ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The form submission does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Form Submission not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    listCustomFields: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of Custom Fields */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["CustomField"][];
+                    };
+                };
+            };
+            /** @description The request is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Business ID does not match API key"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    listBusinesses: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of Businesses */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Business"][];
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid. */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 401,
+                     *         "type": "UnauthenticatedError",
+                     *         "title": "You are not authenticated"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthenticatedError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    retrieveBusiness: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Business */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Business"];
+                    };
+                };
+            };
+            /** @description The request is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Business ID does not match API key"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    updateBusiness: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        /** @description Attributes used to update a Business. */
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["BusinessUpdateInput"];
+            };
+        };
+        responses: {
+            /** @description Updated Business */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Business"];
+                    };
+                };
+            };
+            /** @description No data was provided, or the data is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "No data provided"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    listServiceAvailableTimes: {
+        parameters: {
+            query: {
+                /** @description The start date of the range to retrieve available times for (ISO 8601 format). */
+                startDate: string;
+                /** @description The end date of the range to retrieve available times for (ISO 8601 format). */
+                endDate: string;
+                /** @description The duration of the service in minutes. */
+                duration: number;
+                /** @description The staff members to filter the available times by. */
+                staffIds?: string[];
+                /** @description If true, unavailable slots will be included in the response. */
+                includeUnavailableSlots?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The available times for this service */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["AvailableTimes"];
+                    };
+                };
+            };
+            /** @description A required query parameter is missing, or the service ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "startDate parameter is required"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    listAppointments: {
+        parameters: {
+            query: {
+                /** @description Start of date range */
+                startDate: string;
+                /** @description End of date range */
+                endDate: string;
+                /** @description ID of the patient to filter appointments by */
+                patientId?: string;
+            };
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A list of Appointments */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Appointment"][];
+                    };
+                };
+            };
+            /** @description The query parameters are invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "startDate must be before endDate"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    createAppointment: {
+        parameters: {
+            query?: {
+                /** @description If true, the appointment will be created even if the staff is busy */
+                ignoreBusyTimes?: boolean;
+            };
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+            };
+            cookie?: never;
+        };
+        /** @description Appointment data */
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AppointmentCreateInput"];
+            };
+        };
+        responses: {
+            /** @description Created appointment */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Appointment"];
+                    };
+                };
+            };
+            /** @description The appointment data is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "InvalidServiceDurationError",
+                     *         "title": "The specified duration does not exist on the service."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError" | "InvalidAppointmentDateError" | "InvalidServiceDurationError" | "MissingServiceIdError" | "PatientNameRequiredError" | "MissingEmailError" | "InvalidEmailError" | "DataValidationError" | "PatientArchivedError" | "StaffArchivedError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The service or staff member does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Invalid Staff ID"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description No staff member is free at the requested time. Passing `ignoreBusyTimes=true` with a `staffId` skips the check that returns `StaffUnavailableError`; the other availability errors still apply. */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 409,
+                     *         "type": "StaffUnavailableError",
+                     *         "title": "The staff member is not available on the selected date and time."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "StaffUnavailableError" | "NoStaffAvailableError" | "AdditionalStaffUnavailableError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    retrieveAppointment: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Appointment ID */
+                appointmentId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description An Appointment */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Appointment"];
+                    };
+                };
+            };
+            /** @description The appointment ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The appointment does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Resource not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    deleteAppointment: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Appointment ID */
+                appointmentId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Confirmation that the appointment has been deleted */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description The appointment ID or occurrence date is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError" | "InvalidAppointmentDateError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The appointment does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Appointment with ID {appointmentId} not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    updateAppointment: {
+        parameters: {
+            query?: {
+                /** @description If true, the appointment will be updated even if the staff is busy at the new time */
+                ignoreBusyTimes?: boolean;
+            };
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Appointment ID */
+                appointmentId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Updated Appointment */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Appointment"];
+                    };
+                };
+            };
+            /** @description The appointment data is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "AppointmentNotRecurrentError",
+                     *         "title": "The appointment is not a recurrent appointment."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError" | "InvalidAppointmentDateError" | "InvalidServiceDurationError" | "AppointmentNotRecurrentError" | "PatientArchivedError" | "StaffArchivedError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The appointment or service does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Appointment with ID {appointmentId} not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description No staff member is free at the new time when changing one occurrence (`singleOccurrence`) or all future occurrences (`futureOccurrences`) of the appointment. */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 409,
+                     *         "type": "StaffUnavailableError",
+                     *         "title": "The staff member is not available on the selected date and time."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "StaffUnavailableError" | "AdditionalStaffUnavailableError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    updateAppointmentTags: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Appointment ID */
+                appointmentId: string;
+            };
+            cookie?: never;
+        };
+        /** @description Tags to associate with the appointment */
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @description List of tags to associate with the appointment */
+                    tags: string[];
+                };
+            };
+        };
+        responses: {
+            /** @description Updated appointment with tags */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Appointment"];
+                    };
+                };
+            };
+            /** @description The appointment ID is malformed, the tags are not an array, or none of the tags exist. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "InvalidTagsError",
+                     *         "title": "None of the provided tags are valid."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError" | "InvalidTagsError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The appointment does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Appointment not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    createAppointmentZoomMeeting: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Business ID */
+                businessId: string;
+                /** @description Appointment ID */
+                appointmentId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Appointment with Zoom meeting attached */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: components["schemas"]["Appointment"];
+                    };
+                };
+            };
+            /** @description A Zoom meeting cannot be attached to the appointment. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "ZoomConnectionNotFoundError",
+                     *         "title": "No Zoom connection found for this appointment. Connect Zoom at the business or staff level first."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError" | "AppointmentNotZoomMeetingError" | "AppointmentZoomMeetingExistsError" | "ZoomConnectionNotFoundError" | "ZoomMeetingCreationFailedError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The appointment does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Appointment with ID {appointmentId} not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    appointmentOncreateWebhook: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /**
+                     * @description Unique identifier for this event delivery.
+                     * @example ckq7v1w1k0000zqxk8v6q1m2n
+                     */
+                    id: string;
+                    /**
+                     * @description The name of the event, in `resource.action` format.
+                     * @constant
+                     */
+                    name: "appointment.create";
+                    /**
+                     * Format: date-time
+                     * @description When the event was recorded by Upvio.
+                     * @example 2026-01-31T09:30:00.000Z
+                     */
+                    createdAt: string;
+                    /** @description The business the event belongs to. */
+                    business: {
+                        /**
+                         * @description Unique identifier across the Upvio platform.
+                         * @example ckq7v1w1k0000zqxk8v6q1m2n
+                         */
+                        id: string;
+                    };
+                    data: components["schemas"]["AppointmentWebhookPayload"];
+                };
+            };
+        };
+        responses: {
+            /** @description Return any 2xx status code to acknowledge the delivery. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    appointmentOnupdateWebhook: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /**
+                     * @description Unique identifier for this event delivery.
+                     * @example ckq7v1w1k0000zqxk8v6q1m2n
+                     */
+                    id: string;
+                    /**
+                     * @description The name of the event, in `resource.action` format.
+                     * @constant
+                     */
+                    name: "appointment.update";
+                    /**
+                     * Format: date-time
+                     * @description When the event was recorded by Upvio.
+                     * @example 2026-01-31T09:30:00.000Z
+                     */
+                    createdAt: string;
+                    /** @description The business the event belongs to. */
+                    business: {
+                        /**
+                         * @description Unique identifier across the Upvio platform.
+                         * @example ckq7v1w1k0000zqxk8v6q1m2n
+                         */
+                        id: string;
+                    };
+                    data: components["schemas"]["AppointmentWebhookPayload"];
+                };
+            };
+        };
+        responses: {
+            /** @description Return any 2xx status code to acknowledge the delivery. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    appointmentOndeleteWebhook: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /**
+                     * @description Unique identifier for this event delivery.
+                     * @example ckq7v1w1k0000zqxk8v6q1m2n
+                     */
+                    id: string;
+                    /**
+                     * @description The name of the event, in `resource.action` format.
+                     * @constant
+                     */
+                    name: "appointment.delete";
+                    /**
+                     * Format: date-time
+                     * @description When the event was recorded by Upvio.
+                     * @example 2026-01-31T09:30:00.000Z
+                     */
+                    createdAt: string;
+                    /** @description The business the event belongs to. */
+                    business: {
+                        /**
+                         * @description Unique identifier across the Upvio platform.
+                         * @example ckq7v1w1k0000zqxk8v6q1m2n
+                         */
+                        id: string;
+                    };
+                    data: components["schemas"]["AppointmentWebhookPayload"];
+                };
+            };
+        };
+        responses: {
+            /** @description Return any 2xx status code to acknowledge the delivery. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    appointmentOnrequestWebhook: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /**
+                     * @description Unique identifier for this event delivery.
+                     * @example ckq7v1w1k0000zqxk8v6q1m2n
+                     */
+                    id: string;
+                    /**
+                     * @description The name of the event, in `resource.action` format.
+                     * @constant
+                     */
+                    name: "appointment.request";
+                    /**
+                     * Format: date-time
+                     * @description When the event was recorded by Upvio.
+                     * @example 2026-01-31T09:30:00.000Z
+                     */
+                    createdAt: string;
+                    /** @description The business the event belongs to. */
+                    business: {
+                        /**
+                         * @description Unique identifier across the Upvio platform.
+                         * @example ckq7v1w1k0000zqxk8v6q1m2n
+                         */
+                        id: string;
+                    };
+                    data: components["schemas"]["AppointmentWebhookPayload"];
+                };
+            };
+        };
+        responses: {
+            /** @description Return any 2xx status code to acknowledge the delivery. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    patientOncreateWebhook: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /**
+                     * @description Unique identifier for this event delivery.
+                     * @example ckq7v1w1k0000zqxk8v6q1m2n
+                     */
+                    id: string;
+                    /**
+                     * @description The name of the event, in `resource.action` format.
+                     * @constant
+                     */
+                    name: "patient.create";
+                    /**
+                     * Format: date-time
+                     * @description When the event was recorded by Upvio.
+                     * @example 2026-01-31T09:30:00.000Z
+                     */
+                    createdAt: string;
+                    /** @description The business the event belongs to. */
+                    business: {
+                        /**
+                         * @description Unique identifier across the Upvio platform.
+                         * @example ckq7v1w1k0000zqxk8v6q1m2n
+                         */
+                        id: string;
+                    };
+                    data: components["schemas"]["PatientWebhookPayload"];
+                };
+            };
+        };
+        responses: {
+            /** @description Return any 2xx status code to acknowledge the delivery. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    patientOnupdateWebhook: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /**
+                     * @description Unique identifier for this event delivery.
+                     * @example ckq7v1w1k0000zqxk8v6q1m2n
+                     */
+                    id: string;
+                    /**
+                     * @description The name of the event, in `resource.action` format.
+                     * @constant
+                     */
+                    name: "patient.update";
+                    /**
+                     * Format: date-time
+                     * @description When the event was recorded by Upvio.
+                     * @example 2026-01-31T09:30:00.000Z
+                     */
+                    createdAt: string;
+                    /** @description The business the event belongs to. */
+                    business: {
+                        /**
+                         * @description Unique identifier across the Upvio platform.
+                         * @example ckq7v1w1k0000zqxk8v6q1m2n
+                         */
+                        id: string;
+                    };
+                    data: components["schemas"]["PatientWebhookPayload"];
+                };
+            };
+        };
+        responses: {
+            /** @description Return any 2xx status code to acknowledge the delivery. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    patientOnarchiveWebhook: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /**
+                     * @description Unique identifier for this event delivery.
+                     * @example ckq7v1w1k0000zqxk8v6q1m2n
+                     */
+                    id: string;
+                    /**
+                     * @description The name of the event, in `resource.action` format.
+                     * @constant
+                     */
+                    name: "patient.archive";
+                    /**
+                     * Format: date-time
+                     * @description When the event was recorded by Upvio.
+                     * @example 2026-01-31T09:30:00.000Z
+                     */
+                    createdAt: string;
+                    /** @description The business the event belongs to. */
+                    business: {
+                        /**
+                         * @description Unique identifier across the Upvio platform.
+                         * @example ckq7v1w1k0000zqxk8v6q1m2n
+                         */
+                        id: string;
+                    };
+                    data: components["schemas"]["PatientArchivalWebhookPayload"];
+                };
+            };
+        };
+        responses: {
+            /** @description Return any 2xx status code to acknowledge the delivery. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    patientOnrestoreWebhook: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /**
+                     * @description Unique identifier for this event delivery.
+                     * @example ckq7v1w1k0000zqxk8v6q1m2n
+                     */
+                    id: string;
+                    /**
+                     * @description The name of the event, in `resource.action` format.
+                     * @constant
+                     */
+                    name: "patient.restore";
+                    /**
+                     * Format: date-time
+                     * @description When the event was recorded by Upvio.
+                     * @example 2026-01-31T09:30:00.000Z
+                     */
+                    createdAt: string;
+                    /** @description The business the event belongs to. */
+                    business: {
+                        /**
+                         * @description Unique identifier across the Upvio platform.
+                         * @example ckq7v1w1k0000zqxk8v6q1m2n
+                         */
+                        id: string;
+                    };
+                    data: components["schemas"]["PatientArchivalWebhookPayload"];
+                };
+            };
+        };
+        responses: {
+            /** @description Return any 2xx status code to acknowledge the delivery. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    vitalsScanOncreateWebhook: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /**
+                     * @description Unique identifier for this event delivery.
+                     * @example ckq7v1w1k0000zqxk8v6q1m2n
+                     */
+                    id: string;
+                    /**
+                     * @description The name of the event, in `resource.action` format.
+                     * @constant
+                     */
+                    name: "vitalsScan.create";
+                    /**
+                     * Format: date-time
+                     * @description When the event was recorded by Upvio.
+                     * @example 2026-01-31T09:30:00.000Z
+                     */
+                    createdAt: string;
+                    /** @description The business the event belongs to. */
+                    business: {
+                        /**
+                         * @description Unique identifier across the Upvio platform.
+                         * @example ckq7v1w1k0000zqxk8v6q1m2n
+                         */
+                        id: string;
+                    };
+                    data: components["schemas"]["VitalsScanWebhookPayload"];
+                };
+            };
+        };
+        responses: {
+            /** @description Return any 2xx status code to acknowledge the delivery. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    vitalsScanOncompleteWebhook: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /**
+                     * @description Unique identifier for this event delivery.
+                     * @example ckq7v1w1k0000zqxk8v6q1m2n
+                     */
+                    id: string;
+                    /**
+                     * @description The name of the event, in `resource.action` format.
+                     * @constant
+                     */
+                    name: "vitalsScan.complete";
+                    /**
+                     * Format: date-time
+                     * @description When the event was recorded by Upvio.
+                     * @example 2026-01-31T09:30:00.000Z
+                     */
+                    createdAt: string;
+                    /** @description The business the event belongs to. */
+                    business: {
+                        /**
+                         * @description Unique identifier across the Upvio platform.
+                         * @example ckq7v1w1k0000zqxk8v6q1m2n
+                         */
+                        id: string;
+                    };
+                    data: components["schemas"]["VitalsScanWebhookPayload"];
+                };
+            };
+        };
+        responses: {
+            /** @description Return any 2xx status code to acknowledge the delivery. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    vitalsScanOnfailWebhook: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /**
+                     * @description Unique identifier for this event delivery.
+                     * @example ckq7v1w1k0000zqxk8v6q1m2n
+                     */
+                    id: string;
+                    /**
+                     * @description The name of the event, in `resource.action` format.
+                     * @constant
+                     */
+                    name: "vitalsScan.fail";
+                    /**
+                     * Format: date-time
+                     * @description When the event was recorded by Upvio.
+                     * @example 2026-01-31T09:30:00.000Z
+                     */
+                    createdAt: string;
+                    /** @description The business the event belongs to. */
+                    business: {
+                        /**
+                         * @description Unique identifier across the Upvio platform.
+                         * @example ckq7v1w1k0000zqxk8v6q1m2n
+                         */
+                        id: string;
+                    };
+                    data: components["schemas"]["VitalsScanWebhookPayload"];
+                };
+            };
+        };
+        responses: {
+            /** @description Return any 2xx status code to acknowledge the delivery. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    vitalsScanOnabortWebhook: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /**
+                     * @description Unique identifier for this event delivery.
+                     * @example ckq7v1w1k0000zqxk8v6q1m2n
+                     */
+                    id: string;
+                    /**
+                     * @description The name of the event, in `resource.action` format.
+                     * @constant
+                     */
+                    name: "vitalsScan.abort";
+                    /**
+                     * Format: date-time
+                     * @description When the event was recorded by Upvio.
+                     * @example 2026-01-31T09:30:00.000Z
+                     */
+                    createdAt: string;
+                    /** @description The business the event belongs to. */
+                    business: {
+                        /**
+                         * @description Unique identifier across the Upvio platform.
+                         * @example ckq7v1w1k0000zqxk8v6q1m2n
+                         */
+                        id: string;
+                    };
+                    data: components["schemas"]["VitalsScanWebhookPayload"];
+                };
+            };
+        };
+        responses: {
+            /** @description Return any 2xx status code to acknowledge the delivery. */
+            200: {
                 headers: {
                     [name: string]: unknown;
                 };
