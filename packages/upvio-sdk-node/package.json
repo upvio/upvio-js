@@ -6,7 +6,8 @@
   "files": [
     "dist",
     "LICENSE",
-    "README.md"
+    "README.md",
+    "CHANGELOG.md"
   ],
   "exports": {
     ".": {
@@ -19,10 +20,9 @@
     "check-types": "tsc --noEmit",
     "test": "vitest run"
   },
-  "dependencies": {
-    "@upvio/api-types": "workspace:*"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "@upvio/api-types": "0.1.2",
     "tsup": "^8.5.1"
   }
 }

@@ -11,9 +11,10 @@ pnpm add @upvio/vitals-embed
 ## How it works
 
 1. **Backend:** create a scan and an embed session with
-   [`@upvio/sdk-node`](../upvio-sdk-node). Send the session `url` to the
-   browser. Never expose your API key to the browser. The URL is valid for
-   one hour, so create a new session each time you render the page.
+   [`@upvio/sdk-node`](https://www.npmjs.com/package/@upvio/sdk-node). Send
+   the session `url` to the browser. Never expose your API key to the browser.
+   The URL is valid for one hour, so create a new session each time you render
+   the page.
 
    ```typescript
    const { data: scan } = await client.v1.vitals.scans.create({

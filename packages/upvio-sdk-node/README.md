@@ -27,8 +27,8 @@ for (const patient of patients) {
 ### Embedding the scan interface
 
 Create an embed session for a pending or started scan on your backend and
-pass its `url` to the browser, where [`@upvio/vitals-embed`](../vitals-embed)
-renders it. The URL is valid for one hour.
+load its `url` in an iframe on one of your allowed origins. The URL is valid
+for one hour.
 
 ```typescript
 const { data, error } = await client.v1.vitals.scans.createEmbedSession(scanId)
