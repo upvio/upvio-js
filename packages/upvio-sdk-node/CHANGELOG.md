@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.2 - 2026-10-15
+
+### Fixed
+
+- `@upvio/api-types` is now a dependency instead of a dev dependency. The
+  published type declarations import it, so in 0.1.1 and earlier, fields
+  that reference shared API schemas, such as a scan's `results` and
+  `failureInfo`, were typed as `any` unless the app installed
+  `@upvio/api-types` itself.
+
 ## 0.1.1 - 2026-10-15
 
 ### Added
