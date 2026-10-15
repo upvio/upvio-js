@@ -1,6 +1,6 @@
 {
   "name": "@upvio/sdk-node",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT",
   "type": "module",
   "files": [
@@ -20,9 +20,10 @@
     "check-types": "tsc --noEmit",
     "test": "vitest run"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@upvio/api-types": "0.1.2"
+  },
   "devDependencies": {
-    "@upvio/api-types": "0.1.2",
     "tsup": "^8.5.1"
   }
 }
