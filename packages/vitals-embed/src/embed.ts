@@ -31,7 +31,7 @@ export type EmbeddedScan = {
 const IFRAME_ALLOW = 'camera; microphone; cross-origin-isolated'
 const LOCAL_HOSTNAMES = new Set(['localhost', '127.0.0.1'])
 
-const parseScanUrl = (options: EmbedOptions): URL => {
+export const parseScanUrl = (options: EmbedOptions): URL => {
   let url: URL
   try {
     url = new URL(options.url)
@@ -104,7 +104,16 @@ const statusCallback = (
   }
 }
 
-const handleMessage = (
+export const isFromScan = (
+  event: { source: unknown; origin: string },
+  scanWindow: unknown,
+  scanOrigin: string,
+): boolean => {
+  if (!event.source) return false
+  return event.source === scanWindow && event.origin === scanOrigin
+}
+
+export const handleMessage = (
   message: ScanMessage,
   options: EmbedOptions,
   reply: (message: CancelConfirmMessage) => void,
@@ -139,8 +148,7 @@ export const embed = (options: EmbedOptions): EmbeddedScan => {
     iframe.contentWindow?.postMessage(message, url.origin)
 
   const onMessage = (event: MessageEvent) => {
-    if (!event.source || event.source !== iframe.contentWindow) return
-    if (event.origin !== url.origin) return
+    if (!isFromScan(event, iframe.contentWindow, url.origin)) return
     if (!isScanMessage(event.data)) return
     handleMessage(event.data, options, reply)
   }

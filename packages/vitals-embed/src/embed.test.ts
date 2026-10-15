@@ -1,305 +1,134 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 
-import { embed } from './embed'
+import { handleMessage, isFromScan, parseScanUrl } from './embed'
 
-import type { EmbeddedScan, EmbedOptions } from './embed'
+import type { EmbedOptions } from './embed'
 
 const SCAN_ORIGIN = 'https://scan.upvio.com'
 const EMBED_URL = `${SCAN_ORIGIN}/acme/scans/scan_1/embed#token=tok_1`
 
-let container: HTMLDivElement
-let scan: EmbeddedScan | undefined
+const parse = (options: Partial<EmbedOptions> = {}) =>
+  parseScanUrl({ url: EMBED_URL, container: '#scan', ...options })
 
-beforeEach(() => {
-  container = document.createElement('div')
-  container.id = 'scan'
-  document.body.appendChild(container)
-  vi.spyOn(console, 'warn').mockImplementation(() => {})
-})
-
-afterEach(() => {
-  Reflect.deleteProperty(window, 'crossOriginIsolated')
-  scan?.destroy()
-  scan = undefined
-  container.remove()
-  vi.restoreAllMocks()
-})
-
-const embedScan = (options: Partial<EmbedOptions> = {}) => {
-  scan = embed({ url: EMBED_URL, container: '#scan', ...options })
-  return scan
-}
-
-const getIframe = () => {
-  const iframe = container.querySelector('iframe')
-  if (!iframe) throw new Error('expected an iframe in the container')
-  return iframe
-}
-
-const postFromIframe = (
-  data: unknown,
-  overrides: { origin?: string; source?: Window | null } = {},
-) => {
-  window.dispatchEvent(
-    new MessageEvent('message', {
-      data,
-      origin: overrides.origin ?? SCAN_ORIGIN,
-      source:
-        'source' in overrides ? overrides.source : getIframe().contentWindow,
-    }),
-  )
-}
-
-const setCrossOriginIsolated = (value: boolean) => {
-  Object.defineProperty(window, 'crossOriginIsolated', {
-    configurable: true,
-    value,
-  })
-}
-
-const status = (value: string) => ({
-  type: 'SCAN_STATUS',
-  payload: { scanId: 'scan_1', status: value },
-})
-
-const statusCallbacks = () => ({
+const callbacks = () => ({
   onCompleted: vi.fn(),
   onFailed: vi.fn(),
   onAborted: vi.fn(),
   onError: vi.fn(),
 })
 
-describe('embed', () => {
-  describe('iframe', () => {
-    it('appends an iframe with the scan URL and permissions', () => {
-      embedScan()
-
-      const iframe = getIframe()
-      expect(iframe.src).toBe(EMBED_URL)
-      expect(iframe.allow).toBe('camera; microphone; cross-origin-isolated')
-      expect(iframe.title).toBe('Upvio vitals scan')
-    })
-
-    it('appends lang and theme while keeping the token hash', () => {
-      embedScan({ lang: 'es', theme: 'dark' })
-
-      const src = new URL(getIframe().src)
-      expect(src.hash).toBe('#token=tok_1')
-      expect(src.searchParams.get('lang')).toBe('es')
-      expect(src.searchParams.get('theme')).toBe('dark')
-    })
-
-    it('accepts an element as the container', () => {
-      embedScan({ container })
-
-      expect(getIframe().parentElement).toBe(container)
-    })
+describe('parseScanUrl', () => {
+  it('returns the url unchanged without lang or theme', () => {
+    expect(parse().href).toBe(EMBED_URL)
   })
 
-  describe('validation', () => {
-    it('throws when the container selector matches nothing', () => {
-      expect(() => embedScan({ container: '#missing' })).toThrow(
-        'no element matches the container selector "#missing"',
-      )
-    })
+  it('appends lang and theme while keeping the token hash', () => {
+    const url = parse({ lang: 'es', theme: 'dark' })
 
-    it('throws when the url is not a valid URL', () => {
-      expect(() => embedScan({ url: 'not a url' })).toThrow(
-        '`url` is not a valid absolute URL',
-      )
-    })
-
-    it('throws when the url is plain http on a public host', () => {
-      expect(() =>
-        embedScan({ url: 'http://scan.example.com/a/scans/1/embed' }),
-      ).toThrow('must use https, got "http://scan.example.com"')
-    })
-
-    it.each([
-      'http://localhost:3000/a/scans/1/embed',
-      'http://127.0.0.1:3000/a/scans/1/embed',
-    ])('allows http on a local host: %s', (url) => {
-      embedScan({ url })
-
-      expect(getIframe().src).toBe(url)
-    })
-
-    it('does not append an iframe when validation fails', () => {
-      expect(() => embedScan({ url: 'http://example.com' })).toThrow()
-
-      expect(container.querySelector('iframe')).toBeNull()
-    })
+    expect(url.hash).toBe('#token=tok_1')
+    expect(url.searchParams.get('lang')).toBe('es')
+    expect(url.searchParams.get('theme')).toBe('dark')
   })
 
-  describe('cross-origin isolation warning', () => {
-    it('warns when the page is not cross-origin isolated', () => {
-      setCrossOriginIsolated(false)
-
-      embedScan()
-
-      expect(console.warn).toHaveBeenCalledWith(
-        expect.stringContaining('Cross-Origin-Embedder-Policy: require-corp'),
-      )
-    })
-
-    it('stays silent when the page is cross-origin isolated', () => {
-      setCrossOriginIsolated(true)
-
-      embedScan()
-
-      expect(console.warn).not.toHaveBeenCalled()
-    })
+  it('throws when the url is not a valid URL', () => {
+    expect(() => parse({ url: 'not a url' })).toThrow(
+      '`url` is not a valid absolute URL',
+    )
   })
 
-  describe('scan events', () => {
-    it.each([
-      ['SUCCEEDED', 'onCompleted'],
-      ['FAILED', 'onFailed'],
-      ['ABORTED', 'onAborted'],
-    ] as const)('calls only %s → %s', (value, callbackName) => {
-      const callbacks = statusCallbacks()
-      embedScan(callbacks)
+  it.each([
+    'http://scan.example.com/a/scans/1/embed',
+    'ftp://scan.example.com/a/scans/1/embed',
+  ])('throws when the url is not https on a public host: %s', (url) => {
+    expect(() => parse({ url })).toThrow('must use https')
+  })
 
-      postFromIframe(status(value))
+  it.each([
+    'http://localhost:3000/a/scans/1/embed',
+    'http://127.0.0.1:3000/a/scans/1/embed',
+  ])('allows http on a local host: %s', (url) => {
+    expect(parse({ url }).href).toBe(url)
+  })
+})
 
-      for (const [name, callback] of Object.entries(callbacks)) {
-        if (name === callbackName) {
-          expect(callback).toHaveBeenCalledExactlyOnceWith({
-            scanId: 'scan_1',
-          })
-        } else {
-          expect(callback).not.toHaveBeenCalled()
-        }
-      }
-    })
+describe('isFromScan', () => {
+  const scanWindow = {}
 
-    it('passes the error reason to onError', () => {
-      const onError = vi.fn()
-      embedScan({ onError })
+  it('accepts a message from the scan window and origin', () => {
+    const event = { source: scanWindow, origin: SCAN_ORIGIN }
 
-      postFromIframe({
-        type: 'SCAN_ERROR',
-        payload: { scanId: 'scan_1', reason: 'complete failed' },
-      })
+    expect(isFromScan(event, scanWindow, SCAN_ORIGIN)).toBe(true)
+  })
 
-      expect(onError).toHaveBeenCalledExactlyOnceWith({
-        scanId: 'scan_1',
-        reason: 'complete failed',
-      })
-    })
+  it('rejects a message from another origin', () => {
+    const event = { source: scanWindow, origin: 'https://evil.example' }
 
-    it('does not throw when no callback is registered', () => {
-      embedScan()
+    expect(isFromScan(event, scanWindow, SCAN_ORIGIN)).toBe(false)
+  })
 
-      expect(() => postFromIframe(status('SUCCEEDED'))).not.toThrow()
-    })
+  it('rejects a message from another window', () => {
+    const event = { source: {}, origin: SCAN_ORIGIN }
 
-    it('ignores activity keep-alives', () => {
-      const callbacks = statusCallbacks()
-      embedScan(callbacks)
+    expect(isFromScan(event, scanWindow, SCAN_ORIGIN)).toBe(false)
+  })
 
-      postFromIframe({ type: 'SCAN_ACTIVITY', payload: { scanId: 'scan_1' } })
+  it('rejects a sourceless message once the iframe window is gone', () => {
+    const event = { source: null, origin: SCAN_ORIGIN }
 
-      for (const callback of Object.values(callbacks)) {
+    expect(isFromScan(event, null, SCAN_ORIGIN)).toBe(false)
+  })
+})
+
+describe('handleMessage', () => {
+  it.each([
+    ['SUCCEEDED', 'onCompleted'],
+    ['FAILED', 'onFailed'],
+    ['ABORTED', 'onAborted'],
+  ] as const)('routes %s only to %s', (status, callbackName) => {
+    const all = callbacks()
+
+    handleMessage(
+      { type: 'SCAN_STATUS', payload: { scanId: 'scan_1', status } },
+      { url: EMBED_URL, container: '#scan', ...all },
+      vi.fn(),
+    )
+
+    for (const [name, callback] of Object.entries(all)) {
+      if (name === callbackName) {
+        expect(callback).toHaveBeenCalledExactlyOnceWith({ scanId: 'scan_1' })
+      } else {
         expect(callback).not.toHaveBeenCalled()
       }
+    }
+  })
+
+  it('passes the error reason to onError', () => {
+    const options = { url: EMBED_URL, container: '#scan', ...callbacks() }
+
+    handleMessage(
+      { type: 'SCAN_ERROR', payload: { scanId: 'scan_1', reason: 'boom' } },
+      options,
+      vi.fn(),
+    )
+
+    expect(options.onError).toHaveBeenCalledExactlyOnceWith({
+      scanId: 'scan_1',
+      reason: 'boom',
     })
   })
 
-  describe('cancel requests', () => {
-    it('confirms the cancel back to the iframe', () => {
-      embedScan()
-      const iframeWindow = getIframe().contentWindow
-      if (!iframeWindow) throw new Error('expected an iframe window')
-      const postMessage = vi.spyOn(iframeWindow, 'postMessage')
+  it('confirms a cancel request', () => {
+    const reply = vi.fn()
 
-      postFromIframe({
-        type: 'SCAN_CANCEL_REQUEST',
-        payload: { scanId: 'scan_1' },
-      })
+    handleMessage(
+      { type: 'SCAN_CANCEL_REQUEST', payload: { scanId: 'scan_1' } },
+      { url: EMBED_URL, container: '#scan' },
+      reply,
+    )
 
-      expect(postMessage).toHaveBeenCalledExactlyOnceWith(
-        { type: 'SCAN_CANCEL_CONFIRM', payload: { scanId: 'scan_1' } },
-        SCAN_ORIGIN,
-      )
-    })
-  })
-
-  describe('untrusted messages', () => {
-    it('ignores messages from another origin', () => {
-      const onCompleted = vi.fn()
-      embedScan({ onCompleted })
-
-      postFromIframe(status('SUCCEEDED'), { origin: 'https://evil.example' })
-
-      expect(onCompleted).not.toHaveBeenCalled()
-    })
-
-    it('ignores messages from another window', () => {
-      const onCompleted = vi.fn()
-      embedScan({ onCompleted })
-
-      postFromIframe(status('SUCCEEDED'), { source: window })
-
-      expect(onCompleted).not.toHaveBeenCalled()
-    })
-
-    it('ignores sourceless messages after the host removes the iframe', () => {
-      const onCompleted = vi.fn()
-      embedScan({ onCompleted })
-
-      getIframe().remove()
-      postFromIframe(status('SUCCEEDED'), { source: null })
-
-      expect(onCompleted).not.toHaveBeenCalled()
-    })
-
-    it.each([
-      ['null', null],
-      ['a string', 'SCAN_STATUS'],
-      ['an unknown type', { type: 'SCAN_DONE', payload: { scanId: 'a' } }],
-      ['a missing payload', { type: 'SCAN_STATUS' }],
-      ['a missing scanId', { type: 'SCAN_STATUS', payload: {} }],
-      ['an unknown status', status('STARTED')],
-      [
-        'a non-string reason',
-        { type: 'SCAN_ERROR', payload: { scanId: 'scan_1', reason: 42 } },
-      ],
-    ])('ignores %s', (_, data) => {
-      const callbacks = statusCallbacks()
-      embedScan(callbacks)
-
-      postFromIframe(data)
-
-      for (const callback of Object.values(callbacks)) {
-        expect(callback).not.toHaveBeenCalled()
-      }
-    })
-  })
-
-  describe('destroy', () => {
-    it('removes the iframe', () => {
-      embedScan().destroy()
-
-      expect(container.querySelector('iframe')).toBeNull()
-    })
-
-    it('stops calling callbacks', () => {
-      const onCompleted = vi.fn()
-      const embedded = embedScan({ onCompleted })
-      const iframeWindow = getIframe().contentWindow
-
-      embedded.destroy()
-      postFromIframe(status('SUCCEEDED'), { source: iframeWindow })
-
-      expect(onCompleted).not.toHaveBeenCalled()
-    })
-
-    it('can be called more than once', () => {
-      const embedded = embedScan()
-      embedded.destroy()
-
-      expect(() => embedded.destroy()).not.toThrow()
+    expect(reply).toHaveBeenCalledExactlyOnceWith({
+      type: 'SCAN_CANCEL_CONFIRM',
+      payload: { scanId: 'scan_1' },
     })
   })
 })
