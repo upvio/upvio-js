@@ -1,12 +1,13 @@
 {
   "name": "@upvio/sdk-node",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "type": "module",
   "files": [
     "dist",
     "LICENSE",
-    "README.md"
+    "README.md",
+    "CHANGELOG.md"
   ],
   "exports": {
     ".": {
@@ -21,7 +22,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@upvio/api-types": "0.1.1",
+    "@upvio/api-types": "0.1.2",
     "tsup": "^8.5.1"
   }
 }

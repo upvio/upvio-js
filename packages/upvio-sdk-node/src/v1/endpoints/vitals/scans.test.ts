@@ -194,4 +194,43 @@ describe('client.v1.vitals.scans', () => {
       expect(result).toEqual({ data: { id: 'scan_abc' } })
     })
   })
+
+  describe('createEmbedSession', () => {
+    it('sends a POST to the scan embed-sessions path', async () => {
+      const responseData = {
+        data: {
+          url: 'https://scan.upvio.com/acme/scans/scan_abc/embed#token=tok_abc',
+          expiresAt: '2026-10-09T12:00:00.000Z',
+        },
+      }
+      mockOk(responseData)
+      const client = createClient()
+
+      const result = await client.v1.vitals.scans.createEmbedSession('scan_abc')
+
+      const [url, options] = mockFetch.mock.calls[0]
+      expect(url).toBe(
+        'https://api.example.com/v1/businesses/biz_123/vitals/scans/scan_abc/embed-sessions',
+      )
+      expect(options.method).toBe('POST')
+      expect(options.body).toBeUndefined()
+      expect(result).toEqual(responseData)
+    })
+
+    it('returns the error body when the scan has already finished', async () => {
+      const body = {
+        error: {
+          code: 409,
+          type: 'ConflictError',
+          title: 'Vitals Scan has already finished',
+        },
+      }
+      mockError(409, body)
+      const client = createClient()
+
+      const result = await client.v1.vitals.scans.createEmbedSession('scan_abc')
+
+      expect(result).toStrictEqual(body)
+    })
+  })
 })
