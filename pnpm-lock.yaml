@@ -32,8 +32,8 @@ importers:
   packages/upvio-sdk-node:
     dependencies:
       '@upvio/api-types':
-        specifier: workspace:*
-        version: link:../api-types
+        specifier: 0.1.2
+        version: 0.1.2
     devDependencies:
       tsup:
         specifier: ^8.5.1
@@ -464,6 +464,9 @@ packages:
 
   '@types/estree@1.0.8':
     resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
+
+  '@upvio/api-types@0.1.2':
+    resolution: {integrity: sha512-hXrlBwtglu4jeWZ4KTjXbPQt7pZRjOlCiT8PqQV0nKV3Bp35HuiPXLyhoudu2kcYp3GqNWOqAQ5K0cZqA5kgJA==}
 
   '@vitest/expect@4.1.1':
     resolution: {integrity: sha512-xAV0fqBTk44Rn6SjJReEQkHP3RrqbJo6JQ4zZ7/uVOiJZRarBtblzrOfFIZeYUrukp2YD6snZG6IBqhOoHTm+A==}
@@ -1186,6 +1189,8 @@ snapshots:
   '@types/deep-eql@4.0.2': {}
 
   '@types/estree@1.0.8': {}
+
+  '@upvio/api-types@0.1.2': {}
 
   '@vitest/expect@4.1.1':
     dependencies:

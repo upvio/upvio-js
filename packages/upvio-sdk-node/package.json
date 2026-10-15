@@ -20,7 +20,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@upvio/api-types": "workspace:*"
+    "@upvio/api-types": "0.1.2"
   },
   "devDependencies": {
     "tsup": "^8.5.1"

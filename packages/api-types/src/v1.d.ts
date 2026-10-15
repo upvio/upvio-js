@@ -3679,6 +3679,93 @@ export interface operations {
                     };
                 };
             };
+            /** @description The staff ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The staff member does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Resource not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
         };
     };
     createStaffWorkingHoursSchedule: {
@@ -3814,6 +3901,93 @@ export interface operations {
                     };
                 };
             };
+            /** @description The staff ID is malformed, or the schedule does not start on a Sunday and end on a Saturday in the staff member's timezone. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Working Hours Schedule must start at the beginning of a week."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The staff member does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Resource not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
         };
     };
     retrieveStaffWorkingHoursSchedule: {
@@ -3838,6 +4012,93 @@ export interface operations {
                     "application/json": components["schemas"]["WorkingHoursSchedule"];
                 };
             };
+            /** @description The staff or working hours schedule ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The staff member or working hours schedule does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Resource not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
         };
     };
     deleteStaffWorkingHoursSchedule: {
@@ -3860,19 +4121,121 @@ export interface operations {
                 };
                 content?: never;
             };
-            /** @description Working Hours Schedule does not exist. */
+            /** @description The staff or working hours schedule ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The staff member or working hours schedule does not exist. */
             404: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Resource not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
             };
-            /** @description Failed to delete Working Hours Schedule. */
+            /** @description The working hours schedule could not be deleted. */
             500: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 500,
+                     *         "type": "ServerError",
+                     *         "title": "Failed to delete Working Hours Schedule"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "ServerError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
             };
         };
     };
@@ -3902,8 +4265,8 @@ export interface operations {
                     };
                 };
             };
-            /** @description Authentication failed. */
-            401: {
+            /** @description The request is invalid. */
+            400: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -3911,9 +4274,9 @@ export interface operations {
                     /**
                      * @example {
                      *       "error": {
-                     *         "code": 401,
-                     *         "type": "UnauthenticatedError",
-                     *         "title": "You are not authenticated"
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Business ID does not match API key"
                      *       }
                      *     }
                      */
@@ -3924,7 +4287,65 @@ export interface operations {
                              * @description The specific error that occurred.
                              * @enum {string}
                              */
-                            type?: "UnauthenticatedError";
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
                             /** @description Human-readable description of the error. */
                             title?: string;
                         };
@@ -3956,8 +4377,8 @@ export interface operations {
                     };
                 };
             };
-            /** @description Authentication failed. */
-            401: {
+            /** @description The request is invalid. */
+            400: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -3965,9 +4386,9 @@ export interface operations {
                     /**
                      * @example {
                      *       "error": {
-                     *         "code": 401,
-                     *         "type": "UnauthenticatedError",
-                     *         "title": "You are not authenticated"
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Business ID does not match API key"
                      *       }
                      *     }
                      */
@@ -3978,7 +4399,36 @@ export interface operations {
                              * @description The specific error that occurred.
                              * @enum {string}
                              */
-                            type?: "UnauthenticatedError";
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
                             /** @description Human-readable description of the error. */
                             title?: string;
                         };
@@ -4007,7 +4457,7 @@ export interface operations {
                              * @description The specific error that occurred.
                              * @enum {string}
                              */
-                            type?: "NotFoundError";
+                            type?: "NotFoundError" | "BusinessNotFoundError";
                             /** @description Human-readable description of the error. */
                             title?: string;
                         };
@@ -4076,8 +4526,8 @@ export interface operations {
                     };
                 };
             };
-            /** @description Authentication failed. */
-            401: {
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -4085,9 +4535,9 @@ export interface operations {
                     /**
                      * @example {
                      *       "error": {
-                     *         "code": 401,
-                     *         "type": "UnauthenticatedError",
-                     *         "title": "You are not authenticated"
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
                      *       }
                      *     }
                      */
@@ -4098,7 +4548,36 @@ export interface operations {
                              * @description The specific error that occurred.
                              * @enum {string}
                              */
-                            type?: "UnauthenticatedError";
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
                             /** @description Human-readable description of the error. */
                             title?: string;
                         };
@@ -4190,8 +4669,8 @@ export interface operations {
                     };
                 };
             };
-            /** @description Authentication failed. */
-            401: {
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -4199,9 +4678,9 @@ export interface operations {
                     /**
                      * @example {
                      *       "error": {
-                     *         "code": 401,
-                     *         "type": "UnauthenticatedError",
-                     *         "title": "You are not authenticated"
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
                      *       }
                      *     }
                      */
@@ -4212,7 +4691,7 @@ export interface operations {
                              * @description The specific error that occurred.
                              * @enum {string}
                              */
-                            type?: "UnauthenticatedError";
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
                             /** @description Human-readable description of the error. */
                             title?: string;
                         };
@@ -4241,7 +4720,7 @@ export interface operations {
                              * @description The specific error that occurred.
                              * @enum {string}
                              */
-                            type?: "NotFoundError";
+                            type?: "NotFoundError" | "BusinessNotFoundError";
                             /** @description Human-readable description of the error. */
                             title?: string;
                         };
@@ -4302,8 +4781,8 @@ export interface operations {
                     };
                 };
             };
-            /** @description Authentication failed. */
-            401: {
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -4311,9 +4790,9 @@ export interface operations {
                     /**
                      * @example {
                      *       "error": {
-                     *         "code": 401,
-                     *         "type": "UnauthenticatedError",
-                     *         "title": "You are not authenticated"
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
                      *       }
                      *     }
                      */
@@ -4324,7 +4803,7 @@ export interface operations {
                              * @description The specific error that occurred.
                              * @enum {string}
                              */
-                            type?: "UnauthenticatedError";
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
                             /** @description Human-readable description of the error. */
                             title?: string;
                         };
@@ -4353,7 +4832,7 @@ export interface operations {
                              * @description The specific error that occurred.
                              * @enum {string}
                              */
-                            type?: "NotFoundError";
+                            type?: "NotFoundError" | "BusinessNotFoundError";
                             /** @description Human-readable description of the error. */
                             title?: string;
                         };
@@ -4387,7 +4866,7 @@ export interface operations {
                     };
                 };
             };
-            /** @description The business has no embed allowed origins. */
+            /** @description The business has no embed allowed origins, or the Business ID does not match the API key. */
             400: {
                 headers: {
                     [name: string]: unknown;
@@ -4416,36 +4895,7 @@ export interface operations {
                     };
                 };
             };
-            /** @description Authentication failed. */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    /**
-                     * @example {
-                     *       "error": {
-                     *         "code": 401,
-                     *         "type": "UnauthenticatedError",
-                     *         "title": "You are not authenticated"
-                     *       }
-                     *     }
-                     */
-                    "application/json": {
-                        error?: {
-                            code?: number;
-                            /**
-                             * @description The specific error that occurred.
-                             * @enum {string}
-                             */
-                            type?: "UnauthenticatedError";
-                            /** @description Human-readable description of the error. */
-                            title?: string;
-                        };
-                    };
-                };
-            };
-            /** @description The VitalsScanEmbedSession:write:all scope is missing, or the vitals.embed feature is not enabled for the business. */
+            /** @description The API key is missing or invalid, the Business cannot be accessed with it, the VitalsScanEmbedSession:write:all scope is missing, or the vitals.embed feature is not enabled. */
             403: {
                 headers: {
                     [name: string]: unknown;
@@ -4467,14 +4917,14 @@ export interface operations {
                              * @description The specific error that occurred.
                              * @enum {string}
                              */
-                            type?: "ActionUnauthorizedError" | "UnauthorizedError";
+                            type?: "ActionUnauthorizedError" | "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
                             /** @description Human-readable description of the error. */
                             title?: string;
                         };
                     };
                 };
             };
-            /** @description The vitals scan does not exist. */
+            /** @description The Business or the vitals scan does not exist. */
             404: {
                 headers: {
                     [name: string]: unknown;
@@ -4496,7 +4946,7 @@ export interface operations {
                              * @description The specific error that occurred.
                              * @enum {string}
                              */
-                            type?: "NotFoundError";
+                            type?: "NotFoundError" | "BusinessNotFoundError";
                             /** @description Human-readable description of the error. */
                             title?: string;
                         };
@@ -4594,8 +5044,8 @@ export interface operations {
                     };
                 };
             };
-            /** @description Authentication failed. */
-            401: {
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -4603,9 +5053,9 @@ export interface operations {
                     /**
                      * @example {
                      *       "error": {
-                     *         "code": 401,
-                     *         "type": "UnauthenticatedError",
-                     *         "title": "You are not authenticated"
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
                      *       }
                      *     }
                      */
@@ -4616,7 +5066,36 @@ export interface operations {
                              * @description The specific error that occurred.
                              * @enum {string}
                              */
-                            type?: "UnauthenticatedError";
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
                             /** @description Human-readable description of the error. */
                             title?: string;
                         };
@@ -4677,8 +5156,8 @@ export interface operations {
                     };
                 };
             };
-            /** @description Authentication failed. */
-            401: {
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -4686,9 +5165,9 @@ export interface operations {
                     /**
                      * @example {
                      *       "error": {
-                     *         "code": 401,
-                     *         "type": "UnauthenticatedError",
-                     *         "title": "You are not authenticated"
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
                      *       }
                      *     }
                      */
@@ -4699,7 +5178,7 @@ export interface operations {
                              * @description The specific error that occurred.
                              * @enum {string}
                              */
-                            type?: "UnauthenticatedError";
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
                             /** @description Human-readable description of the error. */
                             title?: string;
                         };
@@ -4728,7 +5207,7 @@ export interface operations {
                              * @description The specific error that occurred.
                              * @enum {string}
                              */
-                            type?: "NotFoundError";
+                            type?: "NotFoundError" | "BusinessNotFoundError";
                             /** @description Human-readable description of the error. */
                             title?: string;
                         };
@@ -4764,6 +5243,93 @@ export interface operations {
                     };
                 };
             };
+            /** @description The query parameters are invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "startDate must be before endDate"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
         };
     };
     retrieveTimeBlocker: {
@@ -4783,6 +5349,93 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: components["schemas"]["TimeBlocker"];
+                    };
+                };
+            };
+            /** @description The time blocker ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The time blocker does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Resource not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
                     };
                 };
             };
@@ -4808,6 +5461,93 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: components["schemas"]["Staff"][];
+                    };
+                };
+            };
+            /** @description The request is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Business ID does not match API key"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
                     };
                 };
             };
@@ -4843,6 +5583,93 @@ export interface operations {
                     };
                 };
             };
+            /** @description The staff data is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "The specified email is already in use"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
         };
     };
     retrieveStaff: {
@@ -4867,6 +5694,93 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: components["schemas"]["Staff"];
+                    };
+                };
+            };
+            /** @description The staff ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The staff member does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Resource not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
                     };
                 };
             };
@@ -4907,6 +5821,93 @@ export interface operations {
                     "application/json": components["schemas"]["Staff"];
                 };
             };
+            /** @description The staff ID is malformed, the staff data is invalid, or the staff member has been archived. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "StaffArchivedError",
+                     *         "title": "Operation unavailable on archived staff."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError" | "StaffArchivedError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The staff member does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Staff with ID {staffId} not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
         };
     };
     deleteStaff: {
@@ -4929,6 +5930,93 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+            /** @description The staff ID is malformed, or the staff member is still assigned to services. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "This staff member is in use by some of your services: Initial Consultation. Please remove this staff from these services and try again."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, the Business cannot be accessed with it, or the staff member is the Business owner. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "This is the business owner and it cannot be archived."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The staff member does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Staff not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
             };
         };
     };
@@ -4974,6 +6062,93 @@ export interface operations {
                     };
                 };
             };
+            /** @description The staff ID is malformed, or the dates are invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid date ranges"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The staff member does not exist. Also returned when the date range is longer than 31 days. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Maximum range is 31 days"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
         };
     };
     listServices: {
@@ -4996,6 +6171,93 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: components["schemas"]["Service"][];
+                    };
+                };
+            };
+            /** @description The request is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Business ID does not match API key"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
                     };
                 };
             };
@@ -5028,6 +6290,93 @@ export interface operations {
                     };
                 };
             };
+            /** @description The service data is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "InvalidAliasError",
+                     *         "title": "Alias can only contain alphanumerical characters and dashes"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError" | "InvalidAliasError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
         };
     };
     retrieveService: {
@@ -5052,6 +6401,93 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: components["schemas"]["Service"];
+                    };
+                };
+            };
+            /** @description The service ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The service does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Resource not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
                     };
                 };
             };
@@ -5086,6 +6522,93 @@ export interface operations {
                     };
                 };
             };
+            /** @description The service ID is malformed, or the service data is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "The minimum time increment is 10 minutes."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError" | "InvalidAliasError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The service does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Service not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
         };
     };
     deleteService: {
@@ -5109,6 +6632,93 @@ export interface operations {
                 };
                 content?: never;
             };
+            /** @description The service ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The service does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Service with ID {serviceId} not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
         };
     };
     listServiceCategories: {
@@ -5131,6 +6741,93 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: components["schemas"]["ServiceCategory"][];
+                    };
+                };
+            };
+            /** @description The request is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Business ID does not match API key"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
                     };
                 };
             };
@@ -5165,6 +6862,93 @@ export interface operations {
                     };
                 };
             };
+            /** @description The name is missing. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Missing required field name"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
         };
     };
     retrieveServiceCategory: {
@@ -5189,6 +6973,93 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: components["schemas"]["ServiceCategory"];
+                    };
+                };
+            };
+            /** @description The service category ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The service category does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Service Category not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
                     };
                 };
             };
@@ -5225,6 +7096,93 @@ export interface operations {
                     };
                 };
             };
+            /** @description The service category ID is malformed, or the name is missing. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Missing required field name"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The service category does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Service Category not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
         };
     };
     deleteServiceCategory: {
@@ -5247,6 +7205,93 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+            /** @description The service category ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The service category does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Service Category not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
             };
         };
     };
@@ -5306,8 +7351,8 @@ export interface operations {
                     };
                 };
             };
-            /** @description Authentication failed. */
-            401: {
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -5315,9 +7360,9 @@ export interface operations {
                     /**
                      * @example {
                      *       "error": {
-                     *         "code": 401,
-                     *         "type": "UnauthenticatedError",
-                     *         "title": "You are not authenticated"
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
                      *       }
                      *     }
                      */
@@ -5328,7 +7373,36 @@ export interface operations {
                              * @description The specific error that occurred.
                              * @enum {string}
                              */
-                            type?: "UnauthenticatedError";
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
                             /** @description Human-readable description of the error. */
                             title?: string;
                         };
@@ -5416,8 +7490,8 @@ export interface operations {
                     };
                 };
             };
-            /** @description Authentication failed. */
-            401: {
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -5425,9 +7499,9 @@ export interface operations {
                     /**
                      * @example {
                      *       "error": {
-                     *         "code": 401,
-                     *         "type": "UnauthenticatedError",
-                     *         "title": "You are not authenticated"
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
                      *       }
                      *     }
                      */
@@ -5438,7 +7512,36 @@ export interface operations {
                              * @description The specific error that occurred.
                              * @enum {string}
                              */
-                            type?: "UnauthenticatedError";
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
                             /** @description Human-readable description of the error. */
                             title?: string;
                         };
@@ -5525,8 +7628,8 @@ export interface operations {
                     };
                 };
             };
-            /** @description Authentication failed. */
-            401: {
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -5534,9 +7637,9 @@ export interface operations {
                     /**
                      * @example {
                      *       "error": {
-                     *         "code": 401,
-                     *         "type": "UnauthenticatedError",
-                     *         "title": "You are not authenticated"
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
                      *       }
                      *     }
                      */
@@ -5547,7 +7650,7 @@ export interface operations {
                              * @description The specific error that occurred.
                              * @enum {string}
                              */
-                            type?: "UnauthenticatedError";
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
                             /** @description Human-readable description of the error. */
                             title?: string;
                         };
@@ -5576,7 +7679,7 @@ export interface operations {
                              * @description The specific error that occurred.
                              * @enum {string}
                              */
-                            type?: "NotFoundError";
+                            type?: "NotFoundError" | "BusinessNotFoundError";
                             /** @description Human-readable description of the error. */
                             title?: string;
                         };
@@ -5653,8 +7756,8 @@ export interface operations {
                     };
                 };
             };
-            /** @description Authentication failed. */
-            401: {
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -5662,9 +7765,9 @@ export interface operations {
                     /**
                      * @example {
                      *       "error": {
-                     *         "code": 401,
-                     *         "type": "UnauthenticatedError",
-                     *         "title": "You are not authenticated"
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
                      *       }
                      *     }
                      */
@@ -5675,7 +7778,7 @@ export interface operations {
                              * @description The specific error that occurred.
                              * @enum {string}
                              */
-                            type?: "UnauthenticatedError";
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
                             /** @description Human-readable description of the error. */
                             title?: string;
                         };
@@ -5704,7 +7807,7 @@ export interface operations {
                              * @description The specific error that occurred.
                              * @enum {string}
                              */
-                            type?: "NotFoundError";
+                            type?: "NotFoundError" | "BusinessNotFoundError";
                             /** @description Human-readable description of the error. */
                             title?: string;
                         };
@@ -5758,8 +7861,8 @@ export interface operations {
                     };
                 };
             };
-            /** @description Authentication failed. */
-            401: {
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -5767,9 +7870,9 @@ export interface operations {
                     /**
                      * @example {
                      *       "error": {
-                     *         "code": 401,
-                     *         "type": "UnauthenticatedError",
-                     *         "title": "You are not authenticated"
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
                      *       }
                      *     }
                      */
@@ -5780,7 +7883,7 @@ export interface operations {
                              * @description The specific error that occurred.
                              * @enum {string}
                              */
-                            type?: "UnauthenticatedError";
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
                             /** @description Human-readable description of the error. */
                             title?: string;
                         };
@@ -5809,7 +7912,7 @@ export interface operations {
                              * @description The specific error that occurred.
                              * @enum {string}
                              */
-                            type?: "NotFoundError" | "PatientArchivedError";
+                            type?: "NotFoundError" | "PatientArchivedError" | "BusinessNotFoundError";
                             /** @description Human-readable description of the error. */
                             title?: string;
                         };
@@ -5841,6 +7944,93 @@ export interface operations {
                     };
                 };
             };
+            /** @description The request is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Business ID does not match API key"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
         };
     };
     listReminderTemplates: {
@@ -5862,6 +8052,93 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: components["schemas"]["ReminderTemplate"][];
+                    };
+                };
+            };
+            /** @description The request is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Business ID does not match API key"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
                     };
                 };
             };
@@ -5893,13 +8170,91 @@ export interface operations {
                     };
                 };
             };
-            /** @description Invalid input. */
+            /** @description The template data is invalid. The title lists each validation issue, prefixed with the field it applies to. */
             400: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Error"];
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "minutes: Too small: expected number to be >=1"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
                 };
             };
         };
@@ -5927,13 +8282,91 @@ export interface operations {
                     };
                 };
             };
-            /** @description Reminder Template not found. */
+            /** @description The reminder template ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The reminder template does not exist. */
             404: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Error"];
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Reminder Template not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
                 };
             };
         };
@@ -5957,13 +8390,91 @@ export interface operations {
                 };
                 content?: never;
             };
-            /** @description Reminder Template not found. */
+            /** @description The reminder template ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The reminder template does not exist. */
             404: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Error"];
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Reminder Template not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
                 };
             };
         };
@@ -5995,22 +8506,91 @@ export interface operations {
                     };
                 };
             };
-            /** @description Invalid input. */
+            /** @description The reminder template ID is malformed, or the template data is invalid. */
             400: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Error"];
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "At least one of enabled or messageTemplate is required."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
                 };
             };
-            /** @description Reminder Template not found. */
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The reminder template does not exist. */
             404: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Error"];
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Reminder Template not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
                 };
             };
         };
@@ -6034,6 +8614,93 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: components["schemas"]["PostAppointmentMessageTemplate"][];
+                    };
+                };
+            };
+            /** @description The request is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Business ID does not match API key"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
                     };
                 };
             };
@@ -6065,13 +8732,91 @@ export interface operations {
                     };
                 };
             };
-            /** @description Invalid input. */
+            /** @description The template data is invalid. The title lists each validation issue, prefixed with the field it applies to. */
             400: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Error"];
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "minutes: Too small: expected number to be >=10"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
                 };
             };
         };
@@ -6099,13 +8844,91 @@ export interface operations {
                     };
                 };
             };
-            /** @description Post-Appointment Message Template not found. */
+            /** @description The post-appointment message template ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The post-appointment message template does not exist. */
             404: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Error"];
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Post-Appointment Message Template not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
                 };
             };
         };
@@ -6129,13 +8952,91 @@ export interface operations {
                 };
                 content?: never;
             };
-            /** @description Post-Appointment Message Template not found. */
+            /** @description The post-appointment message template ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The post-appointment message template does not exist. */
             404: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Error"];
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Post-Appointment Message Template not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
                 };
             };
         };
@@ -6167,22 +9068,91 @@ export interface operations {
                     };
                 };
             };
-            /** @description Invalid input. */
+            /** @description The post-appointment message template ID is malformed, or the template data is invalid. */
             400: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Error"];
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "At least one of enabled or messageTemplate is required."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
                 };
             };
-            /** @description Post-Appointment Message Template not found. */
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The post-appointment message template does not exist. */
             404: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Error"];
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Post-Appointment Message Template not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
                 };
             };
         };
@@ -6206,6 +9176,93 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: components["schemas"]["BookingEventTemplate"][];
+                    };
+                };
+            };
+            /** @description The request is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Business ID does not match API key"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
                     };
                 };
             };
@@ -6237,13 +9294,91 @@ export interface operations {
                     };
                 };
             };
-            /** @description Invalid input. */
+            /** @description The template data is invalid. The title lists each validation issue, prefixed with the field it applies to. */
             400: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Error"];
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "event: Invalid option: expected one of \"APPOINTMENT_CREATED\"|\"APPOINTMENT_DELETED\"|\"APPOINTMENT_UPDATED\"|\"RECURRING_APPOINTMENT_CREATED\"|\"RECURRING_APPOINTMENT_DELETED\"|\"RECURRING_APPOINTMENT_UPDATED\""
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
                 };
             };
         };
@@ -6271,13 +9406,91 @@ export interface operations {
                     };
                 };
             };
-            /** @description Booking Event Template not found. */
+            /** @description The booking event template ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The booking event template does not exist. */
             404: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Error"];
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Booking Event Template not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
                 };
             };
         };
@@ -6301,13 +9514,91 @@ export interface operations {
                 };
                 content?: never;
             };
-            /** @description Booking Event Template not found. */
+            /** @description The booking event template ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The booking event template does not exist. */
             404: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Error"];
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Booking Event Template not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
                 };
             };
         };
@@ -6339,22 +9630,91 @@ export interface operations {
                     };
                 };
             };
-            /** @description Invalid input. */
+            /** @description The booking event template ID is malformed, or the template data is invalid. */
             400: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Error"];
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "At least one of enabled or messageTemplate is required."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
                 };
             };
-            /** @description Booking Event Template not found. */
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The booking event template does not exist. */
             404: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Error"];
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Booking Event Template not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
                 };
             };
         };
@@ -6428,8 +9788,8 @@ export interface operations {
                     };
                 };
             };
-            /** @description Authentication failed. */
-            401: {
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -6437,9 +9797,9 @@ export interface operations {
                     /**
                      * @example {
                      *       "error": {
-                     *         "code": 401,
-                     *         "type": "UnauthenticatedError",
-                     *         "title": "You are not authenticated"
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
                      *       }
                      *     }
                      */
@@ -6450,7 +9810,7 @@ export interface operations {
                              * @description The specific error that occurred.
                              * @enum {string}
                              */
-                            type?: "UnauthenticatedError";
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
                             /** @description Human-readable description of the error. */
                             title?: string;
                         };
@@ -6479,7 +9839,7 @@ export interface operations {
                              * @description The specific error that occurred.
                              * @enum {string}
                              */
-                            type?: "NotFoundError";
+                            type?: "NotFoundError" | "BusinessNotFoundError";
                             /** @description Human-readable description of the error. */
                             title?: string;
                         };
@@ -6511,22 +9871,91 @@ export interface operations {
                     };
                 };
             };
-            /** @description Location requires authentication */
-            401: {
+            /** @description The request is invalid. */
+            400: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Error"];
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Business ID does not match API key"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
                 };
             };
-            /** @description Location not found */
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
             404: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Error"];
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
                 };
             };
         };
@@ -6558,22 +9987,91 @@ export interface operations {
                     };
                 };
             };
-            /** @description Location requires authentication */
-            401: {
+            /** @description The location data is invalid. The title lists the validation issues as a JSON array. */
+            400: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Error"];
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "[\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"name\"\n    ],\n    \"message\": \"Invalid input: expected string, received undefined\"\n  }\n]"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
                 };
             };
-            /** @description Location not found */
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
             404: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Error"];
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
                 };
             };
         };
@@ -6603,22 +10101,91 @@ export interface operations {
                     };
                 };
             };
-            /** @description Location requires authentication */
-            401: {
+            /** @description The location ID is malformed. */
+            400: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Error"];
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
                 };
             };
-            /** @description Location not found */
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The location does not exist or has been deleted. */
             404: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Error"];
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Location not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
                 };
             };
         };
@@ -6652,22 +10219,91 @@ export interface operations {
                     };
                 };
             };
-            /** @description Location requires authentication */
-            401: {
+            /** @description The location ID is malformed, no fields were provided, or the location data is invalid. Validation issues are listed in the title as a JSON array. */
+            400: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Error"];
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "No fields to update provided."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
                 };
             };
-            /** @description Location not found */
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The location does not exist or has been deleted. */
             404: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Error"];
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Could not find Location with ID {locationId} for Business with ID {businessId}"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
                 };
             };
         };
@@ -6693,22 +10329,91 @@ export interface operations {
                 };
                 content?: never;
             };
-            /** @description Location requires authentication */
-            401: {
+            /** @description The location ID is malformed. */
+            400: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Error"];
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
                 };
             };
-            /** @description Location not found */
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The location does not exist or has already been deleted. */
             404: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Error"];
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Could not find Location with ID {locationId} for Business with ID {businessId}"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
                 };
             };
         };
@@ -6737,6 +10442,93 @@ export interface operations {
                     };
                 };
             };
+            /** @description The request is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Business ID does not match API key"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
         };
     };
     retrieveForm: {
@@ -6762,13 +10554,91 @@ export interface operations {
                     };
                 };
             };
-            /** @description Form not found. */
+            /** @description The form ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The form does not exist. */
             404: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Error"];
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Form not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
                 };
             };
         };
@@ -6804,6 +10674,93 @@ export interface operations {
                     };
                 };
             };
+            /** @description The query parameters are invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Limit cannot be greater than 50"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
         };
     };
     retrieveFormSubmission: {
@@ -6829,13 +10786,91 @@ export interface operations {
                     };
                 };
             };
-            /** @description Form Submission not found. */
+            /** @description The form submission ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The form submission does not exist. */
             404: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Error"];
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Form Submission not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
                 };
             };
         };
@@ -6863,6 +10898,93 @@ export interface operations {
                     };
                 };
             };
+            /** @description The request is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Business ID does not match API key"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
         };
     };
     listBusinesses: {
@@ -6882,6 +11004,35 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: components["schemas"]["Business"][];
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid. */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 401,
+                     *         "type": "UnauthenticatedError",
+                     *         "title": "You are not authenticated"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthenticatedError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
                     };
                 };
             };
@@ -6907,6 +11058,93 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: components["schemas"]["Business"];
+                    };
+                };
+            };
+            /** @description The request is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Business ID does not match API key"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
                     };
                 };
             };
@@ -6937,6 +11175,93 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: components["schemas"]["Business"];
+                    };
+                };
+            };
+            /** @description No data was provided, or the data is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "No data provided"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
                     };
                 };
             };
@@ -6973,6 +11298,93 @@ export interface operations {
                     };
                 };
             };
+            /** @description A required query parameter is missing, or the service ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "startDate parameter is required"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
         };
     };
     listAppointments: {
@@ -7002,6 +11414,93 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: components["schemas"]["Appointment"][];
+                    };
+                };
+            };
+            /** @description The query parameters are invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "startDate must be before endDate"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The Business does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "BusinessNotFoundError",
+                     *         "title": "Business not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
                     };
                 };
             };
@@ -7060,7 +11559,36 @@ export interface operations {
                              * @description The specific error that occurred.
                              * @enum {string}
                              */
-                            type?: "BadRequestError" | "InvalidAppointmentDateError" | "InvalidServiceDurationError" | "MissingServiceIdError" | "PatientNameRequiredError" | "InvalidEmailError" | "PatientArchivedError" | "StaffArchivedError";
+                            type?: "BadRequestError" | "InvalidAppointmentDateError" | "InvalidServiceDurationError" | "MissingServiceIdError" | "PatientNameRequiredError" | "MissingEmailError" | "InvalidEmailError" | "DataValidationError" | "PatientArchivedError" | "StaffArchivedError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
                             /** @description Human-readable description of the error. */
                             title?: string;
                         };
@@ -7089,7 +11617,7 @@ export interface operations {
                              * @description The specific error that occurred.
                              * @enum {string}
                              */
-                            type?: "NotFoundError";
+                            type?: "NotFoundError" | "BusinessNotFoundError";
                             /** @description Human-readable description of the error. */
                             title?: string;
                         };
@@ -7152,6 +11680,93 @@ export interface operations {
                     };
                 };
             };
+            /** @description The appointment ID is malformed. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The appointment does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Resource not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
         };
     };
     deleteAppointment: {
@@ -7174,6 +11789,93 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+            /** @description The appointment ID or occurrence date is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "BadRequestError",
+                     *         "title": "Invalid platformId format."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError" | "InvalidAppointmentDateError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The appointment does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Appointment with ID {appointmentId} not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
             };
         };
     };
@@ -7202,6 +11904,122 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: components["schemas"]["Appointment"];
+                    };
+                };
+            };
+            /** @description The appointment data is invalid. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "AppointmentNotRecurrentError",
+                     *         "title": "The appointment is not a recurrent appointment."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError" | "InvalidAppointmentDateError" | "InvalidServiceDurationError" | "AppointmentNotRecurrentError" | "PatientArchivedError" | "StaffArchivedError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The appointment or service does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Appointment with ID {appointmentId} not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description No staff member is free at the new time when changing one occurrence (`singleOccurrence`) or all future occurrences (`futureOccurrences`) of the appointment. */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 409,
+                     *         "type": "StaffUnavailableError",
+                     *         "title": "The staff member is not available on the selected date and time."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "StaffUnavailableError" | "AdditionalStaffUnavailableError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
                     };
                 };
             };
@@ -7240,31 +12058,91 @@ export interface operations {
                     };
                 };
             };
-            /** @description Bad request */
+            /** @description The appointment ID is malformed, the tags are not an array, or none of the tags exist. */
             400: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Error"];
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "InvalidTagsError",
+                     *         "title": "None of the provided tags are valid."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError" | "InvalidTagsError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
                 };
             };
-            /** @description Unauthorized */
-            401: {
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Error"];
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
                 };
             };
-            /** @description Appointment not found */
+            /** @description The appointment does not exist. */
             404: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Error"];
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Appointment not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
                 };
             };
         };
@@ -7294,22 +12172,91 @@ export interface operations {
                     };
                 };
             };
-            /** @description Bad request */
+            /** @description A Zoom meeting cannot be attached to the appointment. */
             400: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Error"];
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 400,
+                     *         "type": "ZoomConnectionNotFoundError",
+                     *         "title": "No Zoom connection found for this appointment. Connect Zoom at the business or staff level first."
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "BadRequestError" | "AppointmentNotZoomMeetingError" | "AppointmentZoomMeetingExistsError" | "ZoomConnectionNotFoundError" | "ZoomMeetingCreationFailedError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
                 };
             };
-            /** @description Appointment not found */
+            /** @description The API key is missing or invalid, or the Business cannot be accessed with it. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 403,
+                     *         "type": "UnauthorizedError",
+                     *         "title": "Invalid API token"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "UnauthorizedError" | "BusinessArchivedError" | "BusinessDisabledError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
+                };
+            };
+            /** @description The appointment does not exist. */
             404: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Error"];
+                    /**
+                     * @example {
+                     *       "error": {
+                     *         "code": 404,
+                     *         "type": "NotFoundError",
+                     *         "title": "Appointment with ID {appointmentId} not found"
+                     *       }
+                     *     }
+                     */
+                    "application/json": {
+                        error?: {
+                            code?: number;
+                            /**
+                             * @description The specific error that occurred.
+                             * @enum {string}
+                             */
+                            type?: "NotFoundError" | "BusinessNotFoundError";
+                            /** @description Human-readable description of the error. */
+                            title?: string;
+                        };
+                    };
                 };
             };
         };
