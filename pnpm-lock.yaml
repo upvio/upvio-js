@@ -30,11 +30,10 @@ importers:
   packages/upvio: {}
 
   packages/upvio-sdk-node:
-    dependencies:
+    devDependencies:
       '@upvio/api-types':
         specifier: 0.1.2
         version: 0.1.2
-    devDependencies:
       tsup:
         specifier: ^8.5.1
         version: 8.5.1(postcss@8.5.6)(typescript@5.9.3)
