@@ -6,31 +6,60 @@ import type {
   TerminalScanStatus,
 } from './messages.js'
 
-export type ScanEvent = { scanId: string }
+/** Identifies the scan a callback refers to. */
+export type ScanEvent = {
+  /** Fetch the scan's results with this ID from your backend. */
+  scanId: string
+}
 
-export type ScanErrorEvent = { scanId: string; reason?: string }
+/** Passed to `onError` when a finished scan could not be saved. */
+export type ScanErrorEvent = {
+  scanId: string
+  /** Why the scan could not be saved, when the scan interface reports it. */
+  reason?: string
+}
 
+/**
+ * Options for {@link embed}.
+ *
+ * Callbacks are signals only and carry no scan results. Fetch the results
+ * from your backend with `client.v1.vitals.scans.retrieve(scanId)`.
+ */
 export type EmbedOptions = {
-  /** The `url` returned by `vitals.scans.createEmbedSession` */
+  /**
+   * The `url` returned by `client.v1.vitals.scans.createEmbedSession` in
+   * `@upvio/sdk-node`. Create it on your backend so your API key never
+   * reaches the browser. It is valid for one hour, so create a new session
+   * each time you render the page.
+   */
   url: string
-  /** CSS selector or element the scan iframe is appended to */
+  /**
+   * The element the scan iframe is appended to, or a CSS selector for it.
+   * It must exist when `embed()` is called. The iframe fills it, so give
+   * the container a size.
+   */
   container: string | HTMLElement
-  /** Language of the scan interface */
+  /** Language of the scan interface. */
   lang?: 'en' | 'es'
-  /** Color scheme of the scan interface */
+  /** Color scheme of the scan interface. */
   themeMode?: 'light' | 'dark' | 'system'
-  /** The scan succeeded */
+  /** Called when the scan succeeds. */
   onSucceeded?: (event: ScanEvent) => void
-  /** The scan failed */
+  /** Called when the scan fails. */
   onFailed?: (event: ScanEvent) => void
-  /** The patient cancelled the scan */
+  /** Called when the patient cancels the scan. */
   onAborted?: (event: ScanEvent) => void
-  /** The scan finished but could not be saved */
+  /** Called when the scan finishes but its results could not be saved. */
   onError?: (event: ScanErrorEvent) => void
 }
 
+/** A scan embedded with {@link embed}. */
 export type EmbeddedScan = {
-  /** Remove the iframe and stop listening for scan events */
+  /**
+   * Remove the iframe and stop calling the callbacks. The iframe is blank
+   * once the scan has finished, so call this from your callbacks and show
+   * your own UI. Calling it more than once is safe.
+   */
   destroy: () => void
 }
 
@@ -146,7 +175,26 @@ export const handleMessage = (
 
 /**
  * Embed the Upvio vitals scan interface in an iframe inside `container`.
- * Callbacks are signals only: fetch scan results from your backend.
+ *
+ * The host page must:
+ * - be on an origin listed under Settings → Developers → Allowed Origins in
+ *   the Account Portal, or the scan interface refuses to load;
+ * - be cross-origin isolated, served with
+ *   `Cross-Origin-Opener-Policy: same-origin` and
+ *   `Cross-Origin-Embedder-Policy: require-corp`. `embed()` logs a warning
+ *   when it is not;
+ * - not use `Referrer-Policy: no-referrer`, or no callbacks are called.
+ *
+ * @throws When `url` is not a valid https URL, or `container` is a selector
+ * that matches no element. No iframe is added in either case.
+ *
+ * @example
+ * const scan = embed({
+ *   url: sessionUrl,
+ *   container: '#scan',
+ *   onSucceeded: ({ scanId }) => showResults(scanId),
+ *   onAborted: () => scan.destroy(),
+ * })
  */
 export const embed = (options: EmbedOptions): EmbeddedScan => {
   const url = parseScanUrl(options)
