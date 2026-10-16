@@ -11,7 +11,7 @@ const parse = (options: Partial<EmbedOptions> = {}) =>
   parseScanUrl({ url: EMBED_URL, container: '#scan', ...options })
 
 const callbacks = () => ({
-  onCompleted: vi.fn(),
+  onSucceeded: vi.fn(),
   onFailed: vi.fn(),
   onAborted: vi.fn(),
   onError: vi.fn(),
@@ -81,7 +81,7 @@ describe('isFromScan', () => {
 
 describe('handleMessage', () => {
   it.each([
-    ['SUCCEEDED', 'onCompleted'],
+    ['SUCCEEDED', 'onSucceeded'],
     ['FAILED', 'onFailed'],
     ['ABORTED', 'onAborted'],
   ] as const)('routes %s only to %s', (status, callbackName) => {
@@ -115,6 +115,33 @@ describe('handleMessage', () => {
       scanId: 'scan_1',
       reason: 'boom',
     })
+  })
+
+  it('passes only the scan ID to onError when there is no reason', () => {
+    const onError = vi.fn()
+
+    handleMessage(
+      { type: 'SCAN_ERROR', payload: { scanId: 'scan_1' } },
+      { url: EMBED_URL, container: '#scan', onError },
+      vi.fn(),
+    )
+
+    expect(onError.mock.calls).toStrictEqual([[{ scanId: 'scan_1' }]])
+  })
+
+  it('does not pass unknown payload fields to onError', () => {
+    const onError = vi.fn()
+    const payload = { scanId: 'scan_1', reason: 'boom', extra: 'x' }
+
+    handleMessage(
+      { type: 'SCAN_ERROR', payload },
+      { url: EMBED_URL, container: '#scan', onError },
+      vi.fn(),
+    )
+
+    expect(onError.mock.calls).toStrictEqual([
+      [{ scanId: 'scan_1', reason: 'boom' }],
+    ])
   })
 
   it('confirms a cancel request', () => {

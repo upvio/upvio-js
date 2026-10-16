@@ -15,11 +15,17 @@ export type EmbedOptions = {
   url: string
   /** CSS selector or element the scan iframe is appended to */
   container: string | HTMLElement
+  /** Language of the scan interface */
   lang?: 'en' | 'es'
+  /** Color scheme of the scan interface */
   themeMode?: 'light' | 'dark' | 'system'
-  onCompleted?: (event: ScanEvent) => void
+  /** The scan succeeded */
+  onSucceeded?: (event: ScanEvent) => void
+  /** The scan failed */
   onFailed?: (event: ScanEvent) => void
+  /** The patient cancelled the scan */
   onAborted?: (event: ScanEvent) => void
+  /** The scan finished but could not be saved */
   onError?: (event: ScanErrorEvent) => void
 }
 
@@ -37,7 +43,7 @@ export const parseScanUrl = (options: EmbedOptions): URL => {
     url = new URL(options.url)
   } catch (cause) {
     throw new Error(
-      'UpvioVitals.embed: `url` is not a valid absolute URL. Pass the ' +
+      '@upvio/vitals-embed: `url` is not a valid absolute URL. Pass the ' +
         '`url` returned by `vitals.scans.createEmbedSession`.',
       { cause },
     )
@@ -46,7 +52,7 @@ export const parseScanUrl = (options: EmbedOptions): URL => {
   const isLocal = url.protocol === 'http:' && LOCAL_HOSTNAMES.has(url.hostname)
   if (url.protocol !== 'https:' && !isLocal) {
     throw new Error(
-      `UpvioVitals.embed: \`url\` must use https, got "${url.origin}".`,
+      `@upvio/vitals-embed: \`url\` must use https, got "${url.origin}".`,
     )
   }
 
@@ -63,7 +69,7 @@ const resolveContainer = (container: string | HTMLElement): HTMLElement => {
   const element = document.querySelector<HTMLElement>(container)
   if (!element) {
     throw new Error(
-      `UpvioVitals.embed: no element matches the container selector ` +
+      `@upvio/vitals-embed: no element matches the container selector ` +
         `"${container}". Make sure it exists before calling embed().`,
     )
   }
@@ -74,8 +80,8 @@ const warnIfNotCrossOriginIsolated = () => {
   if (window.crossOriginIsolated) return
 
   console.warn(
-    'UpvioVitals.embed: this page is not cross-origin isolated, so the scan ' +
-      'cannot run. Serve it with the headers ' +
+    '@upvio/vitals-embed: this page is not cross-origin isolated, so the ' +
+      'scan cannot run. Serve it with the headers ' +
       '`Cross-Origin-Opener-Policy: same-origin` and ' +
       '`Cross-Origin-Embedder-Policy: require-corp`.',
   )
@@ -98,7 +104,7 @@ const statusCallback = (
 ): ((event: ScanEvent) => void) | undefined => {
   switch (status) {
     case 'SUCCEEDED':
-      return options.onCompleted
+      return options.onSucceeded
     case 'FAILED':
       return options.onFailed
     case 'ABORTED':
@@ -125,9 +131,11 @@ export const handleMessage = (
     case 'SCAN_STATUS':
       statusCallback(options, message.payload.status)?.({ scanId })
       return
-    case 'SCAN_ERROR':
-      options.onError?.(message.payload)
+    case 'SCAN_ERROR': {
+      const { reason } = message.payload
+      options.onError?.(reason === undefined ? { scanId } : { scanId, reason })
       return
+    }
     case 'SCAN_CANCEL_REQUEST':
       reply({ type: 'SCAN_CANCEL_CONFIRM', payload: { scanId } })
       return
