@@ -46,6 +46,10 @@ describe('isScanMessage', () => {
     ['null', null],
     ['a string', 'SCAN_STATUS'],
     ['an unknown type', { type: 'SCAN_DONE', payload: { scanId: 'a' } }],
+    [
+      'an inherited property with a scanId',
+      { type: 'constructor', payload: { scanId: 'a' } },
+    ],
     ['a missing payload', { type: 'SCAN_STATUS' }],
     ['a missing scanId', { type: 'SCAN_STATUS', payload: {} }],
     ['a non-string scanId', { type: 'SCAN_ACTIVITY', payload: { scanId: 1 } }],

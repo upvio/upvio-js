@@ -1,6 +1,8 @@
 import type { EmbedOptions, ScanEvent } from './types.js'
 
-export type TerminalScanStatus = 'SUCCEEDED' | 'FAILED' | 'ABORTED'
+const TERMINAL_STATUSES = ['SUCCEEDED', 'FAILED', 'ABORTED'] as const
+
+export type TerminalScanStatus = (typeof TERMINAL_STATUSES)[number]
 
 export type ScanMessage =
   | {
@@ -16,19 +18,6 @@ export type CancelConfirmMessage = {
   payload: { scanId: string }
 }
 
-const MESSAGE_TYPES: ReadonlySet<string> = new Set([
-  'SCAN_STATUS',
-  'SCAN_ERROR',
-  'SCAN_CANCEL_REQUEST',
-  'SCAN_ACTIVITY',
-])
-
-const TERMINAL_STATUSES: ReadonlySet<unknown> = new Set([
-  'SUCCEEDED',
-  'FAILED',
-  'ABORTED',
-])
-
 type UnvalidatedMessage = { type?: unknown; payload?: unknown }
 
 type UnvalidatedPayload = {
@@ -40,24 +29,31 @@ type UnvalidatedPayload = {
 const isObject = (value: unknown): value is object =>
   typeof value === 'object' && value !== null
 
+const isTerminalStatus = (value: unknown): value is TerminalScanStatus =>
+  TERMINAL_STATUSES.some((status) => status === value)
+
+const PAYLOAD_VALIDATORS: Record<
+  ScanMessage['type'],
+  (payload: UnvalidatedPayload) => boolean
+> = {
+  SCAN_STATUS: ({ status }) => isTerminalStatus(status),
+  SCAN_ERROR: ({ reason }) =>
+    reason === undefined || typeof reason === 'string',
+  SCAN_CANCEL_REQUEST: () => true,
+  SCAN_ACTIVITY: () => true,
+}
+
+const isMessageType = (value: unknown): value is ScanMessage['type'] =>
+  typeof value === 'string' && Object.hasOwn(PAYLOAD_VALIDATORS, value)
+
 export const isScanMessage = (data: unknown): data is ScanMessage => {
   if (!isObject(data)) return false
 
   const { type, payload } = data as UnvalidatedMessage
-  if (typeof type !== 'string' || !MESSAGE_TYPES.has(type)) return false
-  if (!isObject(payload)) return false
+  if (!isMessageType(type) || !isObject(payload)) return false
 
-  const { scanId, status, reason } = payload as UnvalidatedPayload
-  if (typeof scanId !== 'string') return false
-
-  switch (type) {
-    case 'SCAN_STATUS':
-      return TERMINAL_STATUSES.has(status)
-    case 'SCAN_ERROR':
-      return reason === undefined || typeof reason === 'string'
-    default:
-      return true
-  }
+  const fields = payload as UnvalidatedPayload
+  return typeof fields.scanId === 'string' && PAYLOAD_VALIDATORS[type](fields)
 }
 
 const statusCallback = (
