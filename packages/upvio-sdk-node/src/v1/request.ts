@@ -38,8 +38,12 @@ export type ApiV1Response<T> = {
     totalCount?: number
   }
   error?: {
+    /** The HTTP status code, repeated in the body */
+    code: number
+    /** A stable identifier for the error, such as `NotFoundError` */
+    type: string
+    /** A human-readable description; the wording may change */
     title: string
-    code: string
   }
 }
 
