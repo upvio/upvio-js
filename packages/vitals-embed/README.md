@@ -114,9 +114,3 @@ app.get('/scan', (req, res) => {
 ```
 
 `embed()` logs a warning when the page is not cross-origin isolated.
-
-### Referrer policy
-
-Do not serve the page with `Referrer-Policy: no-referrer`. The scan interface
-uses the referrer to know which origin to send events to, so no callbacks
-fire without it. The browser default works.

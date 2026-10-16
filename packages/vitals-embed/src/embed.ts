@@ -8,6 +8,11 @@ import type { EmbeddedScan, EmbedOptions } from './types.js'
 // cross-origin-isolated: the scan needs SharedArrayBuffer.
 const IFRAME_ALLOW = 'camera; cross-origin-isolated'
 
+// The scan interface learns which origin to send events to from the referrer.
+// Setting it on the iframe overrides a host page policy such as no-referrer
+// or same-origin, which would otherwise leave every callback silent.
+const IFRAME_REFERRER_POLICY = 'strict-origin'
+
 const resolveContainer = (container: string | HTMLElement): HTMLElement => {
   if (typeof container !== 'string') return container
 
@@ -34,6 +39,7 @@ const warnIfNotCrossOriginIsolated = () => {
 
 const createIframe = (url: URL): HTMLIFrameElement => {
   const iframe = document.createElement('iframe')
+  iframe.referrerPolicy = IFRAME_REFERRER_POLICY
   iframe.src = url.href
   iframe.allow = IFRAME_ALLOW
   iframe.title = 'Upvio vitals scan'
@@ -52,8 +58,7 @@ const createIframe = (url: URL): HTMLIFrameElement => {
  * - be cross-origin isolated, served with
  *   `Cross-Origin-Opener-Policy: same-origin` and
  *   `Cross-Origin-Embedder-Policy: require-corp`. `embed()` logs a warning
- *   when it is not;
- * - not use `Referrer-Policy: no-referrer`, or no callbacks are called.
+ *   when it is not.
  *
  * @throws When `url` is not a valid https URL, or `container` is a selector
  * that matches no element. No iframe is added in either case.
