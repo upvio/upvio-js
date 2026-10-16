@@ -1,5 +1,8 @@
 import type { EmbedOptions } from './types.js'
 
+// Plain http is allowed only for a scan interface running on the developer's
+// own machine. A localhost URL never leaves the visitor's computer, so this
+// exception cannot expose a session token on the network.
 const LOCAL_HOSTNAMES = new Set(['localhost', '127.0.0.1'])
 
 export const parseScanUrl = (options: EmbedOptions): URL => {

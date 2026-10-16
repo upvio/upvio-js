@@ -4,7 +4,9 @@ import { parseScanUrl } from './scan-url.js'
 import type { CancelConfirmMessage } from './messages.js'
 import type { EmbeddedScan, EmbedOptions } from './types.js'
 
-const IFRAME_ALLOW = 'camera; microphone; cross-origin-isolated'
+// camera: the scan measures vital signs from video of the patient's face.
+// cross-origin-isolated: the scan needs SharedArrayBuffer.
+const IFRAME_ALLOW = 'camera; cross-origin-isolated'
 
 const resolveContainer = (container: string | HTMLElement): HTMLElement => {
   if (typeof container !== 'string') return container
