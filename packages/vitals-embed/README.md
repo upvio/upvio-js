@@ -5,7 +5,7 @@ Embed the Upvio vitals scan interface in your web page.
 ## Installation
 
 ```bash
-pnpm add @upvio/vitals-embed
+npm install @upvio/vitals-embed
 ```
 
 ## How it works
@@ -17,14 +17,15 @@ pnpm add @upvio/vitals-embed
    the page.
 
    ```typescript
-   const { data: scan } = await client.v1.vitals.scans.create({
-     vitalsLinkId,
-     patientId,
-   })
-   const { data: session } = await client.v1.vitals.scans.createEmbedSession(
-     scan!.id,
+   const scan = await client.v1.vitals.scans.create({ vitalsLinkId, patientId })
+   if (!scan.data) throw new Error(scan.error?.title)
+
+   const session = await client.v1.vitals.scans.createEmbedSession(
+     scan.data.id,
    )
-   // return session.url to the browser
+   if (!session.data) throw new Error(session.error?.title)
+
+   // return session.data.url to the browser
    ```
 
 2. **Browser:** embed the scan.
@@ -35,9 +36,9 @@ pnpm add @upvio/vitals-embed
    const scan = UpvioVitals.embed({
      url: sessionUrl,
      container: '#scan',
-     onCompleted: ({ scanId }) => showResults(scanId),
+     onSucceeded: ({ scanId }) => showResults(scanId),
      onFailed: ({ scanId }) => showRetry(scanId),
-     onAborted: ({ scanId }) => scan.destroy(),
+     onAborted: () => scan.destroy(),
      onError: ({ scanId, reason }) => console.error(scanId, reason),
    })
 
@@ -45,8 +46,9 @@ pnpm add @upvio/vitals-embed
    scan.destroy()
    ```
 
-3. **Backend:** fetch the results with `client.v1.vitals.scans.retrieve(scanId)`.
-   Callbacks are signals only and carry no results.
+3. **Backend:** fetch the results with
+   `client.v1.vitals.scans.retrieve(scanId)`. Callbacks are signals only and
+   carry no results.
 
 ## Options
 
@@ -56,7 +58,7 @@ pnpm add @upvio/vitals-embed
 | `container`   | CSS selector or element the iframe is appended to            |
 | `lang`        | Interface language: `en` or `es`                             |
 | `themeMode`   | `light`, `dark` or `system`                                  |
-| `onCompleted` | The scan succeeded                                           |
+| `onSucceeded` | The scan succeeded                                           |
 | `onFailed`    | The scan failed                                              |
 | `onAborted`   | The patient cancelled the scan                               |
 | `onError`     | The scan finished but could not be saved. Includes `reason`  |
