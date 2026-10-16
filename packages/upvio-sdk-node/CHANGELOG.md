@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.2.0 - 2026-10-16
+
+### Changed
+
+- The `error` in a response is typed as `{ code: number, type: string,
+  title: string }`, matching what the API returns. It was typed as
+  `{ title: string, code: string }`, so `code` had the wrong type and
+  `type`, the field to branch on, was missing.
+
+### Removed
+
+- `UpvioApiRequestError`. The SDK never throws it: API errors are returned
+  in the response's `error`.
+
 ## 0.1.2 - 2026-10-15
 
 ### Fixed
