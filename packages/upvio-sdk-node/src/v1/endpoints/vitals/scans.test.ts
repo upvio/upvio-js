@@ -69,9 +69,13 @@ describe('request layer', () => {
 
   it('returns parsed JSON for non-ok responses', async () => {
     const body = {
-      error: { title: 'Unauthorized', code: 'unauthorized' },
+      error: {
+        code: 403,
+        type: 'UnauthorizedError',
+        title: 'Invalid API token',
+      },
     }
-    mockError(401, body)
+    mockError(403, body)
     const client = createClient()
 
     const result = await client.v1.vitals.scans.list()
@@ -95,7 +99,7 @@ describe('request layer', () => {
 
   it('returns error body for 404 responses', async () => {
     const body = {
-      error: { title: 'Not found', code: 'not_found' },
+      error: { code: 404, type: 'NotFoundError', title: 'Not found' },
     }
     mockError(404, body)
     const client = createClient()

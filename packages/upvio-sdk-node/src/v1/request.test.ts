@@ -39,7 +39,7 @@ describe('request', () => {
 
     it('returns an error payload from the server without throwing', async () => {
       const body = {
-        error: { title: 'Patient not found', code: 'not_found' },
+        error: { code: 404, type: 'NotFoundError', title: 'Patient not found' },
       }
       mockFetch.mockResolvedValueOnce({
         ok: true,
@@ -50,8 +50,9 @@ describe('request', () => {
 
       expect(result).toStrictEqual(body)
       expect(result.error).toEqual({
+        code: 404,
+        type: 'NotFoundError',
         title: 'Patient not found',
-        code: 'not_found',
       })
       expect(result.data).toBeUndefined()
     })
@@ -85,7 +86,7 @@ describe('request', () => {
   describe('error handling', () => {
     it('returns parsed JSON for 4xx responses', async () => {
       const body = {
-        error: { title: 'Bad request', code: 'bad_request' },
+        error: { code: 400, type: 'BadRequestError', title: 'Bad request' },
       }
       mockFetch.mockResolvedValueOnce({
         ok: false,
@@ -100,7 +101,11 @@ describe('request', () => {
 
     it('returns parsed JSON for 5xx responses', async () => {
       const body = {
-        error: { title: 'Internal server error', code: 'internal' },
+        error: {
+          code: 500,
+          type: 'ServerError',
+          title: 'Internal server error',
+        },
       }
       mockFetch.mockResolvedValueOnce({
         ok: false,
