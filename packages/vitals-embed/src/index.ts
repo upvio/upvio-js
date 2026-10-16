@@ -5,4 +5,4 @@ export type {
   EmbedOptions,
   ScanErrorEvent,
   ScanEvent,
-} from './embed.js'
+} from './types.js'

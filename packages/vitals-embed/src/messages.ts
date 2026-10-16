@@ -1,3 +1,5 @@
+import type { EmbedOptions, ScanEvent } from './types.js'
+
 export type TerminalScanStatus = 'SUCCEEDED' | 'FAILED' | 'ABORTED'
 
 export type ScanMessage =
@@ -55,5 +57,51 @@ export const isScanMessage = (data: unknown): data is ScanMessage => {
       return reason === undefined || typeof reason === 'string'
     default:
       return true
+  }
+}
+
+const statusCallback = (
+  options: EmbedOptions,
+  status: TerminalScanStatus,
+): ((event: ScanEvent) => void) | undefined => {
+  switch (status) {
+    case 'SUCCEEDED':
+      return options.onSucceeded
+    case 'FAILED':
+      return options.onFailed
+    case 'ABORTED':
+      return options.onAborted
+  }
+}
+
+export const isFromScan = (
+  event: { source: unknown; origin: string },
+  scanWindow: unknown,
+  scanOrigin: string,
+): boolean => {
+  if (!event.source) return false
+  return event.source === scanWindow && event.origin === scanOrigin
+}
+
+export const handleMessage = (
+  message: ScanMessage,
+  options: EmbedOptions,
+  reply: (message: CancelConfirmMessage) => void,
+) => {
+  const { scanId } = message.payload
+  switch (message.type) {
+    case 'SCAN_STATUS':
+      statusCallback(options, message.payload.status)?.({ scanId })
+      return
+    case 'SCAN_ERROR': {
+      const { reason } = message.payload
+      options.onError?.(reason === undefined ? { scanId } : { scanId, reason })
+      return
+    }
+    case 'SCAN_CANCEL_REQUEST':
+      reply({ type: 'SCAN_CANCEL_CONFIRM', payload: { scanId } })
+      return
+    case 'SCAN_ACTIVITY':
+      return
   }
 }
