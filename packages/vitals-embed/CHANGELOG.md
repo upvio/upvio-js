@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0 - 2026-10-16
+## 0.1.0 - 2026-10-28
 
 Initial release. `embed()` renders the vitals scan interface in an iframe from
 an embed session URL created with `@upvio/sdk-node`, and reports the scan
